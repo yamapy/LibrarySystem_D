@@ -11,6 +11,9 @@ public class ConnectionProvider {
     /**
      * データベース接続情報
      */
+
+	//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
 	private static final String DRIVER_NAME = "oracle.jdbc.driver.OracleDriver";
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
     private static final String USER_ID = "TEAMD";
