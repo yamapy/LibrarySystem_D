@@ -6,7 +6,7 @@ function login() {
 	};
 	console.log($('#login-id').val());
 	$.ajax({
-		url : "/Resources/api/v1.1/resources/login",
+		url : "/LibrarySystem_D/api/v1.1/resources/login",
 		type : "POST",
 		data : requestQuery,
 		dataType : "json",
