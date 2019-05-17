@@ -1,9 +1,36 @@
 package resources;
 
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import beans.Book;
+import dao.BookDAO;
+
+
+
 public class Resources {
 	/**
 	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
 	 */
+
+
+	@Path("book")
+	public class ExpenseResource {
+
+
+			private final BookDAO dao = new BookDAO();
+
+
+			@GET
+			@Produces(MediaType.APPLICATION_JSON)
+			public List<Book> findAll() {
+				return dao.findAll();
+			}
+
 	@Path("employees")
 	public class EmployeeResource {
 		private final EmployeeDAO empDao = new EmployeeDAO();
