@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>java_s04</groupId>
-    <artifactId>java_s04</artifactId>
+    <groupId>LibrarySystem_D</groupId>
+    <artifactId>LibrarySystem_D</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>java_s04</name>
+    <name>LibrarySystem_D</name>
 
     <build>
-        <finalName>java_s04</finalName>
+        <finalName>LibrarySystem_D</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
