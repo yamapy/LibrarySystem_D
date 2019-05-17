@@ -1,5 +1,6 @@
 package beans;
 
+
 public class Book {
 
 	private int id;
@@ -11,7 +12,7 @@ public class Book {
 	private String buyer;
 	private String status;
 	private String borrower;
-	private int returnDate;
+	private String returnDate;
 
 	public int getId() {
 		return id;
@@ -61,17 +62,20 @@ public class Book {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getReturnDate() {
-		return returnDate;
-	}
-	public void setReturnDate(int returnDate) {
-		this.returnDate = returnDate;
-	}
+
 	public String getBorrower() {
 		return borrower;
 	}
 	public void setBorrower(String borrower) {
 		this.borrower = borrower;
 	}
+	public String getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+
+
 
 }

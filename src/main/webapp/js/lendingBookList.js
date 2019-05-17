@@ -1,7 +1,9 @@
 'use strict';
 
-var rootUrl = "/librarySystem_D/api/v1.1/lendingBook";
+//LendingBookResources.java内の@Path("lendingBook")
+var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
+//メソッドの実行が必要！
 findLendingBook();
 
 function findLendingBook() {
@@ -18,7 +20,7 @@ function renderTable(data) {
 	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却予定日</th></tr>';
 
 	if (data.length === 0) {
-		$('#lendingBook').append('<p>現在、貸出中の書籍は存在しません。</p>')
+		$('#lendingBookList').append('<p>現在、貸出中の書籍は存在しません。</p>')
 	} else {
 		var table = $('<table>').attr('border', 1);
 		table.append(headerRow);
@@ -30,6 +32,6 @@ function renderTable(data) {
 			table.append(row);
 		});
 
-		$('#lendingBooks').append(table);
+		$('#lendingBookList').append(table);
 	}
 }

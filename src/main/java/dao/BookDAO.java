@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,10 +18,10 @@ public class BookDAO {
 	 * クエリ文字列
 	 */
 	private static final String SELECT_LENDING_QUERY = "select BOOK.TITLE, \n" + "EMPLOYEE.NAME, \n"
-			+ "RENTAL_STATUS.RENTDATE + 14 RETURN_DATE \n" + " \n" + "from EMPLOYEE, \n" + "BOOK, \n"
-			+ "RENTAL_STATUS \n" + " \n" + "where 1=1 \n" + "and BOOK.ID = RENTAL_STATUS.BOOKID \n"
-			+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + " \n" + "order by \n"
-			+ "RENTAL_STATUS.RENTDATE, \n";
+			+ "RENTAL_STATUS.RENTDATE + 14 RETURN_DATE \n" + "from EMPLOYEE, \n" + "BOOK, \n"
+			+ "RENTAL_STATUS \n" + "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
+			+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + "order by \n"
+			+ "RENTAL_STATUS.RENTDATE \n";
 
 	/**
 	 * 部署の全件を取得する。
@@ -63,7 +64,14 @@ public class BookDAO {
 		Book result = new Book();
 		result.setTitle(rs.getString("TITLE"));
 		result.setBorrower(rs.getString("NAME"));
-		result.setReturnDate(rs.getInt("RETURN_DATE"));
+		Date returnDate = rs.getDate("RETURN_DATE");
+		if (returnDate != null) {
+			result.setReturnDate(returnDate.toString());
+		}
+
+		//日付の型変換がうまくいっていない
+		//result.setReturnDate(rs.getDate("RETURN_DATE"));
+
 		return result;
 	}
 

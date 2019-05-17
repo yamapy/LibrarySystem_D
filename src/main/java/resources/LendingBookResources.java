@@ -18,7 +18,7 @@ public class LendingBookResources {
 	private final BookDAO dao = new BookDAO();
 
 	/**
-	 * 一覧用に貸出中の書籍を全件取得する。
+	 * 一覧用に貸出中の書籍を取得する。
 	 *
 	 * @return 貸出中の書籍のリストをJSON形式で返す。
 	 */
