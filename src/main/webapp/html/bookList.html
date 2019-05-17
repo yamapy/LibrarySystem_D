@@ -7,6 +7,28 @@
 <body>
   <body>
 	<div class="main">
+	<p>書籍検索</p>
+		<form id="bookSelector">
+				<div>
+					<label for="titleParam">タイトル：</label>
+					<input type="text" maxlength="85" name="titleParam" id="titleParam">
+				</div>
+				<div>
+					<label for="authorParam">作者：</label>
+					<input type="text" maxlength="85" name="authorParam" id="authorParam">
+				</div>
+				<div>
+					<label for="genreParam">ジャンル：</label>
+					<select name="genreParam" id="genreParam">
+					</select>
+				</div>
+				<div>
+					<label for="statusParam">ステータス：</label>
+					<select name="statusParam" id="statusParam">
+					</select>
+				</div>
+				<button id="findBook">検索</button>
+			</form>
 		<div id="bookList">
 			<p>書籍一覧</p>
 			<div id="book"></div>

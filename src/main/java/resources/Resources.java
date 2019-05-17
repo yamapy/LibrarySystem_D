@@ -12,6 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import beans.Book;
+import beans.User;
 import dao.BookDAO;
 
 @Path("resources")
@@ -20,7 +21,7 @@ public class Resources {
 	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
 	 */
 	private final BookDAO bookDAO = new BookDAO();
-
+	private  User user;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +29,24 @@ public class Resources {
 	public List<Book> findAll() {
 		return bookDAO.findAll();
 	}
+
+	@GET
+	@Path("isLogin")
+	public boolean isLogin(){
+		if(user==null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+//	@GET
+//	@Path("findByName")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Book findByName(@PathParam("name") String name) {
+//		return bookDAO.findByName(name);
+//	}
+
 
 	@POST
 	@Path("{login}")
