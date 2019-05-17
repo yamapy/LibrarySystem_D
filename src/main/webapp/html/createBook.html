@@ -1,10 +1,71 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>書籍追加登録</title>
+		<link rel="stylesheet" href="css/postStyle.css">
+	</head>
+	<body>
+		<div class="main clearfix">
+			<div id="createBook">
+				<h1>書籍追加登録</h1>
+				<font color="red">全ての項目を必ず入力してください。</font>
+    			<form id="createBookForm">
+    				<div class="error"></div>
+    				<div>
+    					<label for="bookTitle">タイトル：</label>
+    					<input type="text" style="width:40%" maxlength="256" id="bookTitle" placeholder="例：Javaで学ぶシミュレーションの基礎" required>
+        		    </div>
 
-</body>
+					<div>
+						<label for="author">作者：</label>
+						<input type="text" style="width:20%" maxlength="256" id="author" placeholder="例：峯村吉泰" required>
+					</div>
+
+					<div>
+						<label for="publisher">出版社：</label>
+						<input type="text" style="width:20%" maxlength="256" id="publisher"  placeholder="例：森北出版" required>
+					</div>
+
+					<div>
+					<label for="genre">ジャンル：</label>
+					<select name="genre" id="genre">
+						<option value="" selected>ジャンル</option>
+						<option value="経済">経済</option>
+						<option value="ソフトウェア/ハードウェア">ソフトウェア/ハードウェア</option>
+						<option value="デザイン">デザイン</option>
+						<option value="プログラミング">プログラミング</option>
+						<option value="マネジメント">マネジメント</option>
+						<option value="リーダーシップ">リーダーシップ</option>
+						<option value="AI">AI</option>
+						<option value="IoT">IoT</option>
+						<option value="IT">IT</option>
+						<option value="（新規作成）">（新規作成）</option>
+					</select>
+					</div>
+
+					<div>
+					<input type="text" maxlength="256" id="newGenre"  placeholder="例：パン" required>
+					</div>
+
+					<div>
+						<label for="puchaseDate">購入日：</label>
+						<input type="text" style="width:20%" maxlength="256" id="puchaseDate" placeholder="例：20170427（数字8桁で入力）" required>
+					</div>
+
+					<div>
+						<label for="buyer">購入者：</label>
+						<input type="text" style="width:20%" maxlength="256" id="buyer"  placeholder="例：未来太郎" required>
+					</div>
+
+        			<button id="saveBook">登録</button>
+			    </form>
+			    	<button id="returnManageTopPage">戻る</button>
+			</div>
+		</div>
+
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/post.js"></script>
+
+	</body>
 </html>

@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>管理者トップページ</title>
+		<link rel="stylesheet" href="css/postStyle.css">
+	</head>
+	<body>
+		<h1>管理者トップページ</h1>
+		<div class="main clearfix">
+			<div id="operationList">
+				<h3>管理者操作一覧</h3>
+					<p><button type="button" id="createBook">書籍登録</button>（新しく購入した書籍を登録できます）</p>
+					<p><button type="button" id="lendingBookList">貸出中書籍一覧</button>（現在、貸出中の書籍を一覧できます）</p>
+				</div>
+			</div>
 
-</body>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/post.js"></script>
+
+	</body>
 </html>

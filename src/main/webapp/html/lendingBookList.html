@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>貸出中書籍一覧</title>
+		<link rel="stylesheet" href="css/postStyle.css">
+	</head>
+	<body>
+		<div class="main clearfix">
+			<div id="list">
+				<h1>貸出中書籍一覧</h1>
+				<div id="lendingBooks"></div>
+			</div>
+		</div>
 
-</body>
+		<div>
+		<button id="previousPage">前のページへ</button>
+		<button id="followingPage">次のページへ</button>
+		</div>
+
+		<div>
+		<button id="returnManageTopPage">戻る</button>
+		</div>
+
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/post.js"></script>
+
+	</body>
 </html>
