@@ -9,6 +9,10 @@ public class Book {
 	private String publisher;
 	private int purchaseDate;
 	private String buyer;
+	private String status;
+	private String borrower;
+	private int returnDate;
+
 	public int getId() {
 		return id;
 	}
@@ -50,6 +54,24 @@ public class Book {
 	}
 	public void setBuyer(String buyer) {
 		this.buyer = buyer;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(int returnDate) {
+		this.returnDate = returnDate;
+	}
+	public String getBorrower() {
+		return borrower;
+	}
+	public void setBorrower(String borrower) {
+		this.borrower = borrower;
 	}
 
 }
