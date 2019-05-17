@@ -23,22 +23,17 @@ import org.glassfish.jersey.media.multipart.ContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 
-<<<<<<< HEAD
 import beans.Book;
-import beans.Expense;
 import dao.BookDAO;
 
-=======
+
 import com.sun.research.ws.wadl.Param;
 
 @Path("resources")
->>>>>>> dev
 public class Resources {
 	/**
 	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
 	 */
-<<<<<<< HEAD
-	@Path("resources")
 
 	private final BookDAO bookDAO = new BookDAO();
 	@GET
