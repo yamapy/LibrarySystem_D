@@ -1,6 +1,6 @@
 'use strict';
 
-var rootUrl = "/java_s04/api/v1.1/bookList";
+var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
 findAll();
 
@@ -8,8 +8,9 @@ function findAll() {
 	console.log('findAll start.')
 	$.ajax({
 		type : "GET",
-		url : rootUrl,
+		url : rootUrl+"/book",
 		dataType : "json",
+
 		success : renderTable
 	});
 }

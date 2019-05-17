@@ -38,28 +38,11 @@ public class Resources {
 	private final BookDAO bookDAO = new BookDAO();
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("book")
 	public List<Book> findAll() {
 		return bookDAO.findAll();
 	}
 
-	public class EmployeeResource {
-		private final EmployeeDAO empDao = new EmployeeDAO();
-		private final PostDAO postDao = new PostDAO();
-		private final PhotoDAO photoDao = new PhotoDAO();
-
-		/**
-		 * ID指定で従業員情報を取得する。
-		 *
-		 * @param id
-		 *            取得対象の従業員のID
-		 * @return 取得した従業員情報をJSON形式で返す。データが存在しない場合は空のオブジェクトが返る。
-		 */
-		@GET
-		@Path("{id}")
-		@Produces(MediaType.APPLICATION_JSON)
-		public Employee findById(@PathParam("id") int id) {
-			return empDao.findById(id);
-=======
 
 	private final EmployeeDAO empDao = new EmployeeDAO();
 	private final PostDAO postDao = new PostDAO();

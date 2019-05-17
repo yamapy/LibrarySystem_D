@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Book;
+import beans.Rental_Status;
 
 public class BookDAO {
 	private static final String SELECT_ALL_QUERY = "SELECT \n" +
@@ -50,6 +51,11 @@ public class BookDAO {
 			"WHERE \n" +
 			"	B.ID = R.BOOKID  \n"
 			;
+	private static final String INSERT_QUERY ="INSERT INTO \n" +
+			"	RENTAL_STATUS(MAILADDRESS,BOOKID,RENTDATE) \n" +
+			"VALUES \n" +
+			"	(?,?,?) \n"
+			;
 
 	public List<Book> findAll() {
 		List<Book> result = new ArrayList<>();
@@ -85,6 +91,8 @@ public class BookDAO {
 		return result;
 	}
 
+
+
 	private void setParameter(PreparedStatement statement, Book book) throws SQLException {
 		int count = 1;
 
@@ -95,5 +103,49 @@ public class BookDAO {
 
 
 	}
+
+	public Rental_Status create(Rental_Status rental_status) {
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return rental_status;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
+			// INSERT実行
+			setParameter(statement, rental_status, false);
+			statement.executeUpdate();
+
+			// INSERTできたらKEYを取得
+			ResultSet rs = statement.getGeneratedKeys();
+			rs.next();
+			String id = rs.getString(1);
+			rental_status.setId(id);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return rental_status;
+	}
+
+	public Rental_Status update(Rental_Status rental_status) {
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return rental_status;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+			setParameter(statement, rental_status, true);
+			statement.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return rental_status;
+	}
+
 
 }
