@@ -8,8 +8,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+
+import com.sun.research.ws.wadl.Param;
 
 import beans.Book;
 import beans.User;
@@ -40,12 +43,16 @@ public class Resources {
 		}
 	}
 
-//	@GET
-//	@Path("findByName")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Book findByName(@PathParam("name") String name) {
-//		return bookDAO.findByName(name);
-//	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
+			@QueryParam("authorParam") String authorParam,
+			@QueryParam("genre") String genre,
+			@QueryParam("status") String status) {
+		Param param = new Param(titleParam, authorParam, genre,status);
+		return bookDAO.findByParam(param);
+	}
 
 
 	@POST

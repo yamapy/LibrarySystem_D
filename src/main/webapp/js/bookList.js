@@ -122,14 +122,14 @@ function initPage() {
 	$('#genreParam').append(newOption);
 	makeGenreSelection('#genreParam');
 	findAll();
-	makePostSelection('#genre');
+	makeGenreSelection('#genre');
 }
 
 function findByParam() {
 	console.log('findByParam start.');
 
-	var urlWithParam = rootUrl+'?title='+$('#titleParam').val()
-		+'&author='+$('#authorParam').val()
+	var urlWithParam = rootUrl+'?titleParam='+$('#titleParam').val()
+		+'&authorParam='+$('#authorParam').val()
 		+'&genre='+$('#genreParam').val()
 		+'&status='+$('#statusParam').val();
 	$.ajax({
@@ -140,18 +140,23 @@ function findByParam() {
 	});
 }
 
-//function findByName(name) {
-//	console.log('findByName start - name:' + name);
-//	$.ajax({
-//		type : "GET",
-//		url : rootUrl + '/' + id,
-//		dataType : "json",
-//		success : function(data) {
-//			console.log('findById success: ' + data.name);
-//			renderDetails(data)
-//		}
-//	});
-//}
+function makeGenreSelection(selectionGenre, book) {
+	console.log('makeGenreSelection start.')
+	$.ajax({
+		type : "GET",
+		url : rootUrl+"/genre",
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			$.each(data, function(index, book) {
+				var newOption = $('<option>').val(book.genre).text(book.genre);
+				if (book != null && book.genre == book.genre) {
+					newOption.prop('selected', isSelected);
+				}
+				$(selectionGenre).append(newOption);
+			});
+		}
+	});
+}
 
 
 
