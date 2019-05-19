@@ -8,23 +8,20 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-
-import com.sun.research.ws.wadl.Param;
 
 import beans.Book;
 import beans.User;
 import dao.BookDAO;
+import dao.GenreDAO;
 
 @Path("resources")
 public class Resources {
-	/**
-	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
-	 */
+
 	private final BookDAO bookDAO = new BookDAO();
 	private  User user;
+	private final GenreDAO genreDAO = new GenreDAO();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,15 +41,23 @@ public class Resources {
 	}
 
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
-			@QueryParam("authorParam") String authorParam,
-			@QueryParam("genre") String genre,
-			@QueryParam("status") String status) {
-		Param param = new Param(titleParam, authorParam, genre,status);
-		return bookDAO.findByParam(param);
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Genre> findAllGenre() {
+//		return genreDAO.findAllGenre();
+//	}
+//
+
+//	@GET
+//	@Path("book")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
+//			@QueryParam("authorParam") String authorParam,
+//			@QueryParam("genre") String genre,
+//			@QueryParam("status") String status) {
+//		Param param = new Param(titleParam, authorParam, genre,status);
+//		return bookDAO.findByParam(param);
+//	}
 
 
 	@POST

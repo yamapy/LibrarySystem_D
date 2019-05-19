@@ -106,14 +106,17 @@ public class Param {
 	 */
 	public void setParameter(PreparedStatement statement) throws SQLException {
 		int count = 1;
+		if (!titleParam.isEmpty()) {
+			statement.setString(count++,titleParam );
+		}
+		if (!authorParam.isEmpty()) {
+			statement.setString(count++, authorParam);
+		}
+		if (!genre.isEmpty()) {
+			statement.setString(count++, genre);
+		}
 		if (!status.isEmpty()) {
-			statement.setString(count++, );
-		}
-		if (!empId.isEmpty()) {
-			statement.setString(count++, empId);
-		}
-		if (!nameParam.isEmpty()) {
-			statement.setString(count++, nameParam);
+			statement.setString(count++, status);
 		}
 	}
 }

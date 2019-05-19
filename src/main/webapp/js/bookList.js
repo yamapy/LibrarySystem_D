@@ -112,51 +112,51 @@ function renderTable(data) {
 
 }
 
-$('#findBook').click(function() {
-	findByParam();
-	return false;
-})
+//$('#findBook').click(function() {
+//	findByParam();
+//	return false;
+//})
 
-function initPage() {
-	var newOption = $('<option>').val(0).text('指定しない').prop('selected', true);
-	$('#genreParam').append(newOption);
-	makeGenreSelection('#genreParam');
-	findAll();
-	makeGenreSelection('#genre');
-}
-
-function findByParam() {
-	console.log('findByParam start.');
-
-	var urlWithParam = rootUrl+'?titleParam='+$('#titleParam').val()
-		+'&authorParam='+$('#authorParam').val()
-		+'&genre='+$('#genreParam').val()
-		+'&status='+$('#statusParam').val();
-	$.ajax({
-		type : "GET",
-		url : urlWithParam,
-		dataType : "json",
-		success : renderTable
-	});
-}
-
-function makeGenreSelection(selectionGenre, book) {
-	console.log('makeGenreSelection start.')
-	$.ajax({
-		type : "GET",
-		url : rootUrl+"/genre",
-		dataType : "json",
-		success : function(data, textStatus, jqXHR) {
-			$.each(data, function(index, book) {
-				var newOption = $('<option>').val(book.genre).text(book.genre);
-				if (book != null && book.genre == book.genre) {
-					newOption.prop('selected', isSelected);
-				}
-				$(selectionGenre).append(newOption);
-			});
-		}
-	});
-}
+//function initPage() {
+//	var newOption = $('<option>').val(0).text('指定しない').prop('selected', true);
+//	$('#genreParam').append(newOption);
+//	makeGenreSelection('#genreParam');
+//	findAll();
+//	makeGenreSelection('#genre');
+//}
+//
+//function findByParam() {
+//	console.log('findByParam start.');
+//
+//	var urlWithParam = rootUrl+"/book"+'?titleParam='+$('#titleParam').val()
+//		+'&authorParam='+$('#authorParam').val()
+//		+'&genre='+$('#genreParam').val()
+//		+'&status='+$('#statusParam').val();
+//	$.ajax({
+//		type : "GET",
+//		url : urlWithParam,
+//		dataType : "json",
+//		success : renderTable
+//	});
+//}
+//
+//function makeGenreSelection(selectionGenre, book) {
+//	console.log('makeGenreSelection start.')
+//	$.ajax({
+//		type : "GET",
+//		url : rootUrl+"/genre",
+//		dataType : "json",
+//		success : function(data, textStatus, jqXHR) {
+//			$.each(data, function(index, book) {
+//				var newOption = $('<option>').val(book.genre).text(book.genre);
+//				if (book != null && book.genre == book.genre) {
+//					newOption.prop('selected', isSelected);
+//				}
+//				$(selectionGenre).append(newOption);
+//			});
+//		}
+//	});
+//}
 
 
 
