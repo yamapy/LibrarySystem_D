@@ -12,6 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import beans.Book;
+import beans.Genre;
 import beans.User;
 import dao.BookDAO;
 import dao.GenreDAO;
@@ -41,12 +42,12 @@ public class Resources {
 	}
 
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Genre> findAllGenre() {
-//		return genreDAO.findAllGenre();
-//	}
-//
+	@GET
+	@Path("genre")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Genre> findAllGenre() {
+		return genreDAO.findAllGenre();
+	}
 
 //	@GET
 //	@Path("book")

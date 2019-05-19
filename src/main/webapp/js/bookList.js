@@ -3,6 +3,9 @@
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
 findAll();
+initPageGenre();
+initPageStatus();
+makeGenreSelection();
 
 function findAll() {
 	console.log('findAll start.')
@@ -112,18 +115,51 @@ function renderTable(data) {
 
 }
 
+
+$(function() {
+	  var page = 0;
+	  function draw() {
+	    $('#page').html(page + 1);
+	    $('<tr>').hide();
+	    $('<tr>:first,<tr>:gt(' + page * 20 + '):lt(20)').show();
+	  }
+	  $('#prev').click(function() {
+	    if (page > 0) {
+	      page--;
+	      draw();
+	    }
+	  });
+	  $('#next').click(function() {
+	    if (page < ($('<tr>').size() - 1) / 20 - 1) {
+	      page++;
+	      draw();
+	    }
+	  });
+	  draw();
+	});
+
+
+
 //$('#findBook').click(function() {
 //	findByParam();
 //	return false;
 //})
 
-//function initPage() {
-//	var newOption = $('<option>').val(0).text('指定しない').prop('selected', true);
-//	$('#genreParam').append(newOption);
-//	makeGenreSelection('#genreParam');
-//	findAll();
-//	makeGenreSelection('#genre');
-//}
+function initPageGenre() {
+	var newOption = $('<option>').val(0).text('指定しない').prop('selected', true);
+	$('#genreParam').append(newOption);
+	makeGenreSelection('#genreParam');
+	findAll();
+	makeGenreSelection('#genre');
+}
+
+function initPageStatus() {
+	var newOption = $('<option>').val(0).text('指定しない').prop('selected', true);
+	$('#statusParam').append(newOption);
+	makeGenreSelection('#genreParam');
+	findAll();
+	makeGenreSelection('#genre');
+}
 //
 //function findByParam() {
 //	console.log('findByParam start.');
@@ -140,23 +176,23 @@ function renderTable(data) {
 //	});
 //}
 //
-//function makeGenreSelection(selectionGenre, book) {
-//	console.log('makeGenreSelection start.')
-//	$.ajax({
-//		type : "GET",
-//		url : rootUrl+"/genre",
-//		dataType : "json",
-//		success : function(data, textStatus, jqXHR) {
-//			$.each(data, function(index, book) {
-//				var newOption = $('<option>').val(book.genre).text(book.genre);
-//				if (book != null && book.genre == book.genre) {
-//					newOption.prop('selected', isSelected);
-//				}
-//				$(selectionGenre).append(newOption);
-//			});
-//		}
-//	});
-//}
+function makeGenreSelection(selectionGenre, book) {
+	console.log('makeGenreSelection start.')
+	$.ajax({
+		type : "GET",
+		url : rootUrl+"/genre",
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			$.each(data, function(index, book) {
+				var newOption = $('<option>').val(book.genre).text(book.genre);
+				if (book != null ) {
+					newOption.prop('selected', isSelected);
+				}
+				$(selectionGenre).append(newOption);
+			});
+		}
+	});
+}
 
 
 
