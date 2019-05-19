@@ -1,9 +1,9 @@
 'use strict';
 
-//LendingBookResources.java内の@Path("lendingBook")
+// LendingBookResources.java内の@Path("lendingBook")
 var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
-//メソッドの実行が必要！
+// メソッドの実行が必要！
 findLendingBook();
 
 function findLendingBook() {
@@ -35,3 +35,14 @@ function renderTable(data) {
 		$('#lendingBookList').append(table);
 	}
 }
+
+
+$(function() {
+
+	/* 以下カッコ内はボタンID */
+	$('#returnManageTopPage').click(
+					function() {
+						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/managementTop.html';
+					});
+
+})
