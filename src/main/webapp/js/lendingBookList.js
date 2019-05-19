@@ -33,6 +33,15 @@ function renderTable(data) {
 		});
 
 		$('#lendingBookList').append(table);
+
+		/*$(function() {
+			if ((compareDate(new Date(), 'YYYY-MM-DD') < (lendingBook.returnDate)){
+				$('body').css('background', 'red');
+			}else if ((compareDate(new Date(), 'YYYY-MM-DD' >= (lendingBook.returnDate)){
+				$('body').css('background', 'white');
+			}
+		}); */
+
 	}
 }
 
@@ -46,3 +55,15 @@ $(function() {
 					});
 
 })
+
+
+/* function compareDate(date, format){
+
+	format = format.replace(/YYYY/, date.getFullYear());
+	format = format.replace(/MM/, date.getMonth() + 1);
+	format = format.replace(/DD/, date.getDate());
+
+	return format;
+}
+
+*/

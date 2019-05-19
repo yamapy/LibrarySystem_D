@@ -8,11 +8,12 @@ public class Book {
 	private String genre;
 	private String author;
 	private String publisher;
-	private int purchaseDate;
+	private String purchaseDate;
 	private String buyer;
 	private String status;
 	private String borrower;
 	private String returnDate;
+	private int lendingTotal;
 
 	public int getId() {
 		return id;
@@ -44,12 +45,7 @@ public class Book {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public int getPurchaseDate() {
-		return purchaseDate;
-	}
-	public void setPurchaseDate(int purchaseDate) {
-		this.purchaseDate = purchaseDate;
-	}
+
 	public String getBuyer() {
 		return buyer;
 	}
@@ -74,6 +70,18 @@ public class Book {
 	}
 	public void setReturnDate(String returnDate) {
 		this.returnDate = returnDate;
+	}
+	public String getPurchaseDate() {
+		return purchaseDate;
+	}
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+	public int getLendingTotal() {
+		return lendingTotal;
+	}
+	public void setLendingTotal(int lendingTotal) {
+		this.lendingTotal = lendingTotal;
 	}
 
 
