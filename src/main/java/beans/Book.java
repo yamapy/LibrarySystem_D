@@ -9,6 +9,11 @@ public class Book {
 	private String publisher;
 	private int purchaseDate;
 	private String buyer;
+
+	public Book(){
+		System.out.println("new Book");
+	}
+
 	public int getId() {
 		return id;
 	}
