@@ -2,15 +2,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<title>マイページ</title>
-
 <script src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/myPage.js"></script>
+<title>マイページ</title>
 </head>
 <body>
-	<div id="table">aaa</div>
 
-
+<!--  header -->
+	<div class="header">
+		<h1>マイページ</h1>
+	</div>
+	<!--  メインコンテンツ -->
+	<div class="content">
+			<input type="text"  placeholder="ユーザーID" id="login-id" class="login-id"></input>
+			<input type="text"  placeholder="パスワード" id="login-pass" class="login-pass"></input>
+	<div id="returnTable"></div>
+		<button id="login-button" class="login-button">すべて返却</button>
+	</div>
 </body>
 </html>

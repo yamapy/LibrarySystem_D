@@ -24,7 +24,6 @@ function login() {
 			alert('通信失敗');
 		}
 	})
-
 }
 
 $(document).ready(function() {

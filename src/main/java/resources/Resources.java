@@ -29,7 +29,19 @@ public class Resources {
 		} else {
 			return false;
 		}
-
 	}
-
+	@POST
+	@Path("myPage")
+	@Consumes("application/x-www-form-urlencoded")
+	// @Produces(MediaType.APPLICATION_JSON)
+	public boolean myPage(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
+		String successId = "aaaa";
+		String successPass = "aaaa";
+		System.out.println(id + pass);
+		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

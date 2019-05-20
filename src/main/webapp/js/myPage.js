@@ -1,51 +1,64 @@
-/**
- *
- */
+init();
 
-var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+function init() {
+	// 入力されたユーザーIDとパスワード
 
-initPage();
+//	var requestQuery = {
+//		id : $('#login-id').val(),
+//		pass : $('#login-pass').val()
+//	};
 
-function initPage() {
-	findAll();
-}
-
-function findAll() {
-	console.log('findAll start.')
-
+	console.log('renderTable start');
 	$.ajax({
-		type : "GET",
-		url : rootUrl,
+		url : "/LibrarySystem_D/api/v1.1/resources/myPage",
+		type : "POST",
+//		data : requestQuery,
 		dataType : "json",
-		success : renderTable
-	});
+		success : function(data) {
+			console.log(data);
+			if (data == true) {
+				alert('すべて返却しました');
+//				location.href = './Expense.html';
+			} else {
+				alert('返却失敗');
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
 }
 
-function renderTable(data) {
-	var headerRow = '<tr><th>社員ID</th><th>氏名</th></tr>';
-
-	$('#employees').children().remove();
-
-	if (data.length === 0) {
-		$('#employees').append('<p>現在データが存在していません。</p>')
-	} else {
-		var table = $('<table>').attr('border', 1);
-		table.append(headerRow);
-
-		$.each(data, function(index, employee) {
-			var row = $('<tr>');
-			row.append($('<td>').text(employee.empId));
-			row.append($('<td>').text(employee.name));
-			row.append($('<td>').append(
-					$('<button>').text("編集").attr("type","button").attr("onclick", "findById("+employee.id+')')
-				));
-			row.append($('<td>').append(
-					$('<button>').text("削除").attr("type","button").attr("onclick", "deleteById("+employee.id+')')
-				));
-			table.append(row);
-		});
-
-		$('#employees').append(table);
-	}
+function login() {
+	// 入力されたユーザーIDとパスワード
+	var requestQuery = {
+		id : $('#login-id').val(),
+		pass : $('#login-pass').val()
+	};
+	console.log($('#login-id').val());
+	$.ajax({
+		url : "/LibrarySystem_D/api/v1.1/resources/myPage",
+		type : "POST",
+		data : requestQuery,
+		dataType : "json",
+		success : function(data) {
+			console.log(data);
+			if (data == true) {
+				alert('すべて返却しました');
+//				location.href = './Expense.html';
+			} else {
+				alert('返却失敗');
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
 }
 
+
+
+$(document).ready(function() {
+	// ログインボタンを押したときのイベント
+	$('#login-button').click(login);
+});
