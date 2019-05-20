@@ -3,7 +3,7 @@ package beans;
 public class User {
 	private String mailAdress;
 	private String password;
-	private int manegement;
+	private int management;
 	public String getMailAdress() {
 		return mailAdress;
 	}
@@ -16,11 +16,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getManegement() {
-		return manegement;
+	public int getManagement() {
+		return management;
 	}
-	public void setManegement(int manegement) {
-		this.manegement = manegement;
+	public void setManagement(int management) {
+		this.management = management;
 	}
 
 
