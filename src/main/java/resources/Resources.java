@@ -17,7 +17,7 @@ public class Resources {
 	}
 
 	@POST
-	@Path("{login}")
+	@Path("login")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
 	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
