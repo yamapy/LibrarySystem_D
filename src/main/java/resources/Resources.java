@@ -1,7 +1,11 @@
 package resources;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -10,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.Book;
@@ -18,12 +23,14 @@ import beans.User;
 import dao.BookDAO;
 import dao.GenreDAO;
 import dao.Param;
+import dao.UserDAO;
 
 @Path("resources")
 public class Resources {
 
 	private final BookDAO bookDAO = new BookDAO();
-	private  User user;
+	private final UserDAO userDao = new UserDAO();
+	User user = new User();
 	private final GenreDAO genreDAO = new GenreDAO();
 
 	@GET
@@ -67,23 +74,127 @@ public class Resources {
 		return bookDAO.findByParam(param);
 	}
 
+	@POST
 
+	public boolean borrow(@QueryParam("id") int id) throws WebApplicationException{
+
+		System.out.println(id);
+
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+
+		String mail = "s-kondo@virtualex.co.jp";
+//		int id = Integer.parseInt(form.getField("id").getValue());
+
+		return bookDAO.borrowById(id,today,mail) ;
+
+	}
+
+
+
+//	@GET
+//	@Path("isLogin")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public boolean isGeneralLogin(@Context HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		// session.setAttribute("isGeneralLogin", user);
+//		// if(session.getAttribute("isGeneralLogin") != null){
+//		User nowUser = (User) session.getAttribute("loginUser");
+//		System.out.println(session.getAttribute("loginUser"));
+//		// }
+//		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+//			return false;
+//		}
+//		return true;
+//	}
 
 
 	@POST
-	@Path("{login}")
+	@Path("generalLogin")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-		String successId = "test";
-		String successPass = "1234";
-		System.out.println(id + pass);
-		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
+	public boolean generalLogin(@Context HttpServletRequest request, @FormParam("id") String mailAddress,
+			@FormParam("pass") String password) throws WebApplicationException {
+
+		User DaoResult = new User();
+		DaoResult.setMailAddress(userDao.findByParam(mailAddress, password).getMailAddress());
+		DaoResult.setPassword(userDao.findByParam(mailAddress, password).getPassword());
+		DaoResult.setManagement(userDao.findByParam(mailAddress, password).getManagement());
+		if (mailAddress != null && password != null && mailAddress.equals(DaoResult.getMailAddress())
+				&& password.equals(DaoResult.getPassword())) {
+			user.setMailAddress(DaoResult.getMailAddress());
+			user.setPassword(DaoResult.getPassword());
+			user.setManagement(DaoResult.getManagement());
+
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
+			User nowUser = (User) session.getAttribute("loginUser");
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+
 			return true;
 		} else {
 			return false;
 		}
 
 	}
+
+	@GET
+	@Path("getLoginMailAddress")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String loginMailAddress(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+			return nowUser.getMailAddress();
+		}
+		return "";
+	}
+
+	@POST
+	@Path("mamnagerLogin")
+	@Consumes("application/x-www-form-urlencoded")
+	// @Produces(MediaType.APPLICATION_JSON)
+	public boolean managerLogin(@Context HttpServletRequest request, @FormParam("id") String mailAddress,
+			@FormParam("pass") String password) throws WebApplicationException {
+		User DaoResult = new User();
+		DaoResult.setMailAddress(userDao.findByParam(mailAddress, password).getMailAddress());
+		DaoResult.setPassword(userDao.findByParam(mailAddress, password).getPassword());
+		DaoResult.setManagement(userDao.findByParam(mailAddress, password).getManagement());
+		if (mailAddress != null && password != null && mailAddress.equals(DaoResult.getMailAddress())
+				&& password.equals(DaoResult.getPassword()) && DaoResult.getManagement() == 1) {
+			user.setMailAddress(DaoResult.getMailAddress());
+			user.setPassword(DaoResult.getPassword());
+			user.setManagement(DaoResult.getManagement());
+
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
+			User nowUser = (User) session.getAttribute("loginUser");
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+
+//	@POST
+//	@Path("{login}")
+//	@Consumes("application/x-www-form-urlencoded")
+//	// @Produces(MediaType.APPLICATION_JSON)
+//	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
+//		String successId = "test";
+//		String successPass = "1234";
+//		System.out.println(id + pass);
+//		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//
+//	}
 
 }

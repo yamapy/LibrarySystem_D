@@ -81,7 +81,7 @@ public class BookDAO {
 
 	private Book processRow(ResultSet rs) throws SQLException {
 		Book result = new Book();
-
+		result.setId(rs.getInt("ID"));
 		result.setTitle(rs.getString("TITLE"));
 		result.setGenre(rs.getString("GENRE"));
 		result.setAuthor(rs.getString("AUTHOR"));
@@ -129,10 +129,32 @@ public class BookDAO {
 		return result;
 	}
 
+	public boolean borrowById(int id, String date, String mail) {
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return false;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY)){
+
+			statement.setString(1,mail);
+			statement.setInt(2, id);
+			statement.setString(3,date);
+			ResultSet rs = statement.executeQuery();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+	}
 
 
 
-//
+
+
 //	public Rental_Status create(Rental_Status rental_status) {
 //		Connection connection = ConnectionProvider.getConnection();
 //		if (connection == null) {
@@ -149,24 +171,6 @@ public class BookDAO {
 //			rs.next();
 //			String id = rs.getString(1);
 //			rental_status.setId(id);
-//		} catch (SQLException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			ConnectionProvider.close(connection);
-//		}
-//
-//		return rental_status;
-//	}
-//
-//	public Rental_Status update(Rental_Status rental_status) {
-//		Connection connection = ConnectionProvider.getConnection();
-//		if (connection == null) {
-//			return rental_status;
-//		}
-//
-//		try (PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-//			setParameter(statement, rental_status, true);
-//			statement.executeUpdate();
 //		} catch (SQLException ex) {
 //			ex.printStackTrace();
 //		} finally {

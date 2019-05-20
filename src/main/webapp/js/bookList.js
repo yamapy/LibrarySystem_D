@@ -69,7 +69,7 @@ function renderTable(data) {
 						row.append($('<td>').text(book.status));
 						}else{
 							row.append($('<td>').append(
-									$('<button>').text("借りる").attr("type","button").attr("id","borrow")
+									$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
 							));
 						}
 
@@ -77,6 +77,7 @@ function renderTable(data) {
 					});
 
 					$('#book').append(table);
+					$('.borrow').click(borrowById);
 				}
 
 
@@ -134,13 +135,16 @@ $('#findBook').click(function() {
 	return false;
 })
 
+//$('.borrow').click(function() {
+//	borrowById();
+//})
+
 function initPageGenre() {
 	var newOption = $('<option>').val("").text('指定しない').prop('selected', true);
 	$('#genreParam').append(newOption);
 	makeGenreSelection('#genreParam');
 	findAll();
 }
-
 
 
 function findByParam() {
@@ -175,15 +179,18 @@ function makeGenreSelection(selectionGenre, book) {
 	});
 }
 
-function borrowById(id) {
+function borrowById(button) {
+	var id = button.currentTarget.id;
 	console.log('borrow start - id:' + id);
+//	var fd = {id:id};
 	$.ajax({
 		type : "POST",
-		url : rootUrl + '/' + id,
-		success : function() {
+		url : rootUrl + '?id='+id,
+//		data:fd,
+		dataType:'json',
+		success : function(data) {
 			alert('借りました');
 			findAll();
-			renderDetails({});
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('貸出失敗');
