@@ -8,10 +8,10 @@ $('#createUser-login-button')
 		.click(
 				function() {
 					$('.error').children().remove();
-					if ($('#mailAdress').val() === '') {
+					if ($('#mailAddress').val() === '') {
 						$('.error').append('<div>メールアドレスを入力てください。</div>');
 					}
-					if ($('#mailAdress').val() != '' && $('#employeeName').val() === '') {
+					if ($('#mailAddress').val() != '' && $('#employeeName').val() === '') {
 						$('.error').append('<div>メールアドレスが正しくありません。</div>');
 					}
 					if (($('#password').val() === '')
@@ -26,7 +26,7 @@ $('#createUser-login-button')
 					if ($('.error').children().length != 0) {
 						return false;
 					}
-					// createUserLogin();
+					createUserLogin();
 					return false;
 				})
 
@@ -54,18 +54,18 @@ function renderEmpInfo(data) {
 }
 
 // // searchWordの実行
-// $('#mailAdress').on('change', searchWord);
+// $('#mailAddress').on('change', searchWord);
 
 function searchWord() {
 	var searchText = $('#mailAddress').val(); // 検索ボックスに入力された値
 
 	// 検索結果エリアの表示を空にする
-	// $('#employeeName').empty();
+	 $('#employeeName').val('');
 	// 検索ボックスに値が入ってる場合
 	if (searchText != '') {
 		// employeeInfo.each(function() {
 		for (var i = 0; i < employeeInfo.length; i++) {
-			if (employeeInfo[i].mailAdress === searchText) {
+			if (employeeInfo[i].mailAddress === searchText) {
 				empName = employeeInfo[i].name;
 				$("#employeeName").val(empName);
 			}
@@ -84,10 +84,10 @@ $("#mailAddress").focusout(function() {
 function createUserLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAdress').val()
+			id : $('#mailAddress').val()
 			,pass:$('#password').val()
 	};
-	console.log($('#mailAdress').val());
+	console.log($('#mailAddress').val());
 	$.ajax({
 		url : rootUrl + "/createUser",
 		type : "POST",
@@ -111,10 +111,10 @@ function createUserLogin() {
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAdress').val()
+			id : $('#mailAddress').val()
 			,pass:$('#password').val()
 	};
-	console.log($('#mailAdress').val());
+	console.log($('#mailAddress').val());
 	$.ajax({
 		url : rootUrl + "/generalLogin",
 		type : "POST",

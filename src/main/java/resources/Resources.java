@@ -143,7 +143,7 @@ public class Resources {
 
 	@POST
 	@Path("createUser")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+//	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean createUser(final FormDataMultiPart form) throws WebApplicationException {
 		User user = new User();
@@ -154,8 +154,8 @@ public class Resources {
 		if (user.getMailAddress() == null || user.getPassword() == null) {
 			throw new WebApplicationException(Response.Status.BAD_REQUEST);
 		}
-		userDao.create(user);
-		if (userDao.create(user).getMailAddress() != null && userDao.create(user).getPassword() != null) {
+		User userResult = userDao.create(user);
+		if (userResult.getMailAddress() != null && userResult.getPassword() != null) {
 			return true;
 		}
 		return false;

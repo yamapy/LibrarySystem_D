@@ -12,11 +12,11 @@ import beans.User;
 
 public class UserDAO {
 
-	private static final String SELECT_BY_MAILAddress_QUERY = "select USER_T.MAILADddress, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADddress= ? and USER_T.PASSWORD = ?";
-	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADddress from EMPLOYEE, USER_T where EMPLOYEE.MAILADddress = USER_T.MAILADddress";
-	private static final String INSERT_QUERY = "";
+	private static final String SELECT_BY_MAILADDRESS_QUERY = "select USER_T.MAILADDRESS, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADDRESS = ? and USER_T.PASSWORD = ?";
+	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADDRESS from EMPLOYEE";
+	private static final String INSERT_QUERY = "INSERT INTO USER_T ( MAILADDRESS , PASSWORD, MANAGEMENT) VALUES(?,?,?)";
 
-	public User findByParam(String mailAdrress, String password) {
+	public User findByParam(String mailAddrress, String password) {
 		User result = new User();
 
 		Connection connection = ConnectionProvider.getConnection();
@@ -24,14 +24,14 @@ public class UserDAO {
 			return result;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MAILAddress_QUERY)) {
-			statement.setString(1, mailAdrress);
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MAILADDRESS_QUERY)) {
+			statement.setString(1, mailAddrress);
 			statement.setString(2, password);
 
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {
-					result.setMailAddress(rs.getString("MAILADddress"));
+					result.setMailAddress(rs.getString("MAILADDRESS"));
 					result.setPassword(rs.getString("PASSWORD"));
 					result.setManagement(rs.getInt("MANAGEMENT"));
 			}
@@ -102,7 +102,7 @@ public class UserDAO {
 		// Employee本体の再現
 		result.setId(rs.getInt("ID"));
 		result.setName(rs.getString("NAME"));
-		result.setMailAddress(rs.getString("MAILADddress"));
+		result.setMailAddress(rs.getString("MAILADDRESS"));
 
 		return result;
 	}

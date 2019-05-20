@@ -6,7 +6,7 @@ getUser();
 
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
-	if ($('#mailAdress').val() === '') {
+	if ($('#mailAddress').val() === '') {
 		$('.error').append('<div>メールアドレスを入力てください。</div>');
 	}
 	if ($('#password').val() === '') {
@@ -22,7 +22,7 @@ $('#general-login-button').click(function() {
 
 $('#manager-login-button').click(function() {
 	$('.error').children().remove();
-	if ($('#mailAdress').val() === '') {
+	if ($('#mailAddress').val() === '') {
 		$('.error').append('<div>メールアドレスを入力てください。</div>');
 	}
 	if ($('#password').val() === '') {
@@ -39,10 +39,10 @@ $('#manager-login-button').click(function() {
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAdress').val()
+			id : $('#mailAddress').val()
 			,pass:$('#password').val()
 	};
-	console.log($('#mailAdress').val());
+	console.log($('#mailAddress').val());
 	$.ajax({
 		url : rootUrl + "/generalLogin",
 		type : "POST",
@@ -68,10 +68,10 @@ function generalLogin() {
 function managerLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAdress').val()
+			id : $('#mailAddress').val()
 			,pass:$('#password').val()
 	};
-	console.log($('#mailAdress').val());
+	console.log($('#mailAddress').val());
 	$.ajax({
 		url : rootUrl + "/mamnagerLogin",
 		type : "POST",
