@@ -41,8 +41,11 @@ public class LendingBookResources {
 	 * @return DB上のIDが振られた書籍情報
 	 * @throws WebApplicationException
 	 *             入力データチェックに失敗した場合に送出される。
+	 *             ("")内は、htmlのname=""と同一のものにしないと
+	 *             フォームで入力された内容をDAOに送れない！！！！！
 	 */
 	@POST
+	@Path("createBook")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Book create(final FormDataMultiPart form) throws WebApplicationException {
@@ -53,8 +56,6 @@ public class LendingBookResources {
 		book.setAuthor(form.getField("author").getValue());
 		book.setPublisher(form.getField("publisher").getValue());
 		book.setGenre(form.getField("genre").getValue());
-		//Date purchaseDate = new Date(System.currentTimeMillis());
-		//SimpleDateFormat formatdate = new SimpleDateFormat("YYYY-MM-DD");
 		book.setPurchaseDate(form.getField("purchaseDate").getValue());
 		book.setBuyer(form.getField("buyer").getValue());
 

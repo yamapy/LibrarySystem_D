@@ -2,6 +2,7 @@
 
 //LendingBookResources.java内の@Path("lendingBook")
 var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
+var postUrl = "/LibrarySystem_D/api/v1.1/lendingBook/createBook";
 
 $(function() {
 
@@ -39,8 +40,6 @@ $('#saveBook').click(function() {
 		return false;
 	}
 
-	/* idは欄としてつくる */
-	var id = $('#id').val()
 	addBook();
 	return false;
 })
@@ -50,7 +49,7 @@ function addBook() {
 	console.log('addBook start');
 	var fd = new FormData(document.getElementById("createBookForm"));
 	$.ajax({
-		url : rootUrl,
+		url : postUrl,
 		type : "POST",
 		data : fd,
 		contentType : false,

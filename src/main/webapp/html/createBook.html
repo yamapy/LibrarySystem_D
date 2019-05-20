@@ -16,31 +16,31 @@
 				<div class="error"></div>
 
 				<div>
-					<label for="id">ID：</label>
-					<input type="text" name="id" id="id" disabled>
+					<label for="id">ID：</label> <input type="text" name="id" id="id"
+						disabled>
 				</div>
 
 				<div>
 					<label for="bookTitle">タイトル：</label> <input type="text"
-						style="width: 40%" maxlength="256" id="bookTitle"
+						style="width: 40%" maxlength="256" id="bookTitle" name="title"
 						placeholder="例：Javaで学ぶシミュレーションの基礎" required>
 				</div>
 
 				<div>
 					<label for="author">作者：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="author"
+						style="width: 20%" maxlength="256" id="author" name="author"
 						placeholder="例：峯村吉泰" required>
 				</div>
 
 				<div>
 					<label for="publisher">出版社：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="publisher"
+						style="width: 20%" maxlength="256" id="publisher" name="publisher"
 						placeholder="例：森北出版" required>
 				</div>
 
 				<div>
 					<label for="genre">ジャンル：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="genre"
+						style="width: 20%" maxlength="256" id="genre" name="genre"
 						placeholder="例：プログラミング" required>
 				</div>
 
@@ -68,13 +68,13 @@
 				<div>
 					<label for="puchaseDate">購入日：</label> <input type="text"
 						style="width: 20%" maxlength="256" id="puchaseDate"
-						placeholder="例：20170427（数字8桁で入力）" required>
+						name="purchaseDate" placeholder="例：20170427（数字8桁で入力）" required>
 				</div>
 
 				<div>
 					<label for="buyer">購入者：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="buyer" placeholder="例：未来太郎"
-						required>
+						style="width: 20%" maxlength="256" id="buyer" name="buyer"
+						placeholder="例：未来太郎" required>
 				</div>
 				<div>
 					<button id="saveBook">登録</button>
