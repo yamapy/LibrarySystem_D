@@ -25,14 +25,14 @@ public class Param {
 		return titleParam;
 	}
 	public void setTitleParam(String titleParam) {
-		this.titleParam = titleParam == null ? "" : "%"+titleParam+"%";
+		this.titleParam = titleParam.equals("") ? "" : "%"+titleParam+"%";
 	}
 
 	public String getAuthorParam() {
 		return authorParam;
 	}
 	public void setAuthorParam(String authorParam) {
-		this.authorParam = authorParam == null ? "" : "%"+authorParam+"%";
+		this.authorParam = authorParam.equals("") ? "" : "%"+authorParam+"%";
 	}
 
 	public String getGenre() {
@@ -64,7 +64,7 @@ public class Param {
 			} else {
 				whereClause.append(" AND ");
 			}
-			whereClause.append("BOOK.TITLE LIKE ?");
+			whereClause.append("M.TITLE LIKE ?");
 		}
 		if (!authorParam.isEmpty()) {
 			if (whereClause.length() == 0) {
@@ -72,7 +72,7 @@ public class Param {
 			} else {
 				whereClause.append(" AND ");
 			}
-			whereClause.append("BOOK.AUTHOR = ?");
+			whereClause.append("M.AUTHOR LIKE ?");
 		}
 		if (!genre.isEmpty()) {
 			if (whereClause.length() == 0) {
@@ -80,7 +80,7 @@ public class Param {
 			} else {
 				whereClause.append(" AND ");
 			}
-			whereClause.append("BOOK.GENRE = ?");
+			whereClause.append("M.GENRE = ?");
 		}
 
 		if (!status.isEmpty()) {
@@ -89,7 +89,7 @@ public class Param {
 			} else {
 				whereClause.append(" AND ");
 			}
-			whereClause.append("BOOK.STATUS = ?");
+			whereClause.append("M.STATUS = ?");
 		}
 
 		// ORDER BYは最後に指定する

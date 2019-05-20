@@ -6,6 +6,7 @@
 </head>
 <body>
   <body>
+  <div id="login"></div>
 	<div class="main">
 	<p>書籍検索</p>
 		<form id="bookSelector">
@@ -25,6 +26,9 @@
 				<div>
 					<label for="statusParam">ステータス：</label>
 					<select name="statusParam" id="statusParam">
+					<option value="" selected>指定しない</option>
+						<option value="貸出可能">貸出可能</option>
+						<option value="貸出中">貸出中</option>
 					</select>
 				</div>
 				<button id="findBook">検索</button>

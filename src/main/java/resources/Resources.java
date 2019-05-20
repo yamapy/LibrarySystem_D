@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
@@ -16,6 +17,7 @@ import beans.Genre;
 import beans.User;
 import dao.BookDAO;
 import dao.GenreDAO;
+import dao.Param;
 
 @Path("resources")
 public class Resources {
@@ -49,16 +51,23 @@ public class Resources {
 		return genreDAO.findAllGenre();
 	}
 
-//	@GET
-//	@Path("book")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
-//			@QueryParam("authorParam") String authorParam,
-//			@QueryParam("genre") String genre,
-//			@QueryParam("status") String status) {
-//		Param param = new Param(titleParam, authorParam, genre,status);
-//		return bookDAO.findByParam(param);
-//	}
+
+
+
+	@Path("findByParam")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
+			@QueryParam("authorParam") String authorParam,
+			@QueryParam("genre") String genre,
+			@QueryParam("status") String status) {
+
+		System.out.println("t="+ titleParam );
+		Param param = new Param(titleParam, authorParam, genre,status);
+		return bookDAO.findByParam(param);
+	}
+
+
 
 
 	@POST

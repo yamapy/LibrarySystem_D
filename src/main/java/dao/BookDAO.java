@@ -103,6 +103,33 @@ public class BookDAO {
 
 	}
 
+	public List<Book> findByParam(Param param) {
+		List<Book> result = new ArrayList<>();
+
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return result;
+		}
+
+		String queryString = "SELECT M.TITLE,M.GENRE,M.AUTHOR,M.STATUS  FROM ("+ SELECT_ALL_QUERY +" ) M "+ param.getWhereClause();
+		try (PreparedStatement statement = connection.prepareStatement(queryString)) {
+			param.setParameter(statement);
+
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				result.add(processRow(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return result;
+	}
+
+
 
 
 //
