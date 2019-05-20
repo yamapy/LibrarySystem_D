@@ -1,6 +1,7 @@
 'use strict';
 
-var rootUrl = "/LibrarySystem_D/api/v1.1/createBook";
+//LendingBookResources.java内の@Path("lendingBook")
+var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
 $(function() {
 
@@ -13,6 +14,7 @@ $(function() {
 
 })
 
+/* 書籍の登録動作 */
 $('#saveBook').click(function() {
 	$('.error').children().remove();
 	if ($('#bookTitle').val() === '') {
@@ -37,19 +39,16 @@ $('#saveBook').click(function() {
 		return false;
 	}
 
-	/* idは欄としてつくるのか？ */
+	/* idは欄としてつくる */
 	var id = $('#id').val()
-	if (id === '')
-		addBook();
-	else
-		updateBook(id);
+	addBook();
 	return false;
 })
 
-/*追加*/
+/* 書籍追加のメソッド */
 function addBook() {
 	console.log('addBook start');
-	var fd = new FormData(document.getElementById("createBook"));
+	var fd = new FormData(document.getElementById("createBookForm"));
 	$.ajax({
 		url : rootUrl,
 		type : "POST",

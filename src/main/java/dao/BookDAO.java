@@ -23,13 +23,13 @@ public class BookDAO {
 			+ "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
 			+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + "order by \n" + "RENTAL_STATUS.RENTDATE \n";
 
-	private static final String COUNT_LENDING_QUERY = "select COUNT(*) as TOTAL \n" + "from EMPLOYEE, \n" + "BOOK, \n"
-			+ "RENTAL_STATUS \n" + "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
-			+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + "order by \n" + "RENTAL_STATUS.RENTDATE \n";
+	//private static final String COUNT_LENDING_QUERY = "select COUNT(*) as TOTAL \n" + "from EMPLOYEE, \n" + "BOOK, \n"
+			//+ "RENTAL_STATUS \n" + "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
+			//+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + "order by \n" + "RENTAL_STATUS.RENTDATE \n";
 
 	private static final String INSERT_QUERY = "INSERT INTO "
-			+ "BOOK(TITLE, AUTHOR, , PUBLISHER, GENRE, PUTCHASEDATE, BUYER) "
-			+ "VALUES(?,?,?,?,?,?)";
+			+"BOOK(TITLE, AUTHOR, PUBLISHER, GENRE, PUTCHASEDATE, BUYER) "
+			+"VALUES(?,?,?,?,?,?)";
 
 	/**
 	 * 貸出中の書籍全件を取得する。
@@ -82,11 +82,13 @@ public class BookDAO {
 	 *
 	 *         return result2; }
 	 *
-	 *         /** 指定されたExpensesオブジェクトを新規にDBに登録する。 登録されたオブジェクトにはDB上のIDが上書きされる。
-	 *         何らかの理由で登録に失敗した場合、IDがセットされない状態（=0）で返却される。
+
+	 /**
+	 * 指定されたBookオブジェクトを新規にDBに登録する。
+	 * 登録されたオブジェクトにはDB上のIDが上書きされる。
+	 * 何らかの理由で登録に失敗した場合、IDがセットされない状態（=0）で返却される。
 	 *
-	 * @param Expenses
-	 *            登録対象オブジェクト
+	 * @param Book 登録対象オブジェクト
 	 * @return DB上のIDがセットされたオブジェクト
 	 */
 	public Book create(Book book) {
