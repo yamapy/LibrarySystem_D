@@ -1,16 +1,16 @@
 package beans;
 
 public class User {
-	private String mailAdress;
+	private String mailAddress;
 	private String password;
 	private int management;
 
-	public String getMailAdress() {
-		return mailAdress;
+	public String getMailAddress() {
+		return mailAddress;
 	}
 
-	public void setMailAdress(String mailAdress) {
-		this.mailAdress = mailAdress;
+	public void setMailAddress(String mailAddress) {
+		this.mailAddress = mailAddress;
 	}
 
 	public String getPassword() {
@@ -31,6 +31,6 @@ public class User {
 
 	@Override
 	    public String toString() {
-	        return mailAdress+password+management;
+	        return mailAddress+password+management;
 	    }
 }

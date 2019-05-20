@@ -11,6 +11,9 @@ $('#createUser-login-button')
 					if ($('#mailAdress').val() === '') {
 						$('.error').append('<div>メールアドレスを入力てください。</div>');
 					}
+					if ($('#mailAdress').val() != '' && $('#employeeName').val() === '') {
+						$('.error').append('<div>メールアドレスが正しくありません。</div>');
+					}
 					if (($('#password').val() === '')
 							|| ($('#password2').val() === '')) {
 						$('.error').append('<div>パスワードは同じものを二回入力してください。</div>');
@@ -37,12 +40,12 @@ function findAllName() {
 		type : "GET",
 		url : rootUrl + "/getEmployeeName",
 		dataType : "json",
-		success : renderEmpList
+		success : renderEmpInfo
 
 	});
 }
 
-function renderEmpList(data) {
+function renderEmpInfo(data) {
 	employeeInfo = [];
 	for (var i = 0; i < Object.keys(data).length; i++) {
 		employeeInfo.push(data[i])
@@ -54,7 +57,7 @@ function renderEmpList(data) {
 // $('#mailAdress').on('change', searchWord);
 
 function searchWord() {
-	var searchText = $('#mailAdress').val(); // 検索ボックスに入力された値
+	var searchText = $('#mailAddress').val(); // 検索ボックスに入力された値
 
 	// 検索結果エリアの表示を空にする
 	// $('#employeeName').empty();
@@ -64,12 +67,19 @@ function searchWord() {
 		for (var i = 0; i < employeeInfo.length; i++) {
 			if (employeeInfo[i].mailAdress === searchText) {
 				empName = employeeInfo[i].name;
+				$("#employeeName").val(empName);
 			}
 		}
 		// });
 
 	}
 };
+
+$("#mailAddress").focusout(function() {
+	searchWord();
+//	$("#employeeName").val(empName);
+	console.log(empName);
+});
 
 function createUserLogin() {
 	// 入力されたユーザーIDとパスワード
@@ -127,10 +137,3 @@ function generalLogin() {
 	})
 
 }
-
-
-$("#password").focusout(function() {
-	searchWord;
-	$("#employeeName").val(empName);
-	console.log(empName);
-});

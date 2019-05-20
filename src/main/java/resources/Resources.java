@@ -52,7 +52,7 @@ public class Resources {
 		User nowUser = (User) session.getAttribute("loginUser");
 		System.out.println(session.getAttribute("loginUser"));
 		// }
-		if (nowUser == null || nowUser.getMailAdress().equals("")) {
+		if (nowUser == null || nowUser.getMailAddress().equals("")) {
 			return false;
 		}
 		return true;
@@ -64,22 +64,22 @@ public class Resources {
 	public boolean isManagerLogin(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
-		System.out.println(nowUser.getMailAdress() + " " + nowUser.getPassword());
-		if (nowUser == null || nowUser.getMailAdress().equals("") || nowUser.getManagement() != 1) {
+		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+		if (nowUser == null || nowUser.getMailAddress().equals("") || nowUser.getManagement() != 1) {
 			return false;
 		}
 		return true;
 	}
 
 	@GET
-	@Path("getLoginMailAdress")
+	@Path("getLoginMailAddress")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String loginMailAdress(@Context HttpServletRequest request) {
+	public String loginMailAddress(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
-		System.out.println(nowUser.getMailAdress() + " " + nowUser.getPassword());
-		if (nowUser == null || nowUser.getMailAdress().equals("")) {
-			return nowUser.getMailAdress();
+		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+			return nowUser.getMailAddress();
 		}
 		return "";
 	}
@@ -88,23 +88,23 @@ public class Resources {
 	@Path("generalLogin")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean generalLogin(@Context HttpServletRequest request, @FormParam("id") String mailAdress,
+	public boolean generalLogin(@Context HttpServletRequest request, @FormParam("id") String mailAddress,
 			@FormParam("pass") String password) throws WebApplicationException {
 
 		User DaoResult = new User();
-		DaoResult.setMailAdress(userDao.findByParam(mailAdress, password).getMailAdress());
-		DaoResult.setPassword(userDao.findByParam(mailAdress, password).getPassword());
-		DaoResult.setManagement(userDao.findByParam(mailAdress, password).getManagement());
-		if (mailAdress != null && password != null && mailAdress.equals(DaoResult.getMailAdress())
+		DaoResult.setMailAddress(userDao.findByParam(mailAddress, password).getMailAddress());
+		DaoResult.setPassword(userDao.findByParam(mailAddress, password).getPassword());
+		DaoResult.setManagement(userDao.findByParam(mailAddress, password).getManagement());
+		if (mailAddress != null && password != null && mailAddress.equals(DaoResult.getMailAddress())
 				&& password.equals(DaoResult.getPassword())) {
-			user.setMailAdress(DaoResult.getMailAdress());
+			user.setMailAddress(DaoResult.getMailAddress());
 			user.setPassword(DaoResult.getPassword());
 			user.setManagement(DaoResult.getManagement());
 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);
 			User nowUser = (User) session.getAttribute("loginUser");
-			System.out.println(nowUser.getMailAdress() + " " + nowUser.getPassword());
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
 
 			return true;
 		} else {
@@ -117,22 +117,22 @@ public class Resources {
 	@Path("mamnagerLogin")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean managerLogin(@Context HttpServletRequest request, @FormParam("id") String mailAdress,
+	public boolean managerLogin(@Context HttpServletRequest request, @FormParam("id") String mailAddress,
 			@FormParam("pass") String password) throws WebApplicationException {
 		User DaoResult = new User();
-		DaoResult.setMailAdress(userDao.findByParam(mailAdress, password).getMailAdress());
-		DaoResult.setPassword(userDao.findByParam(mailAdress, password).getPassword());
-		DaoResult.setManagement(userDao.findByParam(mailAdress, password).getManagement());
-		if (mailAdress != null && password != null && mailAdress.equals(DaoResult.getMailAdress())
+		DaoResult.setMailAddress(userDao.findByParam(mailAddress, password).getMailAddress());
+		DaoResult.setPassword(userDao.findByParam(mailAddress, password).getPassword());
+		DaoResult.setManagement(userDao.findByParam(mailAddress, password).getManagement());
+		if (mailAddress != null && password != null && mailAddress.equals(DaoResult.getMailAddress())
 				&& password.equals(DaoResult.getPassword()) && DaoResult.getManagement() == 1) {
-			user.setMailAdress(DaoResult.getMailAdress());
+			user.setMailAddress(DaoResult.getMailAddress());
 			user.setPassword(DaoResult.getPassword());
 			user.setManagement(DaoResult.getManagement());
 
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);
 			User nowUser = (User) session.getAttribute("loginUser");
-			System.out.println(nowUser.getMailAdress() + " " + nowUser.getPassword());
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
 
 			return true;
 		} else {
@@ -148,14 +148,14 @@ public class Resources {
 	public boolean createUser(final FormDataMultiPart form) throws WebApplicationException {
 		User user = new User();
 
-		user.setMailAdress(form.getField("mailAdress").getValue());
+		user.setMailAddress(form.getField("mailAddress").getValue());
 		user.setPassword(form.getField("password").getValue());
 		user.setManagement(0);
-		if (user.getMailAdress() == null || user.getPassword() == null) {
+		if (user.getMailAddress() == null || user.getPassword() == null) {
 			throw new WebApplicationException(Response.Status.BAD_REQUEST);
 		}
 		userDao.create(user);
-		if (userDao.create(user).getMailAdress() != null && userDao.create(user).getPassword() != null) {
+		if (userDao.create(user).getMailAddress() != null && userDao.create(user).getPassword() != null) {
 			return true;
 		}
 		return false;

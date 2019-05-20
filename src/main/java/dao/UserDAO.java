@@ -12,8 +12,8 @@ import beans.User;
 
 public class UserDAO {
 
-	private static final String SELECT_BY_MAILADRESS_QUERY = "select USER_T.MAILADDRESS, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADDRESS= ? and USER_T.PASSWORD = ?";
-	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADDRESS from EMPLOYEE, USER_T where EMPLOYEE.MAILADDRESS = USER_T.MAILADDRESS";
+	private static final String SELECT_BY_MAILAddress_QUERY = "select USER_T.MAILADddress, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADddress= ? and USER_T.PASSWORD = ?";
+	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADddress from EMPLOYEE, USER_T where EMPLOYEE.MAILADddress = USER_T.MAILADddress";
 	private static final String INSERT_QUERY = "";
 
 	public User findByParam(String mailAdrress, String password) {
@@ -24,14 +24,14 @@ public class UserDAO {
 			return result;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MAILADRESS_QUERY)) {
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_MAILAddress_QUERY)) {
 			statement.setString(1, mailAdrress);
 			statement.setString(2, password);
 
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {
-					result.setMailAdress(rs.getString("MAILADDRESS"));
+					result.setMailAddress(rs.getString("MAILADddress"));
 					result.setPassword(rs.getString("PASSWORD"));
 					result.setManagement(rs.getInt("MANAGEMENT"));
 			}
@@ -76,7 +76,7 @@ public class UserDAO {
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
 			// INSERT実行
 //			setParameter(statement, user, false);
-			statement.setString(1, user.getMailAdress());
+			statement.setString(1, user.getMailAddress());
 			statement.setString(2, user.getPassword());
 			statement.setInt(3, 0);
 			statement.executeUpdate();
@@ -102,7 +102,7 @@ public class UserDAO {
 		// Employee本体の再現
 		result.setId(rs.getInt("ID"));
 		result.setName(rs.getString("NAME"));
-		result.setMailAdress(rs.getString("MAILADDRESS"));
+		result.setMailAddress(rs.getString("MAILADddress"));
 
 		return result;
 	}
