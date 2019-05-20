@@ -2,9 +2,21 @@
 
 // LendingBookResources.java内の@Path("lendingBook")
 var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
+var countUrl = "/LibrarySystem_D/api/v1.1/lendingBook/countLendingBook";
 
 // メソッドの実行が必要！
+countLendingBook();
 findLendingBook();
+
+function countLendingBook() {
+	console.log('countLendingBook start. ')
+	$.ajax({
+		type : "GET",
+		url : countUrl,
+		dataType : "json",
+		success : dt
+	});
+}
 
 function findLendingBook() {
 	console.log('findLendingBook start.')
@@ -14,6 +26,19 @@ function findLendingBook() {
 		dataType : "json",
 		success : renderTable
 	});
+}
+
+function dt(data) {
+	var headerRow = '<tr><th>現在貸出中の書籍件数</th><tr>';
+
+	if (data.length === 0) {
+		$('#lendingBookNumber').append('<p>0件</p>')
+	} else {
+		var table = $('<table>').attr('border', 1);
+		table.append(headerRow);
+		$('#lendingBookNumber').append(table);
+		$('#lendingBookNumber').append('全' + data + '件');
+	}
 }
 
 function renderTable(data) {

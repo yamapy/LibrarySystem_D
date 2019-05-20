@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -40,8 +41,7 @@ public class LendingBookResources {
 	 *            書籍情報を収めたオブジェクト
 	 * @return DB上のIDが振られた書籍情報
 	 * @throws WebApplicationException
-	 *             入力データチェックに失敗した場合に送出される。
-	 *             ("")内は、htmlのname=""と同一のものにしないと
+	 *             入力データチェックに失敗した場合に送出される。 ("")内は、htmlのname=""と同一のものにしないと
 	 *             フォームで入力された内容をDAOに送れない！！！！！
 	 */
 	@POST
@@ -62,23 +62,29 @@ public class LendingBookResources {
 		return dao.create(book);
 	}
 
-}
-
-
-
-/*@Path("CountLendingBook")
-public class LendingBookResources {
-	private final BookDAO dao2 = new BookDAO();
+	/**
+	 * ID指定で書籍情報を取得する。 詳細表示で使用！！！！！
+	 *
+	 * @param id
+	 *            取得対象の書籍のID
+	 * @return 取得した書籍情報をJSON形式で返す。データが存在しない場合は空のオブジェクトが返る。
+	 */
+	@GET
+	@Path("{id}") // 自分の関数のパス、数字、その都度変えられるようになっている
+	@Produces(MediaType.APPLICATION_JSON)
+	public Book findById(@PathParam("id") int id) {
+		return dao.findById(id);
+	}
 
 	/**
 	 * 一覧用に貸出中の書籍件数を取得する。
 	 *
 	 * @return 貸出中の書籍件数をJSON形式で返す。
-
+	 */
 	@GET
+	@Path("countLendingBook")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Book> countLendingBook() {
-		return dao2.countLendingBook();
+	public int findNumber() {
+		return dao.findNumber();
 	}
 }
-*/

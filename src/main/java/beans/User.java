@@ -1,14 +1,14 @@
 package beans;
 
 public class User {
-	private String mailAdress;
+	private String mailAddress;
 	private String password;
 	private int manegement;
-	public String getMailAdress() {
-		return mailAdress;
+	public String getMailAddress() {
+		return mailAddress;
 	}
-	public void setMailAdress(String mailAdress) {
-		this.mailAdress = mailAdress;
+	public void setMailAddress(String mailAdress) {
+		this.mailAddress = mailAdress;
 	}
 	public String getPassword() {
 		return password;

@@ -12,6 +12,7 @@ public class Book {
 	private String buyer;
 	private String status;
 	private String borrower;
+	private String borrowerMailaddress;
 	private String returnDate;
 	private int lendingTotal;
 
@@ -82,6 +83,12 @@ public class Book {
 	}
 	public void setLendingTotal(int lendingTotal) {
 		this.lendingTotal = lendingTotal;
+	}
+	public String getBorrowerMailaddress() {
+		return borrowerMailaddress;
+	}
+	public void setBorrowerMailaddress(String borrowerMailaddress) {
+		this.borrowerMailaddress = borrowerMailaddress;
 	}
 
 
