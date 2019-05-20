@@ -2,11 +2,11 @@ package resources;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
 
+import beans.Employee;
 import beans.User;
 import dao.UserDAO;
 
@@ -14,6 +14,7 @@ import dao.UserDAO;
 public class Resources {
 	private final UserDAO userDao = new UserDAO();
 	User user = new User();
+	Employee employee = new Employee();
 
 	/**
 	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
@@ -23,17 +24,17 @@ public class Resources {
 
 	}
 
-	@GET
-	@Path("getMailAddress")
-	public String getMailAddress() {
-		return user.getMailAdress();
-	}
+//	@GET
+//	@Path("getEmployeeName")
+//	public String getEmployeeName() {
+//		return ;
+//	}
 
 	@POST
 	@Path("generalLogin")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean GeneralLogin(@FormParam("mailAdress") String mailAdress, @FormParam("password") String password)
+	public boolean GeneralLogin(@FormParam("id") String mailAdress, @FormParam("pass") String password)
 			throws WebApplicationException {
 		User DaoResult = new User();
 		DaoResult.setMailAdress(userDao.findByParam(mailAdress, password).getMailAdress());
@@ -44,10 +45,10 @@ public class Resources {
 			user.setMailAdress(DaoResult.getMailAdress());
 			user.setPassword(DaoResult.getPassword());
 			user.setManagement(DaoResult.getManagement());
-			System.out.println(user.getMailAdress() + user.getPassword() + user.getManagement());
+			System.out.println(user.getMailAdress()+user.getPassword()+"ok");
 			return true;
 		} else {
-			System.out.println("ng");
+			System.out.println(user.getMailAdress()+user.getPassword()+"ng");
 			return false;
 		}
 
@@ -57,7 +58,7 @@ public class Resources {
 	@Path("mamnagerLogin")
 	@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean ManagerLogin(@FormParam("mailAdress") String mailAdress, @FormParam("password") String password)
+	public boolean ManagerLogin(@FormParam("id") String mailAdress, @FormParam("pass") String password)
 			throws WebApplicationException {
 		User DaoResult = new User();
 		DaoResult.setMailAdress(userDao.findByParam(mailAdress, password).getMailAdress());
@@ -68,10 +69,8 @@ public class Resources {
 			user.setMailAdress(DaoResult.getMailAdress());
 			user.setPassword(DaoResult.getPassword());
 			user.setManagement(DaoResult.getManagement());
-			System.out.println(user.getMailAdress() + user.getPassword() + user.getManagement());
 			return true;
 		} else {
-			System.out.println("ng");
 			return false;
 		}
 

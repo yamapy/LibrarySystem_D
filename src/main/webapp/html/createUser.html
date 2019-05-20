@@ -13,22 +13,28 @@
 	<div class="header">
 		<h1>ユーザー新規登録</h1>
 	</div>
-	<div class="error">
-		<div>
-			<label for="mailAdress">メールアドレス</label> <input type="text"
-				placeholder="" id="mailAdress" class="mailAdress" name="mailAdress"></input>
-		</div>
-		<div>
-			<label for="password">パスワード</label> <input type="password"
-				placeholder="" id="password" class="password" name="password"></input>
-		</div>
-		<div>
-			<label for="password2">パスワード再入力</label> <input type="password2"
-				placeholder="" id="password2" class="password2" name="password2"></input>
-		</div>
-		<div>
-			<button id="createUser-login-button" class="createUser-login-button">登録してログイン</button>
-		</div>
+	<div>
+		<form id="employeeForm" enctype="multipart/form-data">
+			<div class="error">
+				<div>
+					<label for="mailAdress">メールアドレス</label> <input type="text"
+						placeholder="" id="mailAdress" class="mailAdress"
+						name="mailAdress"></input>
+				</div>
+				<div>
+					<label for="password">パスワード</label> <input type="password"
+						placeholder="" id="password" class="password" name="password"></input>
+				</div>
+				<div>
+					<label for="password2">パスワード再入力</label> <input type="password"
+						placeholder="" id="password2" class="password2" name="password2"></input>
+				</div>
+				<div>
+					<button id="createUser-login-button"
+						class="createUser-login-button">登録してログイン</button>
+				</div>
+			</div>
+		</form>
 	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../js/createUser.js"></script>

@@ -1,3 +1,5 @@
+'use strict';
+
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
 	if ($('#mailAdress').val() === '') {
@@ -32,17 +34,17 @@ $('#manager-login-button').click(function() {
 
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード
-	var fd = new FormData(document.getElementById("loginForm"));
-
+	var requestQuery = {
+			id : $('#mailAdress').val()
+			,pass:$('#password').val()
+	};
 	console.log($('#mailAdress').val());
 	$.ajax({
 		url : "/LibrarySystem_D/api/v1.1/resources/generalLogin",
 		type : "POST",
-		data : fd,
-		contentType : false,
-		processData : false,
+		data : requestQuery,
 		dataType : "json",
-		success : function(data, textStatus, jqXHR) {
+		success : function(data) {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
@@ -61,17 +63,17 @@ function generalLogin() {
 
 function managerLogin() {
 	// 入力されたユーザーIDとパスワード
-	var fd = new FormData(document.getElementById("loginForm"));
-
+	var requestQuery = {
+			id : $('#mailAdress').val()
+			,pass:$('#password').val()
+	};
 	console.log($('#mailAdress').val());
 	$.ajax({
 		url : "/LibrarySystem_D/api/v1.1/resources/mamnagerLogin",
 		type : "POST",
-		data : fd,
-		contentType : false,
-		processData : false,
+		data : requestQuery,
 		dataType : "json",
-		success : function(data, textStatus, jqXHR) {
+		success : function(data) {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');

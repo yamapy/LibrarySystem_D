@@ -3,7 +3,7 @@
 findAllName();
 
 $('#createUser-login-button').click(function() {
-	$('.content').children().remove();
+	$('.error').children().remove();
 	if ($('#mailAdress').val() === '') {
 		$('.error').append('<div>メールアドレスを入力てください。</div>');
 	}
@@ -12,7 +12,7 @@ $('#createUser-login-button').click(function() {
 	} else if ($('#password').val() != $('#password2').val()) {
 		$('.error').append('<div>パスワードが一致しません。</div>');
 	}
-	if ($('.content').children().length != 0) {
+	if ($('.error').children().length != 0) {
 		return false;
 	}
 	createUserLogin();
@@ -26,7 +26,7 @@ function findAllName() {
 	console.log('findAllName start');
 	$.ajax({
 		type : "GET",
-		url : "/LibrarySystem_D/api/v1.1/resources/findAllName",
+		url : "/LibrarySystem_D/api/v1.1/resources/getEmployeeName",
 		dataType : "json",
 		success : function(data) {
 			console.log('findById success: ');
@@ -69,10 +69,10 @@ function findAllName() {
 function createUserLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-		id : $('#login-id').val(),
+		id : $('#mailAdress').val(),
 		pass : $('#login-pass').val()
 	};
-	console.log($('#login-id').val());
+	console.log($('#mailAdress').val());
 	$.ajax({
 		url : "/LibrarySystem_D/api/v1.1/resources/generalLogin",
 		type : "POST",
@@ -94,10 +94,3 @@ function createUserLogin() {
 	})
 
 }
-
-$(document).ready(function() {
-
-	// ログインボタンを押したときのイベント
-	$('#general-login-button').click(generalLogin);
-
-});
