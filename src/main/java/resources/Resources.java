@@ -1,12 +1,15 @@
 package resources;
 
-import javax.ws.rs.Consumes;
+import java.util.List;
+
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
 
 import beans.Book;
+import dao.BookDAO;
 
 @Path("resources")
 public class Resources {
@@ -15,19 +18,29 @@ public class Resources {
 	 */
 	Book b = new Book();
 
-	@POST
-	@Path("login")
-	@Consumes("application/x-www-form-urlencoded")
+	private final BookDAO dao = new BookDAO();
+
+	/**
+	 * 一覧用に貸出中の書籍を取得する。
+	 *
+	 * @return 貸出中の書籍のリストをJSON形式で返す。
+	 */
+
+	@GET
+	@Path("findLendingBookById")
+	//@Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-		String successId = "test";
-		String successPass = "1234";
-		System.out.println(id + pass);
-		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
-			return true;
-		} else {
-			return false;
-		}
+	//@Produces(MediaType.APPLICATION_JSON)
+	public List<Book> findLendingBookById() throws WebApplicationException {
+		return dao.findLendingBook();
+	}
+	@GET
+	@Path("returnBookById")
+	//@Consumes("application/x-www-form-urlencoded")
+	// @Produces(MediaType.APPLICATION_JSON)
+	//@Produces(MediaType.APPLICATION_JSON)
+	public boolean returnBookById(@FormParam("id") int id) throws WebApplicationException {
+		return dao.returnBookById(id);
 	}
 	@POST
 	@Path("myPage")
