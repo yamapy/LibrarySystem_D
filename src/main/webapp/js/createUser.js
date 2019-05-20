@@ -1,90 +1,123 @@
 'use strict';
 
+var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+
 findAllName();
 
-$('#createUser-login-button').click(function() {
-	$('.error').children().remove();
-	if ($('#mailAdress').val() === '') {
-		$('.error').append('<div>メールアドレスを入力てください。</div>');
-	}
-	if (($('#password').val() === '') || ($('#password2').val() === '')) {
-		$('.error').append('<div>パスワードは同じものを二回入力してください。</div>');
-	} else if ($('#password').val() != $('#password2').val()) {
-		$('.error').append('<div>パスワードが一致しません。</div>');
-	}
-	if ($('.error').children().length != 0) {
-		return false;
-	}
-	createUserLogin();
-
-})
+$('#createUser-login-button')
+		.click(
+				function() {
+					$('.error').children().remove();
+					if ($('#mailAdress').val() === '') {
+						$('.error').append('<div>メールアドレスを入力てください。</div>');
+					}
+					if (($('#password').val() === '')
+							|| ($('#password2').val() === '')) {
+						$('.error').append('<div>パスワードは同じものを二回入力してください。</div>');
+					}
+					if (($('#password').val() != '')
+							&& ($('#password2').val() != '')
+							&& $('#password').val() != $('#password2').val()) {
+						$('.error').append('<div>パスワードが一致しません。</div>');
+					}
+					if ($('.error').children().length != 0) {
+						return false;
+					}
+					// createUserLogin();
+					return false;
+				})
 
 // 検索結果を格納するための配列を用意
 var employeeInfo = [];
+var empName;
 
 function findAllName() {
 	console.log('findAllName start');
 	$.ajax({
 		type : "GET",
-		url : "/LibrarySystem_D/api/v1.1/resources/getEmployeeName",
+		url : rootUrl + "/getEmployeeName",
 		dataType : "json",
-		success : function(data) {
-			console.log('findById success: ');
-			employeeInfo.put(data)
-		}
+		success : renderEmpList
+
 	});
 }
 
-// $(function() {
-// var $input = $('#input');
-// var $output2 = $('#output2');
-// $input.on('change', function(event) {
-// $output2.text($input.val());
-// });
-// });
-//
-//searchWord = function() {
-//	var searchText = $(this).val(); // 検索ボックスに入力された値
-//
-//	// 検索結果エリアの表示を空にする
-//	$('#search-result__list').empty();
-//	$('.search-result__hit-num').empty();
-//
-//	// 検索ボックスに値が入ってる場合
-//	if (searchText != '') {
-//		employeeInfo.each(function() {
-//			for (var i = 0; i < employeeInfo.length; i++) {
-//				if (employeeInfo[i] === searchText) {
-//					$('#employeeName').val(employeeInfo[i].name);
-//				}
-//			}
-//		});
-//
-//	}
-//};
-//
-//// searchWordの実行
-//$('#search-text').on('input', searchWord);
+function renderEmpList(data) {
+	employeeInfo = [];
+	for (var i = 0; i < Object.keys(data).length; i++) {
+		employeeInfo.push(data[i])
+	}
+	console.log(employeeInfo.length);
+}
+
+// // searchWordの実行
+// $('#mailAdress').on('change', searchWord);
+
+function searchWord() {
+	var searchText = $('#mailAdress').val(); // 検索ボックスに入力された値
+
+	// 検索結果エリアの表示を空にする
+	// $('#employeeName').empty();
+	// 検索ボックスに値が入ってる場合
+	if (searchText != '') {
+		// employeeInfo.each(function() {
+		for (var i = 0; i < employeeInfo.length; i++) {
+			if (employeeInfo[i].mailAdress === searchText) {
+				empName = employeeInfo[i].name;
+			}
+		}
+		// });
+
+	}
+};
 
 function createUserLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-		id : $('#mailAdress').val(),
-		pass : $('#login-pass').val()
+			id : $('#mailAdress').val()
+			,pass:$('#password').val()
 	};
 	console.log($('#mailAdress').val());
 	$.ajax({
-		url : "/LibrarySystem_D/api/v1.1/resources/generalLogin",
+		url : rootUrl + "/createUser",
+		type : "POST",
+		data : requestQuery,
+		dataType : "json",
+		success : function(data) {
+			if(data == true){
+				alert('新規ユーザー登録完了。');
+				generalLogin();
+			}else{
+				alert('新規ユーザー登録に失敗しました。');
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
+
+}
+
+function generalLogin() {
+	// 入力されたユーザーIDとパスワード
+	var requestQuery = {
+			id : $('#mailAdress').val()
+			,pass:$('#password').val()
+	};
+	console.log($('#mailAdress').val());
+	$.ajax({
+		url : rootUrl + "/generalLogin",
 		type : "POST",
 		data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			console.log(data);
 			if (data == true) {
-				alert('登録ログイン成功');
-				// location.href = './bookList.html';
+				alert('ログイン成功');
+				 location.href = './testLogin.html';
 			} else {
-				alert('登録ログインに失敗しました');
+				alert('ログインに失敗しました');
+				location.href = './login.html';
 			}
 
 		},
@@ -94,3 +127,10 @@ function createUserLogin() {
 	})
 
 }
+
+
+$("#password").focusout(function() {
+	searchWord;
+	$("#employeeName").val(empName);
+	console.log(empName);
+});

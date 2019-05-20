@@ -15,11 +15,17 @@
 	</div>
 	<div>
 		<form id="employeeForm" enctype="multipart/form-data">
-			<div class="error">
+				<div class="error"></div>
 				<div>
 					<label for="mailAdress">メールアドレス</label> <input type="text"
 						placeholder="" id="mailAdress" class="mailAdress"
 						name="mailAdress"></input>
+				</div>
+				<div>
+					<label for="employeeName">氏名</label> <input type="text"
+						placeholder="氏名が表示されます" id="employeeName" class="employeeName"
+						name="employeeName" readonly></input>
+
 				</div>
 				<div>
 					<label for="password">パスワード</label> <input type="password"
@@ -33,7 +39,6 @@
 					<button id="createUser-login-button"
 						class="createUser-login-button">登録してログイン</button>
 				</div>
-			</div>
 		</form>
 	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>

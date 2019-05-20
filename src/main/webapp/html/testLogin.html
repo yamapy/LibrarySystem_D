@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<title>ログイン画面</title>
+</head>
+<body>
+
+	<!--  header -->
+	<div class="header">
+		<h1>ログイン</h1>
+	</div>
+	<div>
+			<div class="error"></div>
+			<div>
+				<label for="mailAdress">メールアドレス:</label> <input type="text"
+					placeholder="メールアドレス" id="mailAdress" class="mailAdress"
+					name="mailAdress"></input>
+			</div>
+			<div>
+				<label for="isLogin">パスワード:</label> <h1 id="isLogin" ></h1>
+			</div>
+			<div>
+				<button id="general-login-button" class="general-login-button">一般ログイン</button>
+				<button id="manager-login-button" class="manager-login-button">管理者ログイン</button>
+			</div>
+	</div>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/login.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,9 @@
 'use strict';
 
+var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+
+getUser();
+
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
 	if ($('#mailAdress').val() === '') {
@@ -40,7 +44,7 @@ function generalLogin() {
 	};
 	console.log($('#mailAdress').val());
 	$.ajax({
-		url : "/LibrarySystem_D/api/v1.1/resources/generalLogin",
+		url : rootUrl + "/generalLogin",
 		type : "POST",
 		data : requestQuery,
 		dataType : "json",
@@ -48,7 +52,7 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				// location.href = './bookList.html';
+				 location.href = './login.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -69,7 +73,7 @@ function managerLogin() {
 	};
 	console.log($('#mailAdress').val());
 	$.ajax({
-		url : "/LibrarySystem_D/api/v1.1/resources/mamnagerLogin",
+		url : rootUrl + "/mamnagerLogin",
 		type : "POST",
 		data : requestQuery,
 		dataType : "json",
@@ -77,7 +81,7 @@ function managerLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				// location.href = './bookList.html';
+				 location.href = './login.html.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -88,4 +92,25 @@ function managerLogin() {
 		}
 	})
 
+}
+
+
+function getUser(user) {
+	console.log('getUser start.');
+
+	$.ajax({
+		type : "GET",
+		url : rootUrl + "/isManagerLogin",
+		dataType : "json",
+		success : function(data){
+			if(data ==true){
+				console.log("ok");
+			}else{
+				console.log("ng");
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
 }
