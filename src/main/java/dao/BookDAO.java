@@ -110,7 +110,7 @@ public class BookDAO {
 			return result;
 		}
 
-		String queryString = "SELECT M.TITLE,M.GENRE,M.AUTHOR,M.STATUS  FROM ("+ SELECT_ALL_QUERY +" ) M "+ param.getWhereClause();
+		String queryString = "SELECT M.ID, M.TITLE,M.GENRE,M.AUTHOR,M.STATUS  FROM ("+ SELECT_ALL_QUERY +" ) M "+ param.getWhereClause();
 		try (PreparedStatement statement = connection.prepareStatement(queryString)) {
 			param.setParameter(statement);
 
