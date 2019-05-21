@@ -2,21 +2,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="../js/jquery-3.3.1.min.js"></script>
-<script src="../js/login.js"></script>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
 <title>ログイン画面</title>
 </head>
 <body>
 
-<!--  header -->
+	<!--  header -->
 	<div class="header">
 		<h1>ログイン</h1>
 	</div>
-	<!--  メインコンテンツ -->
-	<div class="content">
-			<input type="text"  placeholder="ユーザーID" id="login-id" class="login-id"></input>
-			<input type="text"  placeholder="パスワード" id="login-pass" class="login-pass"></input>
-		<button id="login-button" class="login-button">ログイン</button>
+	<div>
+			<div class="error"></div>
+			<div>
+				<label for="mailAddress">メールアドレス:</label> <input type="text"
+					placeholder="メールアドレス" id="mailAddress" class="mailAddress"
+					name="mailAddress" maxlength = "100"></input>
+			</div>
+			<div>
+				<label for="password">パスワード:</label> <input type="text"
+					placeholder="パスワード" id="password" class="password" name="password" maxlength = "10"></input>
+			</div>
+			<div>
+				<button id="general-login-button" class="general-login-button">一般ログイン</button>
+				<button id="manager-login-button" class="manager-login-button">管理者ログイン</button>
+				<button id="logout-button" class="logout-button">ログアウト</button>
+			</div>
 	</div>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/login.js"></script>
+
 </body>
 </html>
