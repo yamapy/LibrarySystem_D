@@ -135,3 +135,31 @@ function getUser(user) {
 		}
 	})
 }
+
+function getMailAddress() {
+//	// 入力されたユーザーIDとパスワード
+//	var requestQuery = {
+//		id : $('#mailAddress').val(),
+//		pass : $('#password').val()
+//	};
+	console.log('get mailAddress start');
+	$.ajax({
+		url : rootUrl + "/getLoginMailAddress",
+		type : "GET",
+//		data : requestQuery,
+		dataType : "json",
+		success : function(data) {
+			if (data == '') {
+				alert('取得失敗');
+			} else {
+				alert('取得成功');
+			}
+
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
+
+}
+
