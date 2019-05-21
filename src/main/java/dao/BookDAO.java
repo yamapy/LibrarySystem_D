@@ -432,8 +432,7 @@ public class BookDAO {
 			return result;
 		}
 
-		String queryString = "SELECT M.TITLE,M.GENRE,M.AUTHOR,M.STATUS  FROM (" + SELECT_ALL_QUERY + " ) M "
-				+ param.getWhereClause();
+		String queryString = "SELECT M.ID, M.TITLE,M.GENRE,M.AUTHOR,M.STATUS  FROM ("+ SELECT_ALL_QUERY +" ) M "+ param.getWhereClause();
 		try (PreparedStatement statement = connection.prepareStatement(queryString)) {
 			param.setParameter(statement);
 
@@ -472,37 +471,4 @@ public class BookDAO {
 			ConnectionProvider.close(connection);
 		}
 	}
-
-//	private User getMailAddress(ResultSet rs) throws SQLException {
-//		User result = new User();
-//		result.setMailAddress(rs.getString("MAILADDRESS"));
-//
-//		return result;
-//	}
-//
-//	public Rental_Status create(Rental_Status rental_status) {
-//		Connection connection = ConnectionProvider.getConnection();
-//		if (connection == null) {
-//			return rental_status;
-//		}
-//
-//		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
-//			// INSERT実行
-//			setParameter(statement, rental_status, false);
-//			statement.executeUpdate();
-//
-//			// INSERTできたらKEYを取得
-//			ResultSet rs = statement.getGeneratedKeys();
-//			rs.next();
-//			String id = rs.getString(1);
-//			rental_status.setId(id);
-//		} catch (SQLException ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			ConnectionProvider.close(connection);
-//		}
-//
-//		return rental_status;
-//	}
-
 }

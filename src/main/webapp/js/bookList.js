@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 
@@ -16,9 +18,7 @@ var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 findAll();
 initPageGenre();
 makeGenreSelection();
-//if(isLogin == "false"){
-//	loginButtton()
-//}
+
 
 function findAll() {
 	console.log('findAll start.')
@@ -56,50 +56,46 @@ function renderTable(data) {
 
 		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>貸出</th>';
 
-				$('#book').children().remove();
+		$('#book').children().remove();
 
 
 
-				if (data.length === 0) {
-					$('#book').append('<p>現在データが存在していません。</p>')
-				} else {
-					var table = $('<table>').attr('border', 1);
-					table.append(headerRow);
+		if (data.length === 0) {
+			$('#book').append('<p>現在データが存在していません。</p>')
+		} else {
+			var table = $('<table>').attr('border', 1);
+			table.append(headerRow);
 
 
-					$.each(data, function(index, book) {
-						var row = $('<tr>');
-						row.append($('<td>').text(book.title).attr("id","title"));
-						row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
-						row.append($('<td>').text(book.author).attr("id","author"));
-						row.append($('<td nowrap>').append(
-								$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
-						));
+			$.each(data, function(index, book) {
+				var row = $('<tr>');
+				row.append($('<td>').text(book.title).attr("id","title"));
+				row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
+				row.append($('<td>').text(book.author).attr("id","author"));
+				row.append($('<td nowrap>').append(
+						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
+				));
 
-						if(book.status=="貸出中"){
-						row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
-						}else{
-							row.append($('<td nowrap>').append(
-									$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
-							));
-						}
-
-						table.append(row);
-					});
-
-					$('#book').append(table);
-					$('.borrow').click(borrowById);
+				if(book.status=="貸出中"){
+					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
+				}else{
+					row.append($('<td nowrap>').append(
+							$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
+					));
 				}
+
+				table.append(row);
+			});
+
+			$('#book').append(table);
+			$('.borrow').click(borrowById);
+		}
 
 
 
 	}
 
 	else{
-
-		//loginButton();
-
-
 		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
 
 		$('#book').children().remove();
@@ -122,7 +118,6 @@ function renderTable(data) {
 						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
 				));
 
-//				row.append($('<td>').text(book.status));
 				if(book.status=="貸出中"){
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
 				}else
@@ -150,9 +145,7 @@ $('#findBook').click(function() {
 	return false;
 })
 
-//$('.borrow').click(function() {
-//	borrowById();
-//})
+
 
 function initPageGenre() {
 	var newOption = $('<option>').val("").text('指定しない').prop('selected', true);
@@ -166,9 +159,9 @@ function findByParam() {
 	console.log('findByParam start.');
 
 	var urlWithParam = rootUrl+"/findByParam"+'?titleParam='+$('#titleParam').val()
-		+'&authorParam='+$('#authorParam').val()
-		+'&genre='+$('#genreParam').val()
-		+'&status='+$('#statusParam').val();
+	+'&authorParam='+$('#authorParam').val()
+	+'&genre='+$('#genreParam').val()
+	+'&status='+$('#statusParam').val();
 	console.log( urlWithParam);
 	$.ajax({
 		type : "GET",
@@ -197,12 +190,12 @@ function makeGenreSelection(selectionGenre, book) {
 
 function borrowById(button) {
 	var id = button.currentTarget.id;
+	var requestQuery = {id:id};
 	console.log('borrow start - id:' + id);
-//	var fd = {id:id};
 	$.ajax({
 		type : "POST",
 		url : rootUrl + '?id='+id,
-//		data:fd,
+		data:requestQuery,
 		dataType:'json',
 		success : function(data) {
 			alert('借りました');
@@ -237,16 +230,21 @@ function renderDetails(book) {
 
 function getMailAddress() {
 	console.log('get mailAddress start');
+	var requestQuery = {
+
+
+	};
 	$.ajax({
 		url : rootUrl + "/getLoginMailAddress",
 		type : "GET",
-//		data : requestQuery,
+		data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			if (data == '') {
 				alert('取得失敗');
 			} else {
-				alert('取得成功');
+				alert('取得成功'+data);
+
 			}
 
 		},

@@ -66,6 +66,7 @@ public class Resources {
 		return bookDAO.findByParam(param);
 	}
 
+	// <<<<<<< HEAD
 	@GET
 	@Path("/findLendingBookById")
 	// @Consumes("application/x-www-form-urlencoded")
@@ -86,8 +87,28 @@ public class Resources {
 	@GET
 	@Path("returnBook")
 	public int returnBook() throws WebApplicationException {
+		// =======
+
+		// >>>>>>> shiena
 
 		return dao.returnBook(mailAddress);
+	}
+
+	@POST
+	public boolean borrow(@FormParam("id") int id, @Context HttpServletRequest request) throws WebApplicationException {
+
+		System.out.println(id);
+
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		session.getAttribute("mail");
+
+		String mail = nowUser.getMailAddress();
+		return bookDAO.borrowById(id, today, mail);
+
 	}
 
 	@GET
@@ -146,20 +167,21 @@ public class Resources {
 		}
 	}
 
-	@GET
-	@Path("getLoginMailAddress")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String loginMailAddress(@Context HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		User nowUser = (User) session.getAttribute("loginUser");
-		if ((session != null) && (nowUser.getMailAddress() != null || !nowUser.getMailAddress().equals(""))) {
-			System.out.println(nowUser.getMailAddress());
-			return nowUser.getMailAddress();
-		} else {
-			System.out.println("Resource false");
-			return "";
-		}
-	}
+	// @GET
+	// @Path("getLoginMailAddress")
+	// @Produces(MediaType.APPLICATION_JSON)
+	// public String loginMailAddress(@Context HttpServletRequest request) {
+	// HttpSession session = request.getSession();
+	// User nowUser = (User) session.getAttribute("loginUser");
+	// if ((session != null) && (nowUser.getMailAddress() != null ||
+	// !nowUser.getMailAddress().equals(""))) {
+	// System.out.println(nowUser.getMailAddress());
+	// return nowUser.getMailAddress();
+	// } else {
+	// System.out.println("Resource false");
+	// return "";
+	// }
+	// }
 
 	@GET
 	@Path("logout")
@@ -229,21 +251,22 @@ public class Resources {
 		}
 	}
 
-	@POST
-	public boolean borrow(@QueryParam("id") int id) throws WebApplicationException {
-
-		System.out.println(id);
-
-		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String today = formatter.format(date);
-
-		String mail = "s-kondo@virtualex.co.jp";
-		// int id = Integer.parseInt(form.getField("id").getValue());
-
-		return bookDAO.borrowById(id, today, mail);
-
-	}
+	// @POST
+	// public boolean borrow(@QueryParam("id") int id) throws
+	// WebApplicationException {
+	//
+	// System.out.println(id);
+	//
+	// Date date = new Date(System.currentTimeMillis());
+	// SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	// String today = formatter.format(date);
+	//
+	// String mail = "s-kondo@virtualex.co.jp";
+	// // int id = Integer.parseInt(form.getField("id").getValue());
+	//
+	// return bookDAO.borrowById(id, today, mail);
+	//
+	// }
 
 	@POST
 	@Path("generalLogin")
@@ -272,6 +295,20 @@ public class Resources {
 			return false;
 		}
 
+	}
+
+	@GET
+	@Path("getLoginMailAddress")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String loginMailAddress(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		session.setAttribute("mail", nowUser.getMailAddress());
+		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+		if (nowUser.getMailAddress() != null || !nowUser.getMailAddress().equals("")) {
+			return nowUser.getMailAddress();
+		}
+		return "";
 	}
 
 	@POST
@@ -304,14 +341,14 @@ public class Resources {
 	@Path("createUser")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean createUser(final FormDataMultiPart form)
-			throws WebApplicationException {
+	public boolean createUser(final FormDataMultiPart form) throws WebApplicationException {
 		User user = new User();
 
 		user.setMailAddress(form.getField("mailAddress").getValue());
 		user.setPassword(form.getField("password").getValue());
 		user.setManagement(0);
-		if (user.getMailAddress() == null || user.getPassword() == null ||user.getMailAddress() == "" || user.getPassword() == "") {
+		if (user.getMailAddress() == null || user.getPassword() == null || user.getMailAddress() == ""
+				|| user.getPassword() == "") {
 			throw new WebApplicationException(Response.Status.BAD_REQUEST);
 		}
 		User userResult = userDao.create(user);

@@ -2,7 +2,7 @@
 
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
- getUser();
+getUser();
 
 $('#general-login-button').click(function() {
 	$('.error').children().remove();

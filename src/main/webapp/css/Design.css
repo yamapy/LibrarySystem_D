@@ -1,11 +1,18 @@
 @CHARSET "UTF-8";
 
-#search{
-	 position:relative;
-	 left:150px
+#search {
+	position: relative;
+	left: 150px
 }
-#bookSearch{
+
+#bookSearch {
 	font-size: 150%;
+}
+
+h2 {
+	font-size: 150%;
+	position: relative;
+	left: 150px
 }
 
 table {
@@ -30,20 +37,21 @@ td {
 }
 
 .grayButton {
-  display: inline-block;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  background:#d3d3d3;/*ボタン色*/
-  border-bottom: solid 4px #627295;
-  border-radius: 3px;
-}
-.grayButton:active {
-  /*ボタンを押したとき*/
-  -webkit-transform: translateY(4px);
-  transform: translateY(4px);/*下に動く*/
-  border-bottom: none;/*線を消す*/
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	background: #d3d3d3; /*ボタン色*/
+	border-bottom: solid 4px #627295;
+	border-radius: 3px;
 }
 
-.red{
-	color:red;
+.grayButton:active {
+	/*ボタンを押したとき*/
+	-webkit-transform: translateY(4px);
+	transform: translateY(4px); /*下に動く*/
+	border-bottom: none; /*線を消す*/
+}
+
+.red {
+	color: red;
 }
