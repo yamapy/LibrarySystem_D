@@ -40,15 +40,15 @@ public class Resources {
 		return bookDAO.findAll();
 	}
 
-	@GET
-	@Path("isLogin")
-	public boolean isLogin(){
-		if(user==null){
-			return false;
-		}else{
-			return true;
-		}
-	}
+//	@GET
+//	@Path("isLogin")
+//	public boolean isLogin(){
+//		if(user==null){
+//			return false;
+//		}else{
+//			return true;
+//		}
+//	}
 
 
 	@GET
@@ -93,21 +93,21 @@ public class Resources {
 
 
 
-//	@GET
-//	@Path("isLogin")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public boolean isGeneralLogin(@Context HttpServletRequest request) {
-//		HttpSession session = request.getSession();
-//		// session.setAttribute("isGeneralLogin", user);
-//		// if(session.getAttribute("isGeneralLogin") != null){
-//		User nowUser = (User) session.getAttribute("loginUser");
-//		System.out.println(session.getAttribute("loginUser"));
-//		// }
-//		if (nowUser == null || nowUser.getMailAddress().equals("")) {
-//			return false;
-//		}
-//		return true;
-//	}
+	@GET
+	@Path("isLogin")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean isGeneralLogin(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		// session.setAttribute("isGeneralLogin", user);
+		// if(session.getAttribute("isGeneralLogin") != null){
+		User nowUser = (User) session.getAttribute("loginUser");
+		System.out.println(session.getAttribute("loginUser"));
+		// }
+		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+			return false;
+		}
+		return true;
+	}
 
 
 	@POST
