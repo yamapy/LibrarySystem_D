@@ -19,7 +19,7 @@ function renderTable(data) {
 	console.log(data);
 	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却予定日</th></tr>';
 
-	if (data.length === 0) {
+	if ( data == undefined || data.length === 0) {
 		$('#table').append('<p>現在、貸出中の書籍は存在しません。</p>')
 	} else {
 		var table = $('<table>').attr('border', 1);
@@ -28,17 +28,21 @@ function renderTable(data) {
 			var row = $('<tr>');
 			var returnButton  = '<button id="login-button" class="login-button">すべて返却</button>';
 			row.append($('<td>').text(lendingBook.title));
-			row.append($('<td>').text(lendingBook.borrower));
+			row.append($('<td nowrap>').text(lendingBook.borrower));
 
-			//
-			row.append($('<td>').text(lendingBook.returnDate));
-			row.append($('<td>').append(
+
+			row.append($('<td nowrap>').text(lendingBook.returnDate));
+			row.append(
+				$('<td nowrap>').append(
 					$('<button>').text("返却").attr("type","button").attr("onclick", 'returnBookById('+lendingBook.id+')')
-				));
+				).attr("id",lendingBook.id).attr("class",'returnButton')
+			);
 			if(index==0){
-				row.append($('<td>').append(
-						$('<button>').text("返却").attr("type","button").attr("onclick", 'returnAll()')
-				));
+				row.append
+					($('<td nowrap>').append(
+						$('<button>').text("すべて返却").attr("type","button").attr("onclick", 'returnBookAll()')
+					).attr("class",'returnButton')
+				);
 			}
 
 			table.append(row);
@@ -49,24 +53,24 @@ function renderTable(data) {
 	}
 }
 
-function returnBookById(Id) {
-	alert(Id+'を返却する予定');
+function returnBookById(returnId) {
+	alert(returnId+'を返却する予定');
 	console.log('returnById start.')
-	var param =
-		{
-			id : '1'
-		};
+//	var param =
+//		{
+//			id : returnId
+//		};
 	$.ajax({
 		type : "GET",
-		url : rootUrl + '/returnBookById',
+		url : rootUrl + '/returnBook/'+returnId,
 		//data : param,
 		dataType : "json",
 		success : function(data) {
 			console.log(data);
 			var tableHTML='';
 			if (data == true) {
-				alert('すべて返却しました');
-//				location.href = './Expense.html';
+				$('#'+returnId).text('済み');
+				alert('返却しました');
 			} else {
 				alert('返却失敗');
 			}
@@ -76,8 +80,29 @@ function returnBookById(Id) {
 		}
 	});
 }
-function returnAll() {
-	alert('全部返却する予定');
+
+function returnBookAll() {
+	alert('すべて返却する予定');
+	console.log('returnBookAll start.')
+
+	$.ajax({
+		type : "GET",
+		url : rootUrl + '/returnBook/',
+		dataType : "json",
+		success : function(data) {
+			console.log(data);
+			var tableHTML='';
+			if (data > 0) {
+				$('.returnButton').text('済み');
+				alert(data+'冊返却しました');;
+			} else {
+				alert('返却失敗');
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	});
 }
 
 function init() {

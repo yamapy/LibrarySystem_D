@@ -36,6 +36,25 @@ public class BookDAO {
 			"	and USER_T.MAILADDRESS = EMPLOYEE.MAILADDRESS \n" +
 			"order by  \n" +
 			"	RENTAL_STATUS.RENTDATE \n" ;
+	private static final String SELECT_LENDING_BY_MAILADDRESS_QUERY = "select  \n" +
+			"	BOOK.ID \n" +
+			",	BOOK.TITLE \n" +
+			",	EMPLOYEE.NAME \n" +
+			",	RENTAL_STATUS.RENTDATE + 14 RETURN_DATE \n" +
+			" \n" +
+			"from  \n" +
+			"	EMPLOYEE \n" +
+			",	BOOK \n" +
+			",	RENTAL_STATUS \n" +
+			",	USER_T \n" +
+			"			 \n" +
+			"where 1 = 1 \n" +
+			"	and BOOK.ID = RENTAL_STATUS.BOOKID \n" +
+			"	and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" +
+			"	and USER_T.MAILADDRESS = EMPLOYEE.MAILADDRESS \n" +
+			"	and USER_T.MAILADDRESS = ? \n" +
+			"order by  \n" +
+			"	RENTAL_STATUS.RENTDATE \n" ;
 
 	//private static final String COUNT_LENDING_QUERY = "select COUNT(*) as TOTAL \n" + "from EMPLOYEE, \n" + "BOOK, \n"
 			//+ "RENTAL_STATUS \n" + "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
@@ -48,7 +67,12 @@ public class BookDAO {
 			"FROM \n" +
 			"	RENTAL_STATUS R \n" +
 			"WHERE \n" +
-			"	R.ID = ? \n" ;
+			"	R.BOOKID = ? \n" ;
+	private static final String DELETE_ALL_QUERY = "DELETE \n" +
+			"FROM \n" +
+			"	RENTAL_STATUS R \n" +
+			"WHERE \n" +
+			"	R.MAILADDRESS = ? \n" ;
 
 	/**
 	 * 貸出中の書籍全件を取得する。
@@ -65,6 +89,30 @@ public class BookDAO {
 
 		try (Statement statement = connection.createStatement();) {
 			ResultSet rs = statement.executeQuery(SELECT_LENDING_QUERY);
+
+			while (rs.next()) {
+				result.add(processRow1(rs));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return result;
+	}
+	public List<Book> findLendingBook(String mailAddress) {
+		List<Book> result = new ArrayList<>();
+
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return result;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_LENDING_BY_MAILADDRESS_QUERY, new String[] { "ID" });) {
+			setMailAddressParameter(statement, mailAddress);
+			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
 				result.add(processRow1(rs));
@@ -133,27 +181,52 @@ public class BookDAO {
 
 		return book;
 	}
-	public boolean returnBookById(int id) {
+
+	public int returnBookById(int id) {
 		Connection connection = ConnectionProvider.getConnection();
+		int resultNum;
 		if (connection == null) {
-			return false;
+			return 0;
 		}
 
 		try (PreparedStatement statement = connection.prepareStatement(DELETE_QUERY, new String[] { "ID" });) {
 			// DELETE実行
 			setDeleteParameter(statement, id);
-			int num = statement.executeUpdate();
+			resultNum = statement.executeUpdate();
 
-			// INSERTできたらKEYを取得
-			System.out.println(num+"件更新");
+			// DELETE
+			System.out.println(resultNum+"件更新");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			return false;
+			return 0;
 		} finally {
 			ConnectionProvider.close(connection);
 		}
 
-		return true;
+		return resultNum;
+	}
+	public int returnBook(String mailAddress) {
+		Connection connection = ConnectionProvider.getConnection();
+		int resultNum;
+		if (connection == null) {
+			return 0;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(DELETE_ALL_QUERY, new String[] { "ID" });) {
+			// DELETE実行
+			setMailAddressParameter(statement, mailAddress);
+			resultNum = statement.executeUpdate();
+
+			// DELETE
+			System.out.println(resultNum+"件更新all");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return 0;
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return resultNum;
 	}
 
 	/**
@@ -222,20 +295,12 @@ public class BookDAO {
 		}
 	}
 	private void setDeleteParameter(PreparedStatement statement, int id) throws SQLException {
-//		int count = 1;
-//		statement.setString(count++, book.getTitle());
-//		statement.setString(count++, book.getAuthor());
-//		statement.setString(count++, book.getPublisher());
-//		statement.setString(count++, book.getGenre());
-//		statement.setString(count++, book.getPurchaseDate());
-//		statement.setString(count++, book.getBuyer());
-
-
-//		if (forUpdate) {
-//			statement.setInt(count++, book.getId());
-//		}
 		statement.setInt(1, id);
 	}
+	private void setMailAddressParameter(PreparedStatement statement, String emailAddress) throws SQLException {
+		statement.setString(1, emailAddress);
+	}
+
 
 
 }
