@@ -14,6 +14,7 @@ public class UserDAO {
 
 	private static final String SELECT_BY_MAILADDRESS_QUERY = "select USER_T.MAILADDRESS, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADDRESS = ? and USER_T.PASSWORD = ?";
 	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADDRESS from EMPLOYEE";
+	private static final String SELECT_ALL_USER_MAILADRESS_QUERY = "select USER_T.MAILADDRESS from USER_T";
 	private static final String INSERT_QUERY = "INSERT INTO USER_T ( MAILADDRESS , PASSWORD, MANAGEMENT) VALUES(?,?,?)";
 
 	public User findByParam(String mailAddrress, String password) {
@@ -56,7 +57,30 @@ public class UserDAO {
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				result.add(processRow(rs));
+				result.add(processRowEmp(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionProvider.close(connection);
+		}
+
+		return result;
+	}
+
+	public List<User> getUserInfo(){
+		List<User> result = new ArrayList<>();
+		Connection connection = ConnectionProvider.getConnection();
+		if (connection == null) {
+			return result;
+		}
+
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_MAILADRESS_QUERY)) {
+
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				result.add(processRowUser(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,12 +120,19 @@ public class UserDAO {
 	}
 
 
-	private Employee processRow(ResultSet rs) throws SQLException {
+	private Employee processRowEmp(ResultSet rs) throws SQLException {
 		Employee result = new Employee();
 
 		// Employee本体の再現
 		result.setId(rs.getInt("ID"));
 		result.setName(rs.getString("NAME"));
+		result.setMailAddress(rs.getString("MAILADDRESS"));
+
+		return result;
+	}
+
+	private User processRowUser(ResultSet rs) throws SQLException {
+		User result = new User();
 		result.setMailAddress(rs.getString("MAILADDRESS"));
 
 		return result;

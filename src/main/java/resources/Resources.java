@@ -43,6 +43,13 @@ public class Resources {
 	}
 
 	@GET
+	@Path("getUserInfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> userInfo() {
+		return userDao.getUserInfo();
+	}
+
+	@GET
 	@Path("isLogin")
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean isGeneralLogin(@Context HttpServletRequest request) {

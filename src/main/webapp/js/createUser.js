@@ -2,7 +2,8 @@
 
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
-findAllName();
+findAllEmployees();
+findAllUsers();
 
 $('#createUser-login-button')
 		.click(
@@ -11,7 +12,8 @@ $('#createUser-login-button')
 					if ($('#mailAddress').val() === '') {
 						$('.error').append('<div>メールアドレスを入力てください。</div>');
 					}
-					if ($('#mailAddress').val() != '' && $('#employeeName').val() === '') {
+					if ($('#mailAddress').val() != ''
+							&& $('#employeeName').val() === '') {
 						$('.error').append('<div>メールアドレスが正しくありません。</div>');
 					}
 					if (($('#password').val() === '')
@@ -23,6 +25,7 @@ $('#createUser-login-button')
 							&& $('#password').val() != $('#password2').val()) {
 						$('.error').append('<div>パスワードが一致しません。</div>');
 					}
+					checkIsUser();
 					if ($('.error').children().length != 0) {
 						return false;
 					}
@@ -32,10 +35,11 @@ $('#createUser-login-button')
 
 // 検索結果を格納するための配列を用意
 var employeeInfo = [];
+var userInfo = [];
 var empName;
 
-function findAllName() {
-	console.log('findAllName start');
+function findAllEmployees() {
+	console.log('findAllEmployees start');
 	$.ajax({
 		type : "GET",
 		url : rootUrl + "/getEmployeeName",
@@ -45,22 +49,41 @@ function findAllName() {
 	});
 }
 
+function findAllUsers() {
+	console.log('findAllUsers start');
+	$.ajax({
+		type : "GET",
+		url : rootUrl + "/getUserInfo",
+		dataType : "json",
+		success : renderUserInfo
+
+	});
+
+}
+
 function renderEmpInfo(data) {
 	employeeInfo = [];
 	for (var i = 0; i < Object.keys(data).length; i++) {
 		employeeInfo.push(data[i])
 	}
-	console.log(employeeInfo.length);
+	console.log(employeeInfo.length + " Employees");
+}
+
+function renderUserInfo(data) {
+	userInfo = [];
+	for (var i = 0; i < Object.keys(data).length; i++) {
+		userInfo.push(data[i])
+	}
+	console.log(userInfo.length + " Users");
 }
 
 // // searchWordの実行
 // $('#mailAddress').on('change', searchWord);
-
 function searchWord() {
 	var searchText = $('#mailAddress').val(); // 検索ボックスに入力された値
 
 	// 検索結果エリアの表示を空にする
-	 $('#employeeName').val('');
+	$('#employeeName').val('');
 	// 検索ボックスに値が入ってる場合
 	if (searchText != '') {
 		// employeeInfo.each(function() {
@@ -77,15 +100,25 @@ function searchWord() {
 
 $("#mailAddress").focusout(function() {
 	searchWord();
-//	$("#employeeName").val(empName);
+	// $("#employeeName").val(empName);
 	console.log(empName);
 });
+
+function checkIsUser() {
+	if ($('#employeeName').val() != '') {
+		for (var i = 0; i < userInfo.length; i++) {
+			if (userInfo[i].mailAddress === $('#mailAddress').val()) {
+				alert('このメールアドレスは登録済みです。');
+			}
+		}
+	}
+}
 
 function createUserLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAddress').val()
-			,pass:$('#password').val()
+		id : $('#mailAddress').val(),
+		pass : $('#password').val()
 	};
 	console.log($('#mailAddress').val());
 	$.ajax({
@@ -94,10 +127,10 @@ function createUserLogin() {
 		data : requestQuery,
 		dataType : "json",
 		success : function(data) {
-			if(data == true){
+			if (data == true) {
 				alert('新規ユーザー登録完了。');
 				generalLogin();
-			}else{
+			} else {
 				alert('新規ユーザー登録に失敗しました。');
 			}
 		},
@@ -111,8 +144,8 @@ function createUserLogin() {
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAddress').val()
-			,pass:$('#password').val()
+		id : $('#mailAddress').val(),
+		pass : $('#password').val()
 	};
 	console.log($('#mailAddress').val());
 	$.ajax({
@@ -124,7 +157,7 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				 location.href = './testLogin.html';
+				location.href = './testLogin.html';
 			} else {
 				alert('ログインに失敗しました');
 				location.href = './login.html';
