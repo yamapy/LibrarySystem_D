@@ -63,7 +63,8 @@ public class LendingBookResources {
 	}
 
 	/**
-	 * ID指定で書籍情報を取得する。 詳細表示で使用！！！！！
+	 * ID指定で書籍情報を取得する。
+	 * 詳細表示で使用！！！！！
 	 *
 	 * @param id
 	 *            取得対象の書籍のID
