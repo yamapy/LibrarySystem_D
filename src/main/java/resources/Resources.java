@@ -1,5 +1,6 @@
 package resources;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+=======
+import java.util.List;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import beans.Genre;
+import dao.GenreDAO;
+>>>>>>> yuri
 
 import beans.Book;
 import beans.Employee;
@@ -33,6 +45,7 @@ import dao.UserDAO;
 
 @Path("/resources")
 public class Resources {
+<<<<<<< HEAD
 	User user = new User();
 	User employee = new User();
 	private final BookDAO bookDAO = new BookDAO();
@@ -345,3 +358,16 @@ public class Resources {
 
 
 
+=======
+
+	private final GenreDAO genreDAO = new GenreDAO();
+
+
+	@GET
+	@Path("genre")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Genre> findAllGenre() {
+		return genreDAO.findAllGenre();
+	}
+}
+>>>>>>> yuri

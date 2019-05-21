@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>書籍追加登録</title>
+
+<!--<link rel="stylesheet" href="css/postStyle.css">-->
+
 </head>
 <body>
+	<div class="main clearfix">
+		<div id="createBook">
+			<h1>書籍追加登録</h1>
+			<font color="red">IDを除く全ての項目を必ず入力してください。</font>
+			<form id="createBookForm" enctype="multipart/form-data">
+				<div class="error"></div>
+
+				<div>
+					<label for="id">ID：</label> <input type="text" name="id" id="id"
+						disabled>
+				</div>
+
+				<div>
+					<label for="bookTitle">タイトル：</label> <input type="text"
+						maxlength="85" id="bookTitle" name="title"
+						placeholder="例：Javaで学ぶシミュレーションの基礎" required>
+				</div>
+
+				<div>
+					<label for="author">作者：</label> <input type="text"
+						maxlength="85" id="author" name="author"
+						placeholder="例：峯村吉泰" required>
+				</div>
+
+				<div>
+					<label for="publisher">出版社：</label> <input type="text"
+						maxlength="85" id="publisher" name="publisher"
+						placeholder="例：森北出版" required>
+				</div>
+
+				<div>
+					<label for="genreParam">ジャンル：</label> <select id="genreParam" name="genreParam"></select>
+				</div>
+
+				<div>
+					<label for="genre"></label> <input type="text"
+						id="genre" name="genre" required>
+				</div>
+
+				<div>
+					<label for="puchaseDate">購入日：</label> <input type="text"
+						maxlength="85" id="puchaseDate"
+						name="purchaseDate" placeholder="例：20180523（数字8桁で入力）" required>
+				</div>
+
+				<div>
+					<label for="buyer">購入者：</label> <input type="text"
+						maxlength="85" id="buyer" name="buyer"
+						placeholder="例：未来太郎" required>
+				</div>
+				<div>
+					<button id="saveBook">登録</button>
+				</div>
+			</form>
+			<button id="returnManageTopPage">戻る</button>
+		</div>
+	</div>
+
+	<!--..はファイルの移動-->
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/createBook.js"></script>
 
 </body>
 </html>

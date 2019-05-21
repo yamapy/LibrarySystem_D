@@ -49,4 +49,8 @@ public class GenreDAO {
 	}
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> yuri
