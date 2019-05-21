@@ -10,7 +10,6 @@ var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
 setButton();
 
-
 function isLogin(){
 	$.ajax({
 		type: "GET",
