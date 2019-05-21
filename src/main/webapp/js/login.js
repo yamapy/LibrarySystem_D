@@ -84,7 +84,6 @@ function generalLogin() {
 			alert('通信失敗');
 		}
 	})
-
 }
 
 function managerLogin() {
