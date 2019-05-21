@@ -52,94 +52,151 @@ function renderTable(data) {
 		}
 	});
 	console.log(data)
-	if(isLogin == "true"){
+//
+//	if(isLogin == "true"){
+//
+//		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>貸出</th>';
+//
+//				$('#book').children().remove();
+//
+//
+//
+//				if (data.length === 0) {
+//					$('#book').append('<p>現在データが存在していません。</p>')
+//				} else {
+//					var table = $('<table>').attr('border', 1);
+//					table.append(headerRow);
+//
+//
+//					$.each(data, function(index, book) {
+//						var row = $('<tr>');
+//						row.append($('<td>').text(book.title).attr("id","title"));
+//						row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
+//						row.append($('<td>').text(book.author).attr("id","author"));
+//						row.append($('<td nowrap>').append(
+//								$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
+//						));
+//
+//						if(book.status=="貸出中"){
+//						row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
+//						}else{
+//							row.append($('<td nowrap>').append(
+//									$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
+//							));
+//						}
+//
+//						table.append(row);
+//					});
+//
+//					$('#book').append(table);
+//					$('.borrow').click(borrowById);
+//				}
+//
+//
+//
+//	}
 
-		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>貸出</th>';
+//	else{
+//
+//		//loginButton();
+//
+//
+//		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
+//
+//		$('#book').children().remove();
+//
+//
+//
+//		if (data.length === 0) {
+//			$('#book').append('<p>現在データが存在していません。</p>')
+//		} else {
+//			var table = $('<table>').attr('border', 1);
+//			table.append(headerRow);
+//
+//
+//			$.each(data, function(index, book) {
+//				var row = $('<tr>');
+//				row.append($('<td>').text(book.title).attr("id","title"));
+//				row.append($('<td>').text(book.genre).attr("id","genre"));
+//				row.append($('<td>').text(book.author).attr("id","author"));
+//				row.append($('<td>').append(
+//						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
+//				));
+//
+////				row.append($('<td>').text(book.status));
+//				if(book.status=="貸出中"){
+//					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
+//				}else
+//					row.append($('<td nowrap>').text(book.status).attr("id","status"));
+//
+//
+//				table.append(row);
+//			});
+//
+//			$('#book').append(table);
+//		}
+//
+//
+//
+//
+//	}
 
-				$('#book').children().remove();
+	var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th>';
 
-
-
-				if (data.length === 0) {
-					$('#book').append('<p>現在データが存在していません。</p>')
-				} else {
-					var table = $('<table>').attr('border', 1);
-					table.append(headerRow);
-
-
-					$.each(data, function(index, book) {
-						var row = $('<tr>');
-						row.append($('<td>').text(book.title).attr("id","title"));
-						row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
-						row.append($('<td>').text(book.author).attr("id","author"));
-						row.append($('<td nowrap>').append(
-								$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
-						));
-
-						if(book.status=="貸出中"){
-						row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
-						}else{
-							row.append($('<td nowrap>').append(
-									$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
-							));
-						}
-
-						table.append(row);
-					});
-
-					$('#book').append(table);
-					$('.borrow').click(borrowById);
-				}
-
-
-
-	}
-
-	else{
-
-		//loginButton();
-
-
-		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
-
-		$('#book').children().remove();
-
-
-
-		if (data.length === 0) {
-			$('#book').append('<p>現在データが存在していません。</p>')
-		} else {
-			var table = $('<table>').attr('border', 1);
-			table.append(headerRow);
+	if(isLogin == "true")
+		headerRow+='<th>貸出</th>';
+	else
+		headerRow+='<th>ステータス</th>';
+//
+	$('#book').children().remove();
 
 
-			$.each(data, function(index, book) {
-				var row = $('<tr>');
-				row.append($('<td>').text(book.title).attr("id","title"));
-				row.append($('<td>').text(book.genre).attr("id","genre"));
-				row.append($('<td>').text(book.author).attr("id","author"));
-				row.append($('<td>').append(
-						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
-				));
 
-//				row.append($('<td>').text(book.status));
+	if (data.length === 0) {
+		$('#book').append('<p>現在データが存在していません。</p>')
+	} else {
+		var table = $('<table>').attr('border', 1);
+		table.append(headerRow);
+
+
+		$.each(data, function(index, book) {
+			var row = $('<tr>');
+			row.append($('<td>').text(book.title).attr("id","title"));
+			row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
+			row.append($('<td>').text(book.author).attr("id","author"));
+			row.append($('<td nowrap>').append(
+					$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
+			));
+
+
+
+
+
+
+
+			if(isLogin == "true"){
 				if(book.status=="貸出中"){
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
-				}else
-					row.append($('<td nowrap>').text(book.status).attr("id","status"));
+				}else{
+					row.append($('<td nowrap>').append(
+							$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
+					));
+				}
+			}
+			else{
+				var statusString = $('<td nowrap>').text(book.status);
+				if(book.status=="貸出中"){
+					statusString.attr("class","red");
+				}
+				row.append(statusString);
+			}
+			table.append(row);
+		});
 
-
-				table.append(row);
-			});
-
-			$('#book').append(table);
-		}
-
-
-
-
+		$('#book').append(table);
+		if(isLogin == "true")
+			$('.borrow').click(borrowById);
 	}
-
 }
 
 

@@ -2,7 +2,7 @@
  *
  */
 var loginButton = $('<button>').text("ログイン").attr("type","button").attr("onclick", "location.href='login.html'");
-var logoutButton = $('<button>').text("ログアウト").attr("type","button").attr("onclick", "location.href='bookTList.html'");
+var logoutButton = $('<button>').text("ログアウト").attr("type","button").attr("onclick", "location.href='bookList.html'");
 var bookButton = $('<button>').text("書籍一覧").attr("type","button").attr("onclick", "location.href='bookTList.html'");
 
 setButton();
