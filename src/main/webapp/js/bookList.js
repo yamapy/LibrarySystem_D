@@ -5,9 +5,7 @@ var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 findAll();
 initPageGenre();
 makeGenreSelection();
-//if(isLogin == "false"){
-//	loginButtton()
-//}
+
 
 function findAll() {
 	console.log('findAll start.')
@@ -185,13 +183,14 @@ function makeGenreSelection(selectionGenre, book) {
 }
 
 function borrowById(button) {
-	var id = button.currentTarget.id;
+var id = button.currentTarget.id;
+var requestQuery = {id:id};
 	console.log('borrow start - id:' + id);
 //	var fd = {id:id};
 	$.ajax({
 		type : "POST",
 		url : rootUrl + '?id='+id,
-//		data:fd,
+		data:requestQuery,
 		dataType:'json',
 		success : function(data) {
 			alert('借りました');
@@ -226,16 +225,21 @@ function renderDetails(book) {
 
 function getMailAddress() {
 	console.log('get mailAddress start');
+	var requestQuery = {
+
+
+	};
 	$.ajax({
 		url : rootUrl + "/getLoginMailAddress",
 		type : "GET",
-//		data : requestQuery,
+		data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			if (data == '') {
 				alert('取得失敗');
 			} else {
-				alert('取得成功');
+				alert('取得成功'+data);
+
 			}
 
 		},

@@ -76,16 +76,19 @@ public class Resources {
 
 	@POST
 
-	public boolean borrow(@QueryParam("id") int id) throws WebApplicationException{
+	public boolean borrow(@FormParam("id") int id, @Context HttpServletRequest request) throws WebApplicationException{
 
 		System.out.println(id);
 
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String today = formatter.format(date);
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		session.getAttribute("mail");
 
-		String mail = "s-kondo@virtualex.co.jp";
-//		int id = Integer.parseInt(form.getField("id").getValue());
+
+		String mail = nowUser.getMailAddress();
 
 		return bookDAO.borrowById(id,today,mail) ;
 
@@ -145,6 +148,7 @@ public class Resources {
 	public String loginMailAddress(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
+		session.setAttribute("mail", nowUser.getMailAddress());
 		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
 		if (nowUser.getMailAddress() != null || !nowUser.getMailAddress().equals("")) {
 			return nowUser.getMailAddress();
