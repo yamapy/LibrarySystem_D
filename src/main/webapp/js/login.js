@@ -2,7 +2,7 @@
 
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
-// getUser();
+ getUser();
 
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
@@ -120,7 +120,7 @@ function getUser(user) {
 
 	$.ajax({
 		type : "GET",
-		url : rootUrl + "/isLogin",
+		url : rootUrl + "/isManagerLogin",
 		dataType : "json",
 		success : function(data) {
 			if (data == true) {
