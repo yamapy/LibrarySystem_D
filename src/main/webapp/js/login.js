@@ -18,7 +18,6 @@ function login() {
 			} else {
 				alert('ログイン失敗');
 			}
-
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('通信失敗');
@@ -30,5 +29,4 @@ $(document).ready(function() {
 
 	// ログインボタンを押したときのイベント
 	$('#login-button').click(login);
-
 });

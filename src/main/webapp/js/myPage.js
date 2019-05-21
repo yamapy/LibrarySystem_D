@@ -30,7 +30,6 @@ function renderTable(data) {
 			row.append($('<td>').text(lendingBook.title));
 			row.append($('<td nowrap>').text(lendingBook.borrower));
 
-
 			row.append($('<td nowrap>').text(lendingBook.returnDate));
 			row.append(
 				$('<td nowrap>').append(
@@ -49,7 +48,6 @@ function renderTable(data) {
 		});
 
 		$('#table').append(table);
-
 	}
 }
 
