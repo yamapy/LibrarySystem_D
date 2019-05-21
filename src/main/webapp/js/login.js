@@ -2,7 +2,7 @@
 
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
-getUser();
+// getUser();
 
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
@@ -36,11 +36,33 @@ $('#manager-login-button').click(function() {
 
 })
 
+$('#logout-button').click(function() {
+	console.log('logout');
+
+	$.ajax({
+		type : "GET",
+		url : rootUrl + "/logout",
+		dataType : "json",
+		success : function(data) {
+			if (data == true) {
+				console.log("logout ok");
+				location.href = './login.html';
+
+			} else {
+				console.log("logout ng");
+			}
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
+})
+
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAddress').val()
-			,pass:$('#password').val()
+		id : $('#mailAddress').val(),
+		pass : $('#password').val()
 	};
 	console.log($('#mailAddress').val());
 	$.ajax({
@@ -52,7 +74,7 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				 location.href = './login.html';
+				location.href = './login.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -68,8 +90,8 @@ function generalLogin() {
 function managerLogin() {
 	// 入力されたユーザーIDとパスワード
 	var requestQuery = {
-			id : $('#mailAddress').val()
-			,pass:$('#password').val()
+		id : $('#mailAddress').val(),
+		pass : $('#password').val()
 	};
 	console.log($('#mailAddress').val());
 	$.ajax({
@@ -81,7 +103,7 @@ function managerLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				 location.href = './login.html.html';
+				location.href = './login.html.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -94,18 +116,17 @@ function managerLogin() {
 
 }
 
-
 function getUser(user) {
 	console.log('getUser start.');
 
 	$.ajax({
 		type : "GET",
-		url : rootUrl + "/isManagerLogin",
+		url : rootUrl + "/isLogin",
 		dataType : "json",
-		success : function(data){
-			if(data ==true){
+		success : function(data) {
+			if (data == true) {
 				console.log("ok");
-			}else{
+			} else {
 				console.log("ng");
 			}
 		},

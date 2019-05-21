@@ -50,12 +50,14 @@ public class Resources {
 		// session.setAttribute("isGeneralLogin", user);
 		// if(session.getAttribute("isGeneralLogin") != null){
 		User nowUser = (User) session.getAttribute("loginUser");
-		System.out.println(session.getAttribute("loginUser"));
 		// }
-		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+		if (session != null && nowUser != null && !nowUser.getMailAddress().equals("")) {
+			System.out.println(session.getAttribute("loginUser"));
+			return true;
+		} else {
+			System.out.println("Resource false");
 			return false;
 		}
-		return true;
 	}
 
 	@GET
@@ -64,11 +66,13 @@ public class Resources {
 	public boolean isManagerLogin(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
-		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
-		if (nowUser == null || nowUser.getMailAddress().equals("") || nowUser.getManagement() != 1) {
+		if (session != null && nowUser != null && !nowUser.getMailAddress().equals("") && nowUser.getManagement() == 1) {
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+			return true;
+		} else {
+			System.out.println("Resource false");
 			return false;
 		}
-		return true;
 	}
 
 	@GET
@@ -77,11 +81,29 @@ public class Resources {
 	public String loginMailAddress(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
-		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
-		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+		if((session != null)&& (nowUser.getMailAddress() != null || !nowUser.getMailAddress().equals(""))) {
+			System.out.println(nowUser.getMailAddress());
 			return nowUser.getMailAddress();
+		} else {
+			System.out.println("Resource false");
+			return "";
 		}
-		return "";
+	}
+
+	@GET
+	@Path("logout")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean logout(@Context HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		if (nowUser == null || nowUser.getMailAddress() == null || nowUser.getMailAddress() == ""){
+			System.out.println("Resource false");
+			return false;
+		} else {
+			session.removeAttribute("loginUser");
+			System.out.println("logout");
+			return true;
+		}
 	}
 
 	@POST
@@ -143,7 +165,7 @@ public class Resources {
 
 	@POST
 	@Path("createUser")
-//	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	// @Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean createUser(final FormDataMultiPart form) throws WebApplicationException {
 		User user = new User();
@@ -157,8 +179,9 @@ public class Resources {
 		User userResult = userDao.create(user);
 		if (userResult.getMailAddress() != null && userResult.getPassword() != null) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 }
