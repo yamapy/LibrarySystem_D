@@ -43,4 +43,5 @@ function setButton(){
 	    		alert(fileName+'に対応するボタンリストが宣言されていません')
 	}
 	$('#buttonList').append(buttons);
+
 }
