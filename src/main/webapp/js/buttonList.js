@@ -7,20 +7,6 @@ var logoutButton = $('<button>').text("ログアウト").attr("type","button").a
 setButton();
 
 function setButton(){
-//	var buttons;
-//
-//	buttons = $('<div>').attr('align','right');
-//	buttons.append(
-//			loginButton
-//	);
-//	$('#buttonList1').append(buttons);
-//
-//	buttons = $('<div>').attr('align','right');
-//	buttons.append(
-//			logoutButton
-//	);
-//	$('#buttonList2').append(buttons);
-
 
 	// 拡張子なしで
 	var fileName = window.location.href.match(".+/(.+?)\.[a-z]+([\?#;].*)?$")[1];
@@ -33,7 +19,8 @@ function setButton(){
 	    	buttons.append(logoutButton);
 	        break;
 	    case 'myPage':
-	    //buttons.append(logoutButton);
+	    	buttons.append(logoutButton);
+	    	break;
 	    case 'login':
 	    case 'createBook':
 	    case 'createUser':
