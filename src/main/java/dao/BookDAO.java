@@ -67,9 +67,6 @@ public class BookDAO {
 			+ "and USER_T.MAILADDRESS(+) = RENTAL_STATUS.MAILADDRESS \n" + " and BOOK.ID = ? \n" + "order by \n"
 			+ "BOOK.ID \n";
 
-	private static final String INSERT_QUERY = "INSERT INTO "
-			+ "BOOK(TITLE, AUTHOR, PUBLISHER, GENRE, PUTCHASEDATE, BUYER) " + "VALUES(?,?,?,?,?,?)";
-
 	/**
 	 * 貸出中の書籍全件を取得する。
 	 *
@@ -176,7 +173,7 @@ public class BookDAO {
 			return book;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
+		try (PreparedStatement statement = connection.prepareStatement(INSERT_BOOK_QUERY, new String[] { "ID" });) {
 			// INSERT実行
 			setParameter1(statement, book);
 			statement.executeUpdate();

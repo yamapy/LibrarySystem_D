@@ -33,7 +33,7 @@ import dao.UserDAO;
 
 @Path("/resources")
 public class Resources {
-	User user=new User();
+	User user = new User();
 	User employee = new User();
 	private final BookDAO bookDAO = new BookDAO();
 	private final GenreDAO genreDAO = new GenreDAO();
@@ -277,7 +277,7 @@ public class Resources {
 	@POST
 	@Path("mamnagerLogin")
 	@Consumes("application/x-www-form-urlencoded")
-	// @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public boolean managerLogin(@Context HttpServletRequest request, @FormParam("id") String mailAddress,
 			@FormParam("pass") String password) throws WebApplicationException {
 		User DaoResult = new User();
@@ -302,15 +302,16 @@ public class Resources {
 
 	@POST
 	@Path("createUser")
-	// @Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
-	public boolean createUser(final FormDataMultiPart form) throws WebApplicationException {
+	public boolean createUser(final FormDataMultiPart form)
+			throws WebApplicationException {
 		User user = new User();
 
 		user.setMailAddress(form.getField("mailAddress").getValue());
 		user.setPassword(form.getField("password").getValue());
 		user.setManagement(0);
-		if (user.getMailAddress() == null || user.getPassword() == null) {
+		if (user.getMailAddress() == null || user.getPassword() == null ||user.getMailAddress() == "" || user.getPassword() == "") {
 			throw new WebApplicationException(Response.Status.BAD_REQUEST);
 		}
 		User userResult = userDao.create(user);
@@ -321,4 +322,3 @@ public class Resources {
 		}
 	}
 }
-

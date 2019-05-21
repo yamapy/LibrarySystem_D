@@ -37,7 +37,8 @@ $('#manager-login-button').click(function() {
 })
 
 $('#logout-button').click(function() {
-	console.log('logout');
+	console.log('logout start');
+	$('.error').children().remove();
 
 	$.ajax({
 		type : "GET",
@@ -102,7 +103,7 @@ function managerLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				location.href = './login.html.html';
+				location.href = './login.html';
 			} else {
 				alert('ログインに失敗しました');
 			}

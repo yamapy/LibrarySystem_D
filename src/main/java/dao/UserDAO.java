@@ -14,7 +14,7 @@ public class UserDAO {
 
 	private static final String SELECT_BY_MAILADDRESS_QUERY = "select USER_T.MAILADDRESS, USER_T.PASSWORD, USER_T.MANAGEMENT from USER_T where USER_T.MAILADDRESS = ? and USER_T.PASSWORD = ?";
 	private static final String SELECT_ALL_EMPLOYEE_QUERY = "select EMPLOYEE.ID,EMPLOYEE.NAME,EMPLOYEE.MAILADDRESS from EMPLOYEE";
-	private static final String SELECT_ALL_USER_MAILADRESS_QUERY = "select USER_T.MAILADDRESS from USER_T";
+	private static final String SELECT_ALL_USER_MAILADDRESS_QUERY = "select USER_T.MAILADDRESS from USER_T";
 	private static final String INSERT_USER_QUERY = "INSERT INTO USER_T ( MAILADDRESS , PASSWORD, MANAGEMENT) VALUES(?,?,?)";
 
 	public User findByParam(String mailAddrress, String password) {
@@ -75,7 +75,7 @@ public class UserDAO {
 			return result;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_MAILADRESS_QUERY)) {
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_MAILADDRESS_QUERY)) {
 
 			ResultSet rs = statement.executeQuery();
 
@@ -97,19 +97,13 @@ public class UserDAO {
 			return user;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY, new String[] { "ID" });) {
+		try (PreparedStatement statement = connection.prepareStatement(INSERT_USER_QUERY)) {
 			// INSERT実行
-			// setParameter(statement, user, false);
 			statement.setString(1, user.getMailAddress());
 			statement.setString(2, user.getPassword());
 			statement.setInt(3, 0);
 			statement.executeUpdate();
 
-			// INSERTできたらKEYを取得
-			// ResultSet rs = statement.getGeneratedKeys();
-			// rs.next();
-			// int id = rs.getInt(1);
-			// user.setId(id);
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
