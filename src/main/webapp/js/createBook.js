@@ -52,8 +52,15 @@ $('#saveBook').click(function() {
 
 /* 書籍追加のメソッド */
 function addBook() {
+
 	console.log('addBook start');
+
+	var info = document.getElementById("genre").disabled;
+	document.getElementById("genre").disabled = false;
+
 	var fd = new FormData(document.getElementById("createBookForm"));
+
+
 	$.ajax({
 		url : postUrl,
 		type : "POST",
@@ -68,6 +75,7 @@ function addBook() {
 			alert('書籍の追加に失敗しました');
 		}
 	})
+	document.getElementById("genre").disabled = info;
 }
 
 /* フォーム要素の内容が変更されたときにイベント処理を実行できる */
@@ -75,15 +83,15 @@ $('select').change(function() {
 	var text = $('option:selected').text();
 
 	// 変数targetに、入力不可にしたい項目を定義
-	var target = document.getElementById("genre");
+	//var target = document.getElementById("genre");
 	if (text === '新規作成') {
 		$('#genre').val('');
 		// 変数testの要素を入力可にする
-		target.disabled = false;
+		document.getElementById("genre").disabled = false;
 	} else {
 		$('#genre').val(text);
 		// 変数testの要素を入力不可にする
-		target.disabled = true;
+		document.getElementById("genre").disabled = true;
 	}
 });
 
