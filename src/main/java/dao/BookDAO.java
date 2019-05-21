@@ -91,7 +91,6 @@ public class BookDAO {
 	}
 
 
-
 	private void setParameter(PreparedStatement statement, Book book) throws SQLException {
 		int count = 1;
 

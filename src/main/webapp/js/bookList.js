@@ -40,7 +40,7 @@ function renderTable(data) {
 
 		}
 	});
-
+	console.log(data)
 	if(isLogin == "true"){
 
 		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>貸出</th>';
@@ -181,6 +181,7 @@ function makeGenreSelection(selectionGenre, book) {
 			});
 		}
 	});
+
 }
 
 function borrowById(button) {
