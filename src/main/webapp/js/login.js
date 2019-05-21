@@ -6,7 +6,7 @@ function login() {
 	};
 	console.log($('#login-id').val());
 	$.ajax({
-		url : "/LibrarySystem_D/api/v1.1/resources/login",
+		url : "/LibrarySystem_D/api/v1.1/resources/generalLogin",
 		type : "POST",
 		data : requestQuery,
 		dataType : "json",
@@ -14,7 +14,7 @@ function login() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-//				location.href = './Expense.html';
+				location.href = './login.html';
 			} else {
 				alert('ログイン失敗');
 			}

@@ -59,16 +59,16 @@ function renderTable(data) {
 					$.each(data, function(index, book) {
 						var row = $('<tr>');
 						row.append($('<td>').text(book.title).attr("id","title"));
-						row.append($('<td>').text(book.genre).attr("id","genre"));
+						row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
 						row.append($('<td>').text(book.author).attr("id","author"));
-						row.append($('<td>').append(
+						row.append($('<td nowrap>').append(
 								$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
 						));
 
 						if(book.status=="貸出中"){
-						row.append($('<td>').text(book.status));
+						row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
 						}else{
-							row.append($('<td>').append(
+							row.append($('<td nowrap>').append(
 									$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow")
 							));
 						}
@@ -86,7 +86,7 @@ function renderTable(data) {
 
 	else{
 
-		loginButton();
+		//loginButton();
 
 
 		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
@@ -108,10 +108,14 @@ function renderTable(data) {
 				row.append($('<td>').text(book.genre).attr("id","genre"));
 				row.append($('<td>').text(book.author).attr("id","author"));
 				row.append($('<td>').append(
-						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail")
+						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
 				));
 
-				row.append($('<td>').text(book.status));
+//				row.append($('<td>').text(book.status));
+				if(book.status=="貸出中"){
+					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
+				}else
+					row.append($('<td nowrap>').text(book.status).attr("id","status"));
 
 
 				table.append(row);
@@ -217,4 +221,25 @@ function renderDetails(book) {
 	$('#title').val(book.title);
 	$('#genre').val(book.genre);
 	$('#author').val(book.author);
+}
+
+function getMailAddress() {
+	console.log('get mailAddress start');
+	$.ajax({
+		url : rootUrl + "/getLoginMailAddress",
+		type : "GET",
+//		data : requestQuery,
+		dataType : "json",
+		success : function(data) {
+			if (data == '') {
+				alert('取得失敗');
+			} else {
+				alert('取得成功');
+			}
+
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('通信失敗');
+		}
+	})
 }

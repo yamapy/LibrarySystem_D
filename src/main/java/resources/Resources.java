@@ -146,7 +146,7 @@ public class Resources {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
 		System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
-		if (nowUser == null || nowUser.getMailAddress().equals("")) {
+		if (nowUser.getMailAddress() != null || !nowUser.getMailAddress().equals("")) {
 			return nowUser.getMailAddress();
 		}
 		return "";

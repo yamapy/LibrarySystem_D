@@ -152,8 +152,13 @@ public class BookDAO {
 	}
 
 
-
-
+//	private User getMailAddress(ResultSet rs) throws SQLException {
+//		User result = new User();
+//		result.setMailAddress(rs.getString("MAILADDRESS"));
+//
+//		return result;
+//	}
+//
 
 //	public Rental_Status create(Rental_Status rental_status) {
 //		Connection connection = ConnectionProvider.getConnection();
