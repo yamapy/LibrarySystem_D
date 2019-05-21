@@ -40,15 +40,7 @@ public class Resources {
 		return bookDAO.findAll();
 	}
 
-//	@GET
-//	@Path("isLogin")
-//	public boolean isLogin(){
-//		if(user==null){
-//			return false;
-//		}else{
-//			return true;
-//		}
-//	}
+
 
 
 	@GET
@@ -185,20 +177,6 @@ public class Resources {
 	}
 
 
-//	@POST
-//	@Path("{login}")
-//	@Consumes("application/x-www-form-urlencoded")
-//	// @Produces(MediaType.APPLICATION_JSON)
-//	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-//		String successId = "test";
-//		String successPass = "1234";
-//		System.out.println(id + pass);
-//		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//
-//	}
+
 
 }
