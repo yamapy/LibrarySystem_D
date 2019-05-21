@@ -17,14 +17,11 @@ function isLogin(){
 		url: rootUrl+"/isLogin",
 		dataType: "text",
 		success: function(data) {
-
 			isLogin = data
 			console.log(isLogin);
-
 		}
 	});
 	return isLogin;
-
 }
 function setButton(){
 
@@ -32,7 +29,7 @@ function setButton(){
 	var fileName = window.location.href.match(".+/(.+?)\.[a-z]+([\?#;].*)?$")[1];
 
 	var buttons = $('<div>').attr('align','right');
-	console.log(fileName+isLogin())
+	console.log('isLogin='+isLogin())
 
 	switch( fileName ) {
 	    case 'myPage':

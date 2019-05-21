@@ -52,7 +52,7 @@ function renderTable(data) {
 }
 
 function returnBookById(returnId) {
-	alert(returnId+'を返却する予定');
+	//alert(returnId+'を返却する予定');
 	console.log('returnById start.')
 //	var param =
 //		{
