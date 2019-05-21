@@ -2,9 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>書籍一覧</title>
+<link rel="stylesheet" href="../css/Design.css">
 </head>
 <body>
+<body>
+	<div id="login"></div>
+	<div class="table">
+		<div id = "search">
+		<p id = "bookSearch">書籍検索</p>
+		<form id="bookSelector">
+			<div>
+				<label for="titleParam">タイトル：</label> <input type="text"
+					maxlength="85" name="titleParam" id="titleParam">
+			</div>
+			<div>
+				<label for="authorParam">作者：</label> <input type="text"
+					maxlength="85" name="authorParam" id="authorParam">
+			</div>
+			<div>
+				<label for="genreParam">ジャンル：</label> <select name="genreParam"
+					id="genreParam">
+				</select>
+			</div>
+			<div>
+				<label for="statusParam">ステータス：</label> <select name="statusParam"
+					id="statusParam">
+					<option value="" selected>指定しない</option>
+					<option value="貸出可能">貸出可能</option>
+					<option value="貸出中">貸出中</option>
+				</select>
+			</div>
+			<button class = "grayButton" id="findBook">検索</button>
+		</form>
+		</div>
+		<table>
+			<div id="bookList">
+				<p>書籍一覧</p>
+				<div id="book"></div>
+				<div id="insertBlock"></div>
+			</div>
+		</table>
+		<span id="prev">前へ</span> <span id="page"></span> <span id="next">次へ</span>
+	</div>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/bookList.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 package resources;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -21,15 +24,20 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 
 import beans.Book;
 import beans.Employee;
+import beans.Genre;
 import beans.User;
 import dao.BookDAO;
+import dao.GenreDAO;
+import dao.Param;
 import dao.UserDAO;
 
 @Path("/resources")
 public class Resources {
-	private final UserDAO userDao = new UserDAO();
 	User user = new User();
 	User employee = new User();
+	private final BookDAO bookDAO = new BookDAO();
+	private final GenreDAO genreDAO = new GenreDAO();
+	private final UserDAO userDao = new UserDAO();
 
 	/**
 	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
@@ -45,6 +53,19 @@ public class Resources {
 	 *
 	 * @return 貸出中の書籍のリストをJSON形式で返す。
 	 */
+
+	@GET
+	@Path("findByParam")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Book> findByParam(@QueryParam("titleParam") String titleParam,
+			@QueryParam("authorParam") String authorParam, @QueryParam("genre") String genre,
+			@QueryParam("status") String status) {
+
+		System.out.println("t=" + titleParam);
+		Param param = new Param(titleParam, authorParam, genre, status);
+		return bookDAO.findByParam(param);
+	}
+
 
 	@GET
 	@Path("/findLendingBookById")
@@ -157,6 +178,74 @@ public class Resources {
 		}
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("book")
+	public List<Book> findAll() {
+		return bookDAO.findAll();
+	}
+
+	@GET
+	@Path("genre")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Genre> findAllGenre() {
+		return genreDAO.findAllGenre();
+	}
+
+	@GET
+	@Path("matrix")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getMatrixParam(@MatrixParam("name") final String name, @MatrixParam("year") final String year) {
+
+		return "[MatrixParam] Name : " + name + " Year : " + year;
+	}
+
+	@POST
+	@Path("myPage")
+	// @Consumes("application/x-www-form-urlencoded")
+	// @Produces(MediaType.APPLICATION_JSON)
+	public boolean myPage(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
+		String successId = "aaaa";
+		String successPass = "aaaa";
+		System.out.println(id + pass);
+		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@POST
+	@Path("login")
+	// @Consumes("application/x-www-form-urlencoded")
+	// @Produces(MediaType.APPLICATION_JSON)
+	public boolean login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
+		String successId = "aaaa";
+		String successPass = "aaaa";
+		System.out.println(id + pass);
+		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@POST
+	public boolean borrow(@QueryParam("id") int id) throws WebApplicationException {
+
+		System.out.println(id);
+
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+
+		String mail = "s-kondo@virtualex.co.jp";
+		// int id = Integer.parseInt(form.getField("id").getValue());
+
+		return bookDAO.borrowById(id, today, mail);
+
+	}
+
 	@POST
 	@Path("generalLogin")
 	@Consumes("application/x-www-form-urlencoded")
@@ -213,53 +302,6 @@ public class Resources {
 	}
 
 	@POST
-	@Path("myPage")
-	// @Consumes("application/x-www-form-urlencoded")
-	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean myPage(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-		String successId = "aaaa";
-		String successPass = "aaaa";
-		System.out.println(id + pass);
-		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@POST
-	@Path("login")
-	// @Consumes("application/x-www-form-urlencoded")
-	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-		String successId = "aaaa";
-		String successPass = "aaaa";
-		System.out.println(id + pass);
-		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	/*
-	 * @PUT
-	 *
-	 * @Path("returnBookById") //@Consumes("application/x-www-form-urlencoded")
-	 * // @Produces(MediaType.APPLICATION_JSON)
-	 * //@Produces(MediaType.APPLICATION_JSON) public boolean
-	 * returnBookById(@FormParam("id") int id) throws WebApplicationException {
-	 * //return dao.returnBookById(id); return false; }
-	 */
-
-	@GET
-	@Path("matrix")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getMatrixParam(@MatrixParam("name") final String name, @MatrixParam("year") final String year) {
-
-		return "[MatrixParam] Name : " + name + " Year : " + year;
-	}
-
-	@POST
 	@Path("createUser")
 	// @Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -279,5 +321,27 @@ public class Resources {
 			return false;
 		}
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
