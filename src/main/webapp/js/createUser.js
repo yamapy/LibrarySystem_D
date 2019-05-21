@@ -3,7 +3,7 @@
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
 findAllEmployees();
-findAllUsers();
+findAllUserMailAddresses();
 logout();
 
 $('#createUser-login-button')
@@ -39,7 +39,7 @@ $('#createUser-login-button')
 
 // 検索結果を格納するための配列を用意
 var employeeInfo = [];
-var userInfo = [];
+var userMailAddresses = [];
 var empName;
 
 function findAllEmployees() {
@@ -53,11 +53,11 @@ function findAllEmployees() {
 	});
 }
 
-function findAllUsers() {
+function findAllUserMailAddresses() {
 	console.log('findAllUsers start');
 	$.ajax({
 		type : "GET",
-		url : rootUrl + "/getUserInfo",
+		url : rootUrl + "/getUserMailAddresses",
 		dataType : "json",
 		success : renderUserInfo
 
@@ -74,11 +74,11 @@ function renderEmpInfo(data) {
 }
 
 function renderUserInfo(data) {
-	userInfo = [];
+	userMailAddresses = [];
 	for (var i = 0; i < Object.keys(data).length; i++) {
-		userInfo.push(data[i])
+		userMailAddresses.push(data[i])
 	}
-	console.log(userInfo.length + " Users");
+	console.log(userMailAddresses.length + " Users");
 }
 
 // // searchWordの実行
@@ -110,8 +110,8 @@ $("#mailAddress").focusout(function() {
 
 function checkIsUser() {
 	if ($('#employeeName').val() != '') {
-		for (var i = 0; i < userInfo.length; i++) {
-			if (userInfo[i].mailAddress === $('#mailAddress').val()) {
+		for (var i = 0; i < userMailAddresses.length; i++) {
+			if (userMailAddresses[i] === $('#mailAddress').val()) {
 				alert('このメールアドレスは登録済みです。');
 				return true;
 			}
@@ -162,10 +162,9 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				location.href = './createUser.html';
+				location.href = './bookList.html';
 			} else {
 				alert('ログインに失敗しました');
-				location.href = './createUser.html';
 			}
 
 		},
@@ -184,7 +183,7 @@ function logout() {
 		success : function(data) {
 			if (data == true) {
 				console.log("logout ok");
-				location.href = './login.html';
+				location.href = './bookList.html';
 			} else {
 				console.log("logout ng");
 			}

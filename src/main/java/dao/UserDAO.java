@@ -68,8 +68,8 @@ public class UserDAO {
 		return result;
 	}
 
-	public List<User> getUserInfo() {
-		List<User> result = new ArrayList<>();
+	public List<String> getUserMailAddresses() {
+		List<String> result = new ArrayList<>();
 		Connection connection = ConnectionProvider.getConnection();
 		if (connection == null) {
 			return result;
@@ -80,7 +80,7 @@ public class UserDAO {
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				result.add(processRowUser(rs));
+				result.add(rs.getString("MAILADDRESS"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

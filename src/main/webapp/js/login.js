@@ -47,10 +47,11 @@ $('#logout-button').click(function() {
 		success : function(data) {
 			if (data == true) {
 				console.log("logout ok");
-				location.href = './login.html';
+				location.href = './bookList.html';
 
 			} else {
 				console.log("logout ng");
+				alert('ログアウトできません');
 			}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
@@ -75,7 +76,7 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				location.href = './login.html';
+				location.href = './bookList.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -103,7 +104,7 @@ function managerLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				location.href = './login.html';
+				location.href = './managementTop.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -158,18 +159,18 @@ function getMailAddress() {
 
 }
 
-function getMailAddress() {
-	console.log('get mailAddress start');
+function isLogin() {
+	console.log('isLogin start');
 	$.ajax({
-		url : rootUrl + "/getLoginMailAddress",
+		url : rootUrl + "/isLogin",
 		type : "GET",
 		// data : requestQuery,
 		dataType : "json",
 		success : function(data) {
-			if (data == '') {
-				alert('取得失敗');
+			if (data == true) {
+				alert('ログインしてます');
 			} else {
-				alert('取得成功');
+				alert('ログインしてません');
 			}
 
 		},
@@ -180,23 +181,18 @@ function getMailAddress() {
 
 }
 
-function getMailAddress() {
-	// // 入力されたユーザーIDとパスワード
-	// var requestQuery = {
-	// id : $('#mailAddress').val(),
-	// pass : $('#password').val()
-	// };
-	console.log('get mailAddress start');
+function isManagerLogin() {
+	console.log('isManagerLogin start');
 	$.ajax({
-		url : rootUrl + "/getLoginMailAddress",
+		url : rootUrl + "/isManagerLogin",
 		type : "GET",
 		// data : requestQuery,
 		dataType : "json",
 		success : function(data) {
-			if (data == '') {
-				alert('取得失敗');
+			if (data == true) {
+				alert('管理者ログインしてます');
 			} else {
-				alert('取得成功');
+				alert('管理者ログインしてません');
 			}
 
 		},

@@ -106,10 +106,10 @@ public class Resources {
 	}
 
 	@GET
-	@Path("getUserInfo")
+	@Path("getUserMailAddresses")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> userInfo() {
-		return userDao.getUserInfo();
+	public List<String> userInfo() {
+		return userDao.getUserMailAddresses();
 	}
 
 	@GET
