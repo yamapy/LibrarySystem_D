@@ -133,30 +133,7 @@ public class BookDAO {
 		return result;
 	}
 
-	/**
-	 * 貸出中の書籍件数を取得する。
-	 *
-	 * @return DBに登録されている貸出中の書籍件数を収めたリスト。途中でエラーが発生した場合は空のリストを返す。
-	 *
-	 *         public int countLendingBook() { int result2;
-	 *
-	 *         Connection connection = ConnectionProvider.getConnection(); if
-	 *         (connection == null) { return result2; }
-	 *
-	 *         try (Statement statement = connection.createStatement();) {
-	 *         ResultSet rs2 = statement.executeQuery(COUNT_LENDING_QUERY);
-	 *
-	 *         result2.add(rs2); }
-	 *
-	 *         }catch(
-	 *
-	 *         SQLException e) { e.printStackTrace(); }finally {
-	 *         ConnectionProvider.close(connection); }
-	 *
-	 *         return result2; }
-	 *
-	 *
-	 *         /** 指定されたBookオブジェクトを新規にDBに登録する。 登録されたオブジェクトにはDB上のIDが上書きされる。
+	/** 指定されたBookオブジェクトを新規にDBに登録する。 登録されたオブジェクトにはDB上のIDが上書きされる。
 	 *         何らかの理由で登録に失敗した場合、IDがセットされない状態（=0）で返却される。
 	 *
 	 * @param Book
@@ -238,22 +215,6 @@ public class BookDAO {
 		}
 		return result;
 	}
-
-	/**
-	 * 貸出中の書籍の件数表示 検索結果行をオブジェクトとして構成する。
-	 *
-	 * @param rs2
-	 *            検索結果が収められているResultSet
-	 * @return 検索結果行の各データを収めたBookインスタンス
-	 * @throws SQLException
-	 *             ResultSetの処理中発生した例外
-	 *
-	 *             private Book processRow2(ResultSet rs2) throws SQLException {
-	 *             Book result2 = new Book();
-	 *             result2.setLendingTotal(rs2.getInt("TOTAL"));
-	 *
-	 *             return result2; }
-	 */
 
 	/**
 	 * オブジェクトからSQLにパラメータを展開する。

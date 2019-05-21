@@ -1,35 +1,25 @@
 package resources;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
+import java.util.List;
+
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import beans.Genre;
+import dao.GenreDAO;
 
 @Path("resources")
 public class Resources {
-	/**
-	 * 従業員関連のサービス実装。 Servlet/JSPの実装とは異なり、画像についてはバイナリでなくpathベースで扱うものとする。
-	 */
-	@Path("resources")
-	public class EmployeeResource {
 
+	private final GenreDAO genreDAO = new GenreDAO();
+
+
+	@GET
+	@Path("genre")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Genre> findAllGenre() {
+		return genreDAO.findAllGenre();
 	}
-
-	@POST
-	@Path("login")
-	@Consumes("application/x-www-form-urlencoded")
-	// @Produces(MediaType.APPLICATION_JSON)
-	public boolean Login(@FormParam("id") String id, @FormParam("pass") String pass) throws WebApplicationException {
-		String successId = "test";
-		String successPass = "1234";
-		System.out.println(id + pass);
-		if (id != null && pass != null && id.equals(successId) && pass.equals(successPass)) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
 }

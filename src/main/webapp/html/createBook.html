@@ -22,58 +22,40 @@
 
 				<div>
 					<label for="bookTitle">タイトル：</label> <input type="text"
-						style="width: 40%" maxlength="256" id="bookTitle" name="title"
+						maxlength="85" id="bookTitle" name="title"
 						placeholder="例：Javaで学ぶシミュレーションの基礎" required>
 				</div>
 
 				<div>
 					<label for="author">作者：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="author" name="author"
+						maxlength="85" id="author" name="author"
 						placeholder="例：峯村吉泰" required>
 				</div>
 
 				<div>
 					<label for="publisher">出版社：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="publisher" name="publisher"
+						maxlength="85" id="publisher" name="publisher"
 						placeholder="例：森北出版" required>
 				</div>
 
 				<div>
-					<label for="genre">ジャンル：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="genre" name="genre"
-						placeholder="例：プログラミング" required>
-				</div>
-
-				<!--<div>
-					<label for="genre">ジャンル：</label> <select name="genre" id="genre">
-						<option value="" selected>ジャンル</option>
-						<option value="経済">経済</option>
-						<option value="ソフトウェア/ハードウェア">ソフトウェア/ハードウェア</option>
-						<option value="デザイン">デザイン</option>
-						<option value="プログラミング">プログラミング</option>
-						<option value="マネジメント">マネジメント</option>
-						<option value="リーダーシップ">リーダーシップ</option>
-						<option value="AI">AI</option>
-						<option value="IoT">IoT</option>
-						<option value="IT">IT</option>
-						<option value="（新規作成）">（新規作成）</option>
-					</select>
+					<label for="genreParam">ジャンル：</label> <select id="genreParam" name="genreParam"></select>
 				</div>
 
 				<div>
-					<input type="text" maxlength="256" id="newGenre" placeholder="例：パン"
-						required>
-				</div>-->
+					<label for="genre"></label> <input type="text"
+						id="genre" name="genre" required>
+				</div>
 
 				<div>
 					<label for="puchaseDate">購入日：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="puchaseDate"
-						name="purchaseDate" placeholder="例：20170427（数字8桁で入力）" required>
+						maxlength="85" id="puchaseDate"
+						name="purchaseDate" placeholder="例：20180523（数字8桁で入力）" required>
 				</div>
 
 				<div>
 					<label for="buyer">購入者：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="buyer" name="buyer"
+						maxlength="85" id="buyer" name="buyer"
 						placeholder="例：未来太郎" required>
 				</div>
 				<div>

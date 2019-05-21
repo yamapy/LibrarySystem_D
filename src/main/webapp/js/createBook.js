@@ -1,8 +1,14 @@
 'use strict';
 
-//LendingBookResources.java内の@Path("lendingBook")
+// LendingBookResources.java内の@Path("lendingBook")
 var rootUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 var postUrl = "/LibrarySystem_D/api/v1.1/lendingBook/createBook";
+
+// Resources.java内の@Path("resources")
+var genreUrl = "/LibrarySystem_D/api/v1.1/resources/genre";
+
+initPageGenre();
+makeGenreSelection();
 
 $(function() {
 
@@ -62,4 +68,48 @@ function addBook() {
 			alert('書籍の追加に失敗しました');
 		}
 	})
+}
+
+/* フォーム要素の内容が変更されたときにイベント処理を実行できる */
+$('select').change(function() {
+	var text = $('option:selected').text();
+
+	// 変数targetに、入力不可にしたい項目を定義
+	var target = document.getElementById("genre");
+	if (text === '新規作成') {
+		$('#genre').val('');
+		// 変数testの要素を入力可にする
+		target.disabled = false;
+	} else {
+		$('#genre').val(text);
+		// 変数testの要素を入力不可にする
+		target.disabled = true;
+	}
+});
+
+
+
+function initPageGenre() {
+	var newOption = $('<option>').val("").text('新規作成').prop('selected', true);
+	$('#genreParam').append(newOption);
+	makeGenreSelection('#genreParam');
+
+	/* findAll(); */
+}
+
+function makeGenreSelection(selectionGenre, book) {
+	console.log('makeGenreSelection start.')
+	$.ajax({
+		type : "GET",
+		url : genreUrl,
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			$.each(data, function(index, book) {
+				var newOption = $('<option>').val(book.genre).text(book.genre);
+
+				$(selectionGenre).append(newOption);
+			});
+		}
+	});
+
 }
