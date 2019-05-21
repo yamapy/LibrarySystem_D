@@ -18,7 +18,7 @@ public class BookDAO {
 	/**
 	 * クエリ文字列
 	 */
-	private static final String SELECT_LENDING_QUERY = "select BOOK.TITLE, \n" + "EMPLOYEE.NAME, \n"
+	private static final String SELECT_LENDING_QUERY = "select BOOK.ID, BOOK.TITLE, \n" + "EMPLOYEE.NAME, \n"
 			+ "RENTAL_STATUS.RENTDATE + 14 RETURN_DATE \n" + "from EMPLOYEE, \n" + "BOOK, \n" + "RENTAL_STATUS \n"
 			+ "where \n" + "BOOK.ID = RENTAL_STATUS.BOOKID \n"
 			+ "and EMPLOYEE.MAILADDRESS = RENTAL_STATUS.MAILADDRESS \n" + "order by \n" + "RENTAL_STATUS.RENTDATE \n";
@@ -199,6 +199,7 @@ public class BookDAO {
 	 */
 	private Book processRow1(ResultSet rs) throws SQLException {
 		Book result = new Book();
+		result.setId(rs.getInt("ID"));
 		result.setTitle(rs.getString("TITLE"));
 		result.setBorrower(rs.getString("NAME"));
 		Date returnDate = rs.getDate("RETURN_DATE");

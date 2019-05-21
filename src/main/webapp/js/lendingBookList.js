@@ -43,7 +43,7 @@ function dt(data) {
 
 function renderTable(data) {
 	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却予定日</th></tr>';
-
+	console.log(data);
 	if (data.length === 0) {
 		$('#lendingBookList').append('<p>現在、貸出中の書籍は存在しません。</p>')
 	} else {
@@ -53,19 +53,29 @@ function renderTable(data) {
 			var row = $('<tr>');
 			row.append($('<td>').text(lendingBook.title));
 			row.append($('<td>').text(lendingBook.borrower));
-			row.append($('<td>').text(lendingBook.returnDate));
+			row.append($('<td>').text(lendingBook.returnDate).attr("id", lendingBook.id));
 			table.append(row);
 		});
 
+//		var now = new Date();
+//		console.log(now);
+
 		$('#lendingBookList').append(table);
 
-		/*$(function() {
-			if ((compareDate(new Date(), 'YYYY-MM-DD') < (lendingBook.returnDate)){
-				$('body').css('background', 'red');
-			}else if ((compareDate(new Date(), 'YYYY-MM-DD' >= (lendingBook.returnDate)){
-				$('body').css('background', 'white');
+		$.each(data, function(index, lendingBook) {
+			var date = new Date(lendingBook.returnDate);
+//			console.log(date); 返却予定日の出力　確認のために使っていた
+
+			var now = new Date();
+//			console.log(now); 今日の日付を出力　確認のために使っていた
+			if (date < now) {
+				$('#' + lendingBook.id).attr("class", "red");
 			}
-		}); */
+			else {
+//			デフォルトは黒なので何も書かない
+			}
+
+		});
 
 	}
 }
