@@ -84,6 +84,4 @@ public class Book {
 		this.lendingTotal = lendingTotal;
 	}
 
-
-
 }

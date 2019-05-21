@@ -140,7 +140,7 @@ function getMailAddress() {
 	$.ajax({
 		url : rootUrl + "/getLoginMailAddress",
 		type : "GET",
-//		data : requestQuery,
+		// data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			if (data == '') {
@@ -162,7 +162,7 @@ function getMailAddress() {
 	$.ajax({
 		url : rootUrl + "/getLoginMailAddress",
 		type : "GET",
-//		data : requestQuery,
+		// data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			if (data == '') {
@@ -180,16 +180,16 @@ function getMailAddress() {
 }
 
 function getMailAddress() {
-//	// 入力されたユーザーIDとパスワード
-//	var requestQuery = {
-//		id : $('#mailAddress').val(),
-//		pass : $('#password').val()
-//	};
+	// // 入力されたユーザーIDとパスワード
+	// var requestQuery = {
+	// id : $('#mailAddress').val(),
+	// pass : $('#password').val()
+	// };
 	console.log('get mailAddress start');
 	$.ajax({
 		url : rootUrl + "/getLoginMailAddress",
 		type : "GET",
-//		data : requestQuery,
+		// data : requestQuery,
 		dataType : "json",
 		success : function(data) {
 			if (data == '') {
@@ -205,4 +205,3 @@ function getMailAddress() {
 	})
 
 }
-
