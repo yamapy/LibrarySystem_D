@@ -48,9 +48,4 @@ public class GenreDAO {
 		return result;
 	}
 
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> yuri

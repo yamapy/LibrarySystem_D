@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Book;
-import beans.Rental_Status;
-import beans.User;
 
 /**
  * 書籍データを扱うDAO
@@ -153,7 +151,7 @@ public class BookDAO {
 			ResultSet rs = statement.executeQuery();
 
 			if (rs.next()) {
-				result = processRow(rs);
+				result = processRow3(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,7 +178,7 @@ public class BookDAO {
 
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
 			// INSERT実行
-			setParameter(statement, book);
+			setParameter1(statement, book);
 			statement.executeUpdate();
 
 			// INSERTできたらKEYを取得
@@ -228,7 +226,7 @@ public class BookDAO {
 	 * @throws SQLException
 	 *             検索結果取得中に何らかの問題が発生した場合に送出される。
 	 */
-	private Book processRow(ResultSet rs) throws SQLException {
+	private Book processRow3(ResultSet rs) throws SQLException {
 		Book result = new Book();
 
 		// Book本体の再現
@@ -258,7 +256,7 @@ public class BookDAO {
 	 * @throws SQLException
 	 *             パラメータ展開時に何らかの問題が発生した場合に送出される。
 	 */
-	private void setParameter(PreparedStatement statement, Book book) throws SQLException {
+	private void setParameter1(PreparedStatement statement, Book book) throws SQLException {
 		int count = 1;
 		statement.setString(count++, book.getTitle());
 		statement.setString(count++, book.getAuthor());
@@ -284,7 +282,7 @@ public class BookDAO {
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				result.add(processRow1(rs));
+				result.add(processRow2(rs));
 			}
 
 		} catch (SQLException e) {
@@ -294,43 +292,6 @@ public class BookDAO {
 		}
 
 		return result;
-	}
-
-	/**
-	 * 貸出中の書籍件数を取得する。
-	 *
-	 * @return DBに登録されている貸出中の書籍件数を収めたリスト。途中でエラーが発生した場合は空のリストを返す。
-	 *
-	 *         /** 指定されたBookオブジェクトを新規にDBに登録する。 登録されたオブジェクトにはDB上のIDが上書きされる。
-	 *         何らかの理由で登録に失敗した場合、IDがセットされない状態（=0）で返却される。
-	 *
-	 * @param Book
-	 *            登録対象オブジェクト
-	 * @return DB上のIDがセットされたオブジェクト
-	 */
-	public Book create(Book book) {
-		Connection connection = ConnectionProvider.getConnection();
-		if (connection == null) {
-			return book;
-		}
-
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_BOOK_QUERY, new String[] { "ID" });) {
-			// INSERT実行
-			setParameter(statement, book, false);
-			statement.executeUpdate();
-
-			// INSERTできたらKEYを取得
-			ResultSet rs = statement.getGeneratedKeys();
-			rs.next();
-			int id = rs.getInt(1);
-			book.setId(id);
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			ConnectionProvider.close(connection);
-		}
-
-		return book;
 	}
 
 	public int returnBookById(int id) {
@@ -390,7 +351,7 @@ public class BookDAO {
 	 * @throws SQLException
 	 *             ResultSetの処理中発生した例外
 	 */
-	private Book processRow1(ResultSet rs) throws SQLException {
+	private Book processRow2(ResultSet rs) throws SQLException {
 		Book result = new Book();
 		// System.out.println(rs.getString("ID"));
 		result.setId(Integer.parseInt(rs.getString("ID")));
@@ -410,41 +371,7 @@ public class BookDAO {
 	 * @param rs2
 	 *            検索結果が収められているResultSet
 	 * @return 検索結果行の各データを収めたBookインスタンス
-	 * @throws SQLException
-	 *             ResultSetの処理中発生した例外
-	 *
-	 *             private Book processRow2(ResultSet rs2) throws SQLException {
-	 *             Book result2 = new Book();
-	 *             result2.setLendingTotal(rs2.getInt("TOTAL"));
-	 *
-	 *             return result2; }
 	 */
-
-	/**
-	 * オブジェクトからSQLにパラメータを展開する。
-	 *
-	 * @param statement
-	 *            パラメータ展開対象のSQL
-	 * @param book
-	 *            パラメータに対して実際の値を供給するオブジェクト
-	 * @param forUpdate
-	 *            更新に使われるならtrueを、新規追加に使われるならfalseを指定する。
-	 * @throws SQLException
-	 *             パラメータ展開時に何らかの問題が発生した場合に送出される。
-	 */
-	private void setParameter(PreparedStatement statement, Book book, boolean forUpdate) throws SQLException {
-		int count = 1;
-		statement.setString(count++, book.getTitle());
-		statement.setString(count++, book.getAuthor());
-		statement.setString(count++, book.getPublisher());
-		statement.setString(count++, book.getGenre());
-		statement.setString(count++, book.getPurchaseDate());
-		statement.setString(count++, book.getBuyer());
-
-		if (forUpdate) {
-			statement.setInt(count++, book.getId());
-		}
-	}
 
 	private void setDeleteParameter(PreparedStatement statement, int id) throws SQLException {
 		statement.setInt(1, id);
@@ -468,7 +395,7 @@ public class BookDAO {
 			ResultSet rs = statement.executeQuery(SELECT_ALL_QUERY);
 
 			while (rs.next()) {
-				result.add(processRow(rs));
+				result.add(processRow4(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -479,7 +406,7 @@ public class BookDAO {
 		return result;
 	}
 
-	private Book processRow(ResultSet rs) throws SQLException {
+	private Book processRow4(ResultSet rs) throws SQLException {
 		Book result = new Book();
 		result.setId(rs.getInt("ID"));
 		result.setTitle(rs.getString("TITLE"));
@@ -516,7 +443,7 @@ public class BookDAO {
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
-				result.add(processRow(rs));
+				result.add(processRow4(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -549,36 +476,36 @@ public class BookDAO {
 		}
 	}
 
-	private User getMailAddress(ResultSet rs) throws SQLException {
-		User result = new User();
-		result.setMailAddress(rs.getString("MAILADDRESS"));
-
-		return result;
-	}
-
-	public Rental_Status create(Rental_Status rental_status) {
-		Connection connection = ConnectionProvider.getConnection();
-		if (connection == null) {
-			return rental_status;
-		}
-
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
-			// INSERT実行
-			setParameter(statement, rental_status, false);
-			statement.executeUpdate();
-
-			// INSERTできたらKEYを取得
-			ResultSet rs = statement.getGeneratedKeys();
-			rs.next();
-			String id = rs.getString(1);
-			rental_status.setId(id);
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		} finally {
-			ConnectionProvider.close(connection);
-		}
-
-		return rental_status;
-	}
+//	private User getMailAddress(ResultSet rs) throws SQLException {
+//		User result = new User();
+//		result.setMailAddress(rs.getString("MAILADDRESS"));
+//
+//		return result;
+//	}
+//
+//	public Rental_Status create(Rental_Status rental_status) {
+//		Connection connection = ConnectionProvider.getConnection();
+//		if (connection == null) {
+//			return rental_status;
+//		}
+//
+//		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY, new String[] { "ID" });) {
+//			// INSERT実行
+//			setParameter(statement, rental_status, false);
+//			statement.executeUpdate();
+//
+//			// INSERTできたらKEYを取得
+//			ResultSet rs = statement.getGeneratedKeys();
+//			rs.next();
+//			String id = rs.getString(1);
+//			rental_status.setId(id);
+//		} catch (SQLException ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			ConnectionProvider.close(connection);
+//		}
+//
+//		return rental_status;
+//	}
 
 }
