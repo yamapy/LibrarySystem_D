@@ -51,7 +51,7 @@ function renderTable(data) {
 
 		}
 	});
-	console.log(data)
+	//console.log(data)
 //
 //	if(isLogin == "true"){
 //

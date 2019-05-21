@@ -74,7 +74,7 @@ function generalLogin() {
 			console.log(data);
 			if (data == true) {
 				alert('ログイン成功');
-				location.href = './login.html';
+				location.href = './bookList.html';
 			} else {
 				alert('ログインに失敗しました');
 			}
@@ -174,7 +174,6 @@ function getMailAddress() {
 			} else {
 				alert('取得成功');
 			}
-
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('通信失敗');
