@@ -21,7 +21,7 @@ $(function(){
 		sessionStorage.setItem('id', bookId);
 		var id = sessionStorage.getItem('id');
 //		console.log('id');
-		location.href = 'http://localhost:8080/LibrarySystem_D/html/bookDetail.html?bookId='+bookId;
+		location.href = './bookDetail.html?bookId='+bookId;
 
 	})
 

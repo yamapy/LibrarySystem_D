@@ -6,7 +6,7 @@ $(function() {
 	$('#lendingBookList')
 			.click(
 					function() {
-						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/lendingBookList.html';
+						window.location.href = './lendingBookList.html';
 					});
 
 })
@@ -17,7 +17,7 @@ $(function() {
 	$('#createBook')
 			.click(
 					function() {
-						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/createBook.html';
+						window.location.href = './createBook.html';
 					});
 
 })
@@ -28,7 +28,7 @@ $(function() {
 	$('#bookList')
 			.click(
 					function() {
-						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/bookList.html';
+						window.location.href = './bookList.html';
 					});
 
 })

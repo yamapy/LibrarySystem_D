@@ -43,7 +43,7 @@ $(function() {
 	$('#return')
 			.click(
 					function() {
-						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/bookList.html';
+						window.location.href = './bookList.html';
 					});
 
 })
