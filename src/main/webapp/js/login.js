@@ -80,7 +80,6 @@ function generalLogin() {
 			} else {
 				alert('ログインに失敗しました');
 			}
-
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('通信失敗');
@@ -120,6 +119,11 @@ function managerLogin() {
 function getUser(user) {
 	console.log('getUser start.');
 
+//<<<<<<< HEAD
+//	// ログインボタンを押したときのイベント
+//	$('#login-button').click(login);
+//});
+//=======
 	$.ajax({
 		type : "GET",
 		url : rootUrl + "/isManagerLogin",
@@ -172,7 +176,6 @@ function isLogin() {
 			} else {
 				alert('ログインしてません');
 			}
-
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('通信失敗');

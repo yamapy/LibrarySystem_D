@@ -17,7 +17,7 @@ function findLendingBook() {
 function renderTable(data) {
 	console.log('renderTable start.')
 	console.log(data);
-	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却予定日</th></tr>';
+	var headerRow = '<tr><th>タイトル</th><th>返却予定日</th><th>返却</th><th>返却</th></tr>';
 
 	if ( data == undefined || data.length === 0) {
 		$('#table').append('<p>現在、貸出中の書籍は存在しません。</p>')
@@ -26,10 +26,9 @@ function renderTable(data) {
 		table.append(headerRow);
 		$.each(data, function(index, lendingBook) {
 			var row = $('<tr>');
-			var returnButton  = '<button id="login-button" class="login-button">すべて返却</button>';
+			//var returnButton  = '<button colspan="3" class="grayButton">すべて返却</button>';
 			row.append($('<td>').text(lendingBook.title));
-			row.append($('<td nowrap>').text(lendingBook.borrower));
-
+			//row.append($('<td nowrap>').text(lendingBook.borrower));
 
 			row.append($('<td nowrap>').text(lendingBook.returnDate));
 			row.append(
@@ -41,7 +40,7 @@ function renderTable(data) {
 				row.append
 					($('<td nowrap>').append(
 						$('<button>').text("すべて返却").attr("type","button").attr("onclick", 'returnBookAll()')
-					).attr("class",'returnButton')
+					).attr("class",'returnButton').attr("rowspan",data.length)
 				);
 			}
 
@@ -49,13 +48,11 @@ function renderTable(data) {
 		});
 
 		$('#table').append(table);
-		$('#table').append('aaa');
-
 	}
 }
 
 function returnBookById(returnId) {
-	alert(returnId+'を返却する予定');
+	//alert(returnId+'を返却する予定');
 	console.log('returnById start.')
 //	var param =
 //		{
@@ -70,7 +67,7 @@ function returnBookById(returnId) {
 			console.log(data);
 			var tableHTML='';
 			if (data == true) {
-				$('#'+returnId).text('済み');
+				$('#'+returnId).text('(済み)');
 				alert('返却しました');
 			} else {
 				alert('返却失敗');

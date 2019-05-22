@@ -1,5 +1,4 @@
 
-
 'use strict';
 
 
@@ -80,7 +79,7 @@ function renderTable(data) {
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
 				}else{
 					row.append($('<td nowrap>').append(
-							$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow grayButton")//.attr("class","grayButton")
+							$('<button>').text("借りる").attr("type","button").attr("id",book.id).attr("class","borrow grayButton")// .attr("class","grayButton")
 					));
 				}
 
@@ -129,16 +128,8 @@ function renderTable(data) {
 
 			$('#book').append(table);
 		}
-
-
-
-
 	}
-
 }
-
-
-
 
 $('#findBook').click(function() {
 	findByParam();
@@ -153,7 +144,6 @@ function initPageGenre() {
 	makeGenreSelection('#genreParam');
 	findAll();
 }
-
 
 function findByParam() {
 	console.log('findByParam start.');
@@ -206,20 +196,6 @@ function borrowById(button) {
 		}
 	});
 }
-
-//function findById(id) {
-//	console.log('findByID start - id:' + id);
-//	$.ajax({
-//		type : "GET",
-//		url : rootUrl + '/' + id,
-//		dataType : "json",
-//		success : function(data) {
-//			alert('借りました');
-//			console.log('findById success: ' + data.name);
-//			renderDetails(data)
-//		}
-//	});
-//}
 
 function renderDetails(book) {
 	$('.error').text('');
