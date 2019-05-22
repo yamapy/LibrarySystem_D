@@ -101,9 +101,9 @@ function renderTable(data) {
 			$.each(data, function(index, book) {
 				var row = $('<tr>');
 				row.append($('<td>').text(book.title).attr("id","title"));
-				row.append($('<td>').text(book.genre).attr("id","genre"));
+				row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
 				row.append($('<td>').text(book.author).attr("id","author"));
-				row.append($('<td>').append(
+				row.append($('<td nowrap>').append(
 						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton")
 				));
 
