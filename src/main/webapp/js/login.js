@@ -3,6 +3,7 @@
 var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
 
 getUser();
+logout();
 
 $('#general-login-button').click(function() {
 	$('.error').children().remove();
@@ -36,7 +37,15 @@ $('#manager-login-button').click(function() {
 
 })
 
-$('#logout-button').click(function() {
+$('#create-user-button').click(function() {
+	location.href = './createUser.html';
+})
+
+$('#back-to-bookList-button').click(function() {
+	location.href = './bookList.html';
+})
+
+function logout() {
 	console.log('logout start');
 	$('.error').children().remove();
 
@@ -47,18 +56,16 @@ $('#logout-button').click(function() {
 		success : function(data) {
 			if (data == true) {
 				console.log("logout ok");
-				location.href = './bookList.html';
 
 			} else {
 				console.log("logout ng");
-				alert('ログアウトできません');
 			}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('通信失敗');
 		}
 	})
-})
+}
 
 function generalLogin() {
 	// 入力されたユーザーIDとパスワード

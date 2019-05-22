@@ -43,10 +43,11 @@ function logOut() {
 		success : function(data) {
 			if (data == true) {
 				console.log("logout ok");
+				alert('ログアウトしました')
 				location.href = './bookList.html';
-
 			} else {
 				console.log("logout ng");
+				alert('ログアウトできません')
 			}
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
