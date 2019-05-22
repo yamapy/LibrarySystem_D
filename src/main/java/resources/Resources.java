@@ -72,9 +72,9 @@ public class Resources {
 	// @Consumes("application/x-www-form-urlencoded")
 	// @Produces(MediaType.APPLICATION_JSON)
 	// @Produces(MediaType.APPLICATION_JSON)
-	public List<Book> findLendingBookById() throws WebApplicationException {
-		// return null;
-		return dao.findLendingBook(mailAddress);
+	public List<Book> findLendingBookById(@Context HttpServletRequest request) throws WebApplicationException {
+		System.out.println("ログイン："+loginMailAddress(request));
+		return dao.findLendingBook(loginMailAddress(request));
 	}
 
 	/*
@@ -86,9 +86,9 @@ public class Resources {
 	 */
 	@GET
 	@Path("returnBook")
-	public int returnBook() throws WebApplicationException {
-
-		return dao.returnBook(mailAddress);
+	public int returnBook(@Context HttpServletRequest request) throws WebApplicationException {
+		System.out.println("ログイン："+loginMailAddress(request));
+		return dao.returnBook(loginMailAddress(request));
 	}
 
 	@GET
@@ -118,8 +118,6 @@ public class Resources {
 	@Produces(MediaType.APPLICATION_JSON)
 	public boolean isGeneralLogin(@Context HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		// session.setAttribute("isGeneralLogin", user);
-		// if(session.getAttribute("isGeneralLogin") != null){
 		User nowUser = (User) session.getAttribute("loginUser");
 		// }
 		if (session != null && nowUser != null && !nowUser.getMailAddress().equals("")) {
@@ -139,7 +137,7 @@ public class Resources {
 		User nowUser = (User) session.getAttribute("loginUser");
 		if (session != null && nowUser != null && !nowUser.getMailAddress().equals("")
 				&& nowUser.getManagement() == 1) {
-			System.out.println(nowUser.getMailAddress() + " aa" + nowUser.getPassword());
+			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
 			return true;
 		} else {
 			System.out.println("Resource false");

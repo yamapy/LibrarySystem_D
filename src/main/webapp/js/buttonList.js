@@ -105,13 +105,13 @@ function setButton(loginStatus,management){
 	    case 'myPage':
 	    	if(management==true){
 	    		buttons.append(manageButton);
+	    		buttons.append(blank);
 			}
 	    	buttons.append(bookButton);
+	    	buttons.append(blank2);
 	    	buttons.append(logoutButton);
 	        break;
 	    case 'managementTop':
-	    	buttons.append(manageButton);
-	    	buttons.append(blank);
 	    	buttons.append(bookButton);
 	    	buttons.append(blank2);
 	    	buttons.append(logoutButton);
@@ -120,8 +120,10 @@ function setButton(loginStatus,management){
 	    	if( loginStatus == true){
 	    		if( management == true ){
 	    			buttons.append(manageButton);
+	    			buttons.append(blank);
 	    		}
 	    		buttons.append(myPageButton);
+	    		buttons.append(blank2);
 	    		buttons.append(logoutButton);
 	    	}else{
 	    		buttons.append(loginButton);

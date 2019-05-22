@@ -171,6 +171,9 @@ public class BookDAO {
 	}
 
 	public int returnBook(String mailAddress) {
+		if(mailAddress.equals("")){
+			return -1;
+		}
 		Connection connection = ConnectionProvider.getConnection();
 		int resultNum;
 		if (connection == null) {
