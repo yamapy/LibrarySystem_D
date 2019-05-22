@@ -17,31 +17,35 @@
 	</div>
 	<div>
 		<form id="userForm" enctype="multipart/form-data">
-				<div class="error"></div>
-				<div>
-					<label for="mailAddress">メールアドレス</label> <input type="text"
-						placeholder="" id="mailAddress" class="mailAddress"
-						name="mailAddress" maxlength = "100"></input>
-				</div>
-				<div>
-					<label for="employeeName">氏名</label> <input type="text"
-						placeholder="氏名が表示されます" id="employeeName" class="employeeName"
-						name="employeeName" readonly></input>
+			<div class="error"></div>
+			<div>
+				<label for="mailAddress">メールアドレス</label> <input type="text"
+					placeholder="" id="mailAddress" class="mailAddress"
+					name="mailAddress" maxlength="100"></input>
+			</div>
+			<div>
+				<label for="employeeName">氏名</label> <input type="text"
+					placeholder="氏名が表示されます" id="employeeName" class="employeeName"
+					name="employeeName" readonly></input>
 
-				</div>
-				<div>
-					<label for="password">パスワード</label> <input type="password"
-						placeholder="" id="password" class="password" name="password" maxlength = "10"></input>
-				</div>
-				<div>
-					<label for="password2">パスワード再入力</label> <input type="password"
-						placeholder="" id="password2" class="password2" name="password2" maxlength = "10"></input>
-				</div>
-				<div>
-					<button id="createUser-login-button"
-						class="createUser-login-button">登録してログイン</button>
-				</div>
+			</div>
+			<div>
+				<label for="password">パスワード</label> <input type="password"
+					placeholder="" id="password" class="password" name="password"
+					maxlength="10"></input>
+			</div>
+			<div>
+				<label for="password2">パスワード再入力</label> <input type="password"
+					placeholder="" id="password2" class="password2" name="password2"
+					maxlength="10"></input>
+			</div>
+			<div>
+				<button id="createUser-login-button" class="blueButton">登録してログイン</button>
+			</div>
 		</form>
+	</div>
+	<div>
+		<button id="createUser-login-button" class="orangeButton">戻る</button>
 	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../js/createUser.js"></script>

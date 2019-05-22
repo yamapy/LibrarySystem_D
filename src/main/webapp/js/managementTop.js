@@ -21,3 +21,14 @@ $(function() {
 					});
 
 })
+
+$(function() {
+
+	/* 以下カッコ内はボタンID */
+	$('#bookList')
+			.click(
+					function() {
+						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/bookList.html';
+					});
+
+})
