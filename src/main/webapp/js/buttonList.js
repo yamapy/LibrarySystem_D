@@ -34,8 +34,7 @@ function setup(){
 				dataType : "json",
 		    })
 		}
-		getIsLogin().done(function(management) {
-
+		isManagerLogin().done(function(management) {
 			setButton(result,management);
 
 		}).fail(function(result) {
