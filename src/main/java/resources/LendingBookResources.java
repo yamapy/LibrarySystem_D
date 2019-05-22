@@ -63,7 +63,8 @@ public class LendingBookResources {
 	}
 
 	/**
-	 * ID指定で書籍情報を取得する。 詳細表示で使用！！！！！
+	 * ID指定で書籍情報を取得する。
+	 * 詳細表示で使用！！！！！
 	 *
 	 * @param id
 	 *            取得対象の書籍のID
@@ -75,6 +76,7 @@ public class LendingBookResources {
 	public Book findById(@PathParam("id") int id) {
 		return dao.findById(id);
 	}
+
 
 	/**
 	 * 一覧用に貸出中の書籍件数を取得する。

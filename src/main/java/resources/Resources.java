@@ -66,7 +66,6 @@ public class Resources {
 		return bookDAO.findByParam(param);
 	}
 
-	// <<<<<<< HEAD
 	@GET
 	@Path("/findLendingBookById")
 	// @Consumes("application/x-www-form-urlencoded")
@@ -77,20 +76,9 @@ public class Resources {
 		return dao.findLendingBook(mailAddress);
 	}
 
-	/*
-	 * @GET
-	 *
-	 * @Path("returnBookById") public boolean returnBookById(@FormParam("id")
-	 * int id) throws WebApplicationException { //return dao.returnBookById(id);
-	 * return false; }
-	 */
 	@GET
 	@Path("returnBook")
 	public int returnBook() throws WebApplicationException {
-		// =======
-
-		// >>>>>>> shiena
-
 		return dao.returnBook(mailAddress);
 	}
 
@@ -150,22 +138,6 @@ public class Resources {
 		}
 	}
 
-	// @GET
-	// @Path("getLoginMailAddress")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public String loginMailAddress(@Context HttpServletRequest request) {
-	// HttpSession session = request.getSession();
-	// User nowUser = (User) session.getAttribute("loginUser");
-	// if ((session != null) && (nowUser.getMailAddress() != null ||
-	// !nowUser.getMailAddress().equals(""))) {
-	// System.out.println(nowUser.getMailAddress());
-	// return nowUser.getMailAddress();
-	// } else {
-	// System.out.println("Resource false");
-	// return "";
-	// }
-	// }
-
 	@GET
 	@Path("logout")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -215,7 +187,6 @@ public class Resources {
 		HttpSession session = request.getSession();
 		User nowUser = (User) session.getAttribute("loginUser");
 		session.getAttribute("mail");
-
 		String mail = nowUser.getMailAddress();
 		return bookDAO.borrowById(id, today, mail);
 
@@ -250,23 +221,6 @@ public class Resources {
 			return false;
 		}
 	}
-
-	// @POST
-	// public boolean borrow(@QueryParam("id") int id) throws
-	// WebApplicationException {
-	//
-	// System.out.println(id);
-	//
-	// Date date = new Date(System.currentTimeMillis());
-	// SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	// String today = formatter.format(date);
-	//
-	// String mail = "s-kondo@virtualex.co.jp";
-	// // int id = Integer.parseInt(form.getField("id").getValue());
-	//
-	// return bookDAO.borrowById(id, today, mail);
-	//
-	// }
 
 	@POST
 	@Path("generalLogin")

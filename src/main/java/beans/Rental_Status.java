@@ -30,5 +30,4 @@ public class Rental_Status {
 	public void setRentDate(int rentDate) {
 		this.rentDate = rentDate;
 	}
-
 }

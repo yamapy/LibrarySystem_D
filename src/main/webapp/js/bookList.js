@@ -1,7 +1,11 @@
+
 'use strict';
 
 var loginButton = '<buttoon>ログイン<button>'
-var logoutinButton = '<buttoon>ログアウト<button>'
+var logoutinButton = '<buttoon>ログアウト<button>';
+
+var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+var detailUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
 function findLendingBook() {
 	console.log('renderButton start.')
@@ -10,7 +14,18 @@ function findLendingBook() {
 	$('#buttonList').append(loginButton);
 }
 
-var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+$('#returnPage').click(findById);
+/* 詳細情報 */
+$(function(){
+	$(document).on('click','.bookDetail',function(){
+		var bookId = $(this).attr('id');
+		sessionStorage.setItem('id', bookId);
+		var id = sessionStorage.getItem('id');
+		location.href = 'http://localhost:8080/LibrarySystem_D/html/bookDetail.html?bookId='+bookId;
+
+	})
+
+})
 
 findAll();
 initPageGenre();
@@ -61,23 +76,16 @@ function renderTable(data) {
 			$.each(data, function(index, book) {
 				var row = $('<tr>');
 				row.append($('<td>').text(book.title).attr("id", "title"));
-				row.append($('<td nowrap>').text(book.genre)
-						.attr("id", "genre"));
+				row.append($('<td nowrap>').text(book.genre).attr("id", "genre"));
 				row.append($('<td>').text(book.author).attr("id", "author"));
-				row.append($('<td nowrap>')
-						.append(
-								$('<button>').text("詳細").attr("type", "button")
-										.attr("id", "bookDetail").attr("class",
-												"grayButton")));
+				row.append($('<td nowrap>')	.append(
+						$('<button>').text("詳細").attr("type", "button").attr("id", "bookDetail").attr("class","grayButton")));
 
 				if (book.status == "貸出中") {
-					row.append($('<td nowrap>').text(book.status).attr("id",
-							"status").attr("class", "red"));
+					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class", "red"));
 				} else {
 					row.append($('<td nowrap>').append(
-							$('<button>').text("借りる").attr("type", "button")
-									.attr("id", book.id).attr("class",
-											"borrow grayButton")// .attr("class","grayButton")
+							$('<button>').text("借りる").attr("type", "button").attr("id", book.id).attr("class","borrow grayButton")// .attr("class","grayButton")
 					));
 				}
 
@@ -88,9 +96,10 @@ function renderTable(data) {
 			$('.borrow').click(borrowById);
 		}
 
+
 	}
 
-	else {
+	else{
 		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
 
 		$('#book').children().remove();
@@ -104,21 +113,15 @@ function renderTable(data) {
 			$.each(data, function(index, book) {
 				var row = $('<tr>');
 				row.append($('<td>').text(book.title).attr("id", "title"));
-				row.append($('<td nowrap>').text(book.genre)
-						.attr("id", "genre"));
+				row.append($('<td nowrap>').text(book.genre).attr("id", "genre"));
 				row.append($('<td>').text(book.author).attr("id", "author"));
-				row.append($('<td nowrap>')
-						.append(
-								$('<button>').text("詳細").attr("type", "button")
-										.attr("id", "bookDetail").attr("class",
-												"grayButton")));
+				row.append($('<td nowrap>').append(
+						$('<button>').text("詳細").attr("type", "button").attr("id", "bookDetail").attr("class","grayButton")));
 
 				if (book.status == "貸出中") {
-					row.append($('<td nowrap>').text(book.status).attr("id",
-							"status").attr("class", "red"));
+					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
 				} else
-					row.append($('<td nowrap>').text(book.status).attr("id",
-							"status"));
+					row.append($('<td nowrap>').text(book.status).attr("id","status"));
 
 				table.append(row);
 			});
@@ -140,14 +143,15 @@ function initPageGenre() {
 	findAll();
 }
 
+/* 検索 */
 function findByParam() {
 	console.log('findByParam start.');
 
-	var urlWithParam = rootUrl + "/findByParam" + '?titleParam='
-			+ $('#titleParam').val() + '&authorParam='
-			+ $('#authorParam').val() + '&genre=' + $('#genreParam').val()
-			+ '&status=' + $('#statusParam').val();
-	console.log(urlWithParam);
+	var urlWithParam = rootUrl+"/findByParam"+'?titleParam='+$('#titleParam').val()
+	+'&authorParam='+$('#authorParam').val()
+	+'&genre='+$('#genreParam').val()
+	+'&status='+$('#statusParam').val();
+	console.log( urlWithParam);
 	$.ajax({
 		type : "GET",
 		url : urlWithParam,
@@ -175,9 +179,7 @@ function makeGenreSelection(selectionGenre, book) {
 
 function borrowById(button) {
 	var id = button.currentTarget.id;
-	var requestQuery = {
-		id : id
-	};
+	var requestQuery = {id:id};
 	console.log('borrow start - id:' + id);
 	$.ajax({
 		type : "POST",
@@ -192,6 +194,34 @@ function borrowById(button) {
 			alert('貸出失敗');
 		}
 	});
+}
+
+/* 詳細表示 */
+function findById(id) {
+	console.log('findByID start - id:' + id);
+	$.ajax({
+		type : "GET",
+		url : detailUrl + '/' + id,
+		dataType : "json",
+		success : function(data) {
+			console.log('findById success: ' + data.name);
+			renderBookDetails(data)
+		}
+	});
+}
+
+/* 詳細表示 */
+function renderBookDetails(book) {
+	$('.error').text('');
+	$('#title').val(book.title);
+	$('#author').val(book.author);
+	$('#publisher').val(book.publisher);
+	$('#genre').val(book.genre);
+	$('#puchaseDate').val(book.purchaseDate);
+	$('#buyer').val(book.buyer);
+	$('#borrowerMailaddress').val(book.borrowerMailaddress);
+	$('#returnDate').val(book.returnDate);
+
 }
 
 function renderDetails(book) {
@@ -216,7 +246,6 @@ function getMailAddress() {
 				alert('取得失敗');
 			} else {
 				alert('取得成功' + data);
-
 			}
 
 		},

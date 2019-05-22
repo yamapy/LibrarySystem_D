@@ -23,5 +23,4 @@ public class Employee {
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
 	}
-
 }

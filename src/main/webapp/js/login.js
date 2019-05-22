@@ -120,17 +120,11 @@ function managerLogin() {
 			alert('通信失敗');
 		}
 	})
-
 }
 
 function getUser(user) {
 	console.log('getUser start.');
 
-//<<<<<<< HEAD
-//	// ログインボタンを押したときのイベント
-//	$('#login-button').click(login);
-//});
-//=======
 	$.ajax({
 		type : "GET",
 		url : rootUrl + "/isManagerLogin",
@@ -188,7 +182,6 @@ function isLogin() {
 			alert('通信失敗');
 		}
 	})
-
 }
 
 function isManagerLogin() {
@@ -210,5 +203,4 @@ function isManagerLogin() {
 			alert('通信失敗');
 		}
 	})
-
 }
