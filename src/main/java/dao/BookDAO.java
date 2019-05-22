@@ -348,7 +348,7 @@ public class BookDAO {
 	}
 
 	public int returnBook(String mailAddress) {
-		if(mailAddress.equals("")){
+		if (mailAddress.equals("")) {
 			return -1;
 		}
 		Connection connection = ConnectionProvider.getConnection();
@@ -475,7 +475,6 @@ public class BookDAO {
 			statement.setInt(2, id);
 			statement.setString(3, date);
 			ResultSet rs = statement.executeQuery();
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -483,5 +482,7 @@ public class BookDAO {
 		} finally {
 			ConnectionProvider.close(connection);
 		}
+		return true;
 	}
+
 }
