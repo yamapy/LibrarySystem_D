@@ -42,26 +42,12 @@ public class Resources {
 		return bookDAO.findAll();
 	}
 
-//	@GET
-//	@Path("isLogin")
-//	public boolean isLogin(){
-//		if(user==null){
-//			return false;
-//		}else{
-//			return true;
-//		}
-//	}
-
-
 	@GET
 	@Path("genre")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Genre> findAllGenre() {
 		return genreDAO.findAllGenre();
 	}
-
-
-
 
 	@Path("findByParam")
 	@GET
@@ -73,7 +59,7 @@ public class Resources {
 
 		System.out.println("t="+ titleParam );
 		Param param = new Param(titleParam, authorParam, genre,status);
-		bookDAO.findByParam(param);
+		//bookDAO.findByParam(param);
 		return bookDAO.findByParam(param);
 	}
 
@@ -97,8 +83,6 @@ public class Resources {
 
 	}
 
-
-
 	@GET
 	@Path("isLogin")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -114,7 +98,6 @@ public class Resources {
 		}
 		return true;
 	}
-
 
 	@POST
 	@Path("generalLogin")

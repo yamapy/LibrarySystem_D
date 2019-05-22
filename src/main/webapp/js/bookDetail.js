@@ -22,6 +22,7 @@ function initPage() {
 	});
 }
 
+/* 詳細表示 */
 function renderBookDetails(book) {
 	$('.error').text('');
 	$('#id').val(book.id);
@@ -36,3 +37,15 @@ function renderBookDetails(book) {
 	$('#returnDate').val(book.returnDate);
 
 }
+
+/* 書籍一覧へ戻る */
+$(function() {
+
+	/* 以下カッコ内は戻るボタンのID名称 */
+	$('#return')
+			.click(
+					function() {
+						window.location.href = 'http://localhost:8080/LibrarySystem_D/html/bookList.html';
+					});
+
+})

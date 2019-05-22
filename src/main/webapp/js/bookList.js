@@ -118,8 +118,13 @@ function renderTable(data) {
 				row.append($('<td nowrap>').text(book.genre).attr("id","genre"));
 				row.append($('<td>').text(book.author).attr("id","author"));
 				row.append($('<td nowrap>').append(
+						$('<button class="bookDetail">').attr("id",book.id).text("詳細")
+				));
+
+				/* row.append($('<td nowrap>').append(
 						$('<button>').text("詳細").attr("type","button").attr("id","bookDetail").attr("class","grayButton").attr('src','http://localhost:8080/LibrarySystem_D/html/bookDetail.html')
 				));
+				*/
 
 				if(book.status=="貸出中"){
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
@@ -141,8 +146,6 @@ function renderTable(data) {
 }
 
 
-
-
 $('#findBook').click(function() {
 	findByParam();
 	return false;
@@ -157,7 +160,7 @@ function initPageGenre() {
 	findAll();
 }
 
-
+/* 検索 */
 function findByParam() {
 	console.log('findByParam start.');
 
@@ -224,6 +227,7 @@ function findById(id) {
 	});
 }
 
+/* 詳細表示 */
 function renderBookDetails(book) {
 	$('.error').text('');
 	$('#title').val(book.title);
@@ -235,20 +239,6 @@ function renderBookDetails(book) {
 	$('#borrowerMailaddress').val(book.borrowerMailaddress);
 	$('#returnDate').val(book.returnDate);
 
-}
-
-function findById(id) {
-	console.log('findByID start - id:' + id);
-	$.ajax({
-		type : "GET",
-		url : rootUrl + '/' + id,
-		dataType : "json",
-		success : function(data) {
-			alert('借りました');
-			console.log('findById success: ' + data.name);
-			renderDetails(data)
-		}
-	});
 }
 
 function renderDetails(book) {

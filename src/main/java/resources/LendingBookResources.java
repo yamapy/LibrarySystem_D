@@ -77,6 +77,7 @@ public class LendingBookResources {
 		return dao.findById(id);
 	}
 
+
 	/**
 	 * 一覧用に貸出中の書籍件数を取得する。
 	 *
