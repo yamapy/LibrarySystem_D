@@ -4,8 +4,6 @@
 var loginButton = '<buttoon>ログイン<button>'
 var logoutinButton = '<buttoon>ログアウト<button>';
 
-var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
-var detailUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
 function findLendingBook() {
 	console.log('renderButton start.')
@@ -15,17 +13,23 @@ function findLendingBook() {
 }
 
 $('#returnPage').click(findById);
+
 /* 詳細情報 */
 $(function(){
 	$(document).on('click','.bookDetail',function(){
 		var bookId = $(this).attr('id');
 		sessionStorage.setItem('id', bookId);
 		var id = sessionStorage.getItem('id');
+//		console.log('id');
 		location.href = 'http://localhost:8080/LibrarySystem_D/html/bookDetail.html?bookId='+bookId;
 
 	})
 
 })
+
+var rootUrl = "/LibrarySystem_D/api/v1.1/resources";
+var detailUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
+
 
 findAll();
 initPageGenre();
@@ -79,7 +83,7 @@ function renderTable(data) {
 				row.append($('<td nowrap>').text(book.genre).attr("id", "genre"));
 				row.append($('<td>').text(book.author).attr("id", "author"));
 				row.append($('<td nowrap>')	.append(
-						$('<button>').text("詳細").attr("type", "button").attr("id", "bookDetail").attr("class","grayButton")));
+						$('<button>').text("詳細").attr("type", "button").attr("id", book.id).attr("class","grayButton bookDetail")));
 
 				if (book.status == "貸出中") {
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class", "red"));
@@ -116,7 +120,7 @@ function renderTable(data) {
 				row.append($('<td nowrap>').text(book.genre).attr("id", "genre"));
 				row.append($('<td>').text(book.author).attr("id", "author"));
 				row.append($('<td nowrap>').append(
-						$('<button>').text("詳細").attr("type", "button").attr("id", "bookDetail").attr("class","grayButton")));
+						$('<button class="bookDetail">').text("詳細").attr("type", "button").attr("id", book.id).attr("class","grayButton bookDetail")));
 
 				if (book.status == "貸出中") {
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));
@@ -188,7 +192,7 @@ function borrowById(button) {
 		dataType : 'json',
 		success : function(data) {
 			alert('借りました');
-			findAll();
+			findByParam();
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert('貸出失敗');
@@ -198,7 +202,7 @@ function borrowById(button) {
 
 /* 詳細表示 */
 function findById(id) {
-	console.log('findByID start - id:' + id);
+	console.log('findByID start - id: ' + id);
 	$.ajax({
 		type : "GET",
 		url : detailUrl + '/' + id,

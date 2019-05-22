@@ -2,9 +2,7 @@
 
 var detailUrl = "/LibrarySystem_D/api/v1.1/lendingBook";
 
-
 initPage();
-
 
 /* 詳細表示 */
 function initPage() {
