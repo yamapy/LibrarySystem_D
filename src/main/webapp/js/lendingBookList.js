@@ -42,7 +42,7 @@ function dt(data) {
 }
 
 function renderTable(data) {
-	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却予定日</th></tr>';
+	var headerRow = '<tr><th>タイトル</th><th>借り手</th><th>返却期限</th></tr>';
 	console.log(data);
 	if (data.length === 0) {
 		$('#lendingBookList').append('<p>現在、貸出中の書籍は存在しません。</p>')

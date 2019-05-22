@@ -81,7 +81,7 @@ function renderTable(data) {
 	console.log('renderTable start.')
 	console.log(data);
 
-	var headerRow = '<tr><th>タイトル</th><th>返却予定日</th><th colspan="2">返却</th></tr>';
+	var headerRow = '<tr><th>タイトル</th><th>返却期限</th><th colspan="2">返却</th></tr>';
 
 	if ( data == undefined || data.length === 0) {
 		$('#table').append('<p>現在、貸出中の書籍は存在しません。</p>')
