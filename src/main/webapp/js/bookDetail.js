@@ -36,12 +36,11 @@ function renderBookDetails(book) {
 		$('#borrowerMailaddress').append( addEmp(book.borrowerMailaddress) );
 		$('#returnDate').append( addEmp(book.returnDate) );
 	}else{
-		$('#borrowerArea').val('A');
+		$('#borrowerArea').remove();
 	}
 
-
 	function addEmp(data){
-		return ( data=="" ? '(なし)' : data );
+		return ( data == undefined  ? '(なし)' : data );
 	}
 
 }

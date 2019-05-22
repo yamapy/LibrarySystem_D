@@ -104,7 +104,7 @@ function renderTable(data) {
 	}
 
 	else{
-		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
+		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th nowrap>ステータス</th>';
 
 		$('#book').children().remove();
 
