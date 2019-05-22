@@ -30,14 +30,18 @@ td {
 }
 
 
+
 .grayButton {
   display: inline-block;
   padding: 0.5em 1em;
   text-decoration: none;
   background:#d3d3d3;/*ボタン色*/
-  border-bottom: solid 4px #627295;
+  border-bottom: solid 3px #808080;
   border-radius: 3px;
+  font-weight: bold;
 }
+
+
 .grayButton:active {
   /*ボタンを押したとき*/
   -webkit-transform: translateY(4px);
@@ -45,6 +49,47 @@ td {
   border-bottom: none;/*線を消す*/
 }
 
+.orangeButton {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background:#ED7D31;/*ボタン色*/
+  border-bottom: solid 3px #BF5711;
+  border-right: solid 3px #BF5711;
+  border-top: solid 3px #f19c63;
+  border-left: solid 3px #f19c63;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.orangeButton:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+
+.blueButton {
+  color: #ffffff;
+  text-shadow: black 1px 1px 0px;
+  display: inline-block;
+  padding: 0.5em 1em;
+
+
+  text-decoration: none;
+  background:#2F5496;/*ボタン色*/
+  border-bottom: solid 3px #1B3056;
+  border-right: solid 3px #1B3056;
+  border-top: solid 3px #4E78C7;
+  border-left: solid 3px #4E78C7;
+  border-radius: 3px;
+  font-weight: bold
+}
+.blueButton:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
 .red{
 	color:red;
 }

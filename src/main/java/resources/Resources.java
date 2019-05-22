@@ -139,7 +139,7 @@ public class Resources {
 		User nowUser = (User) session.getAttribute("loginUser");
 		if (session != null && nowUser != null && !nowUser.getMailAddress().equals("")
 				&& nowUser.getManagement() == 1) {
-			System.out.println(nowUser.getMailAddress() + " " + nowUser.getPassword());
+			System.out.println(nowUser.getMailAddress() + " aa" + nowUser.getPassword());
 			return true;
 		} else {
 			System.out.println("Resource false");
