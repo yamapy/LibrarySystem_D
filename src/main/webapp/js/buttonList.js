@@ -35,7 +35,6 @@ function setup(){
 		    })
 		}
 		isManagerLogin().done(function(management) {
-
 			setButton(result,management);
 
 		}).fail(function(result) {

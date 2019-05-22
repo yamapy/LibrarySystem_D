@@ -18,21 +18,31 @@ function initPage() {
 			renderBookDetails(data)
 		}
 	});
+
 }
 
 /* 詳細表示 */
 function renderBookDetails(book) {
-	$('.error').text('');
-	$('#id').val(book.id);
-	$('#title').val(book.title);
-	$('#author').val(book.author);
-	$('#publisher').val(book.publisher);
-	$('#genre').val(book.genre);
-	$('#puchaseDate').val(book.purchaseDate);
-	$('#buyer').val(book.buyer);
-	$('#borrower').val(book.borrower);
-	$('#borrowerMailaddress').val(book.borrowerMailaddress);
-	$('#returnDate').val(book.returnDate);
+	var emp = '(なし)'
+
+	$('#title').append( addEmp(book.title) );
+	$('#author').append( addEmp(book.author) );
+	$('#publisher').append( addEmp(book.publisher) );
+	$('#genre').append( addEmp(book.genre) );
+	$('#puchaseDate').append(book.purchaseDate);
+	$('#buyer').append( addEmp(book.buyer) );
+	if( book.borrower != undefined ){
+		$('#borrower').append(book.borrower);
+		$('#borrowerMailaddress').append( addEmp(book.borrowerMailaddress) );
+		$('#returnDate').append( addEmp(book.returnDate) );
+	}else{
+		$('#borrowerArea').val('A');
+	}
+
+
+	function addEmp(data){
+		return ( data=="" ? '(なし)' : data );
+	}
 
 }
 

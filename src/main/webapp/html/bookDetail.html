@@ -5,6 +5,7 @@
 <title>書籍詳細</title>
 
 <!--<link rel="stylesheet" href="css/postStyle.css">-->
+<link rel="stylesheet" href="../css/Design.css">
 
 </head>
 <body>
@@ -12,58 +13,59 @@
 		<div id="bookDetail">
 			<h1>書籍詳細</h1>
 
-			<form id="bookDetail" enctype="multipart/form-data">
-				<div class="error"></div>
-				<div>
-					<label for="id">ID：</label> <input type="text" name="id" id="id"
-						disabled>
-				</div>
-				<div>
-					<label for="title">タイトル：</label> <input type="text" maxlength="100"
-						name="title" id="title">
-				</div>
-				<div>
-					<label for="author">作者：</label> <input type="text" maxlength="40"
-						name="author" id="author">
-				</div>
-				<div>
-					<label for="publisher">出版社：</label> <input type="text"
-						name="publisher" id="publisher">
+			<div>
+			    <div>
+			    </div>
+			    <div>
+			        <div class="leftForm" >タイトル</div>
+			        <div class="blankForm"> : </div>
+			        <div class="rightForm" id="title"></div>
+			    </div>
+			    <div>
+			        <span class="leftForm" >作者</span>
+			        <div class="blankForm"> : </div>
+			        <span class="rightForm" id="author"></span>
+			    </div>
+			    <div>
+			        <span class="leftForm" >出版社</span>
+			        <div class="blankForm"> : </div>
+			        <span class="rightForm" id="publisher"></span>
+			    </div>
+			    <div>
+			        <span class="leftForm" >ジャンル</span>
+			        <div class="blankForm"> : </div>
+			        <span class="rightForm" id="genre"></span>
+			    </div>
+			    <div>
+			        <span class="leftForm" >購入日</span>
+			        <div class="blankForm"> : </div>
+			        <span class="rightForm" id="puchaseDate"></span>
+			    </div>
+			    <div>
+			        <span class="leftForm" >購入者</span>
+			        <div class="blankForm"> : </div>
+			        <span class="rightForm" id="buyer"></span>
+			    </div>
+			    <div id="borrowerArea">
+			    	<p></p>
+				    <div>
+				        <span class="leftForm" >借り手</span>
+				        <div class="blankForm"> : </div>
+				        <span class="rightForm" id="borrower"></span>
+				    </div>
+				    <div>
+				        <span class="leftForm" >メールアドレス</span>
+				        <div class="blankForm"> : </div>
+				        <span class="rightForm" id="borrowerMailaddress"></span>
+				    </div>
+				    <div>
+				        <span class="leftForm" >返却期限</span>
+				        <div class="blankForm"> : </div>
+				        <span class="rightForm" id="returnDate"></span>
+				    </div>
 				</div>
 
-				<div>
-					<label for="genre">ジャンル：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="genre" name="genre">
-				</div>
-
-				<div>
-					<label for="puchaseDate">購入日：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="puchaseDate"
-						name="purchaseDate">
-				</div>
-
-				<div>
-					<label for="buyer">購入者：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="buyer" name="buyer">
-				</div>
-
-				<div>
-					<label for="borrower">借り手：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="borrower" name="borrower">
-				</div>
-
-				<div>
-					<label for="borrowerMailaddress">借り手のメールアドレス：</label> <input
-						type="text" style="width: 20%" maxlength="256"
-						id="borrowerMailaddress" name="borrowerMailaddress">
-				</div>
-
-				<div>
-					<label for="returnDate">返却期限：</label> <input type="text"
-						style="width: 20%" maxlength="256" id="returnDate"
-						name="returnDate">
-				</div>
-			</form>
+			</div>
 		</div>
 		<!-- 戻るとき、戻る先がログインしてるかしてないかで異なるので後で考える -->
 		<button id="return">戻る</button>
