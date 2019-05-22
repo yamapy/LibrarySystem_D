@@ -21,7 +21,7 @@ $(function(){
 		sessionStorage.setItem('id', bookId);
 		var id = sessionStorage.getItem('id');
 //		console.log('id');
-		location.href = 'http://localhost:8080/LibrarySystem_D/html/bookDetail.html?bookId='+bookId;
+		location.href = './bookDetail.html?bookId='+bookId;
 
 	})
 
@@ -120,7 +120,7 @@ function renderTable(data) {
 				row.append($('<td nowrap>').text(book.genre).attr("id", "genre"));
 				row.append($('<td>').text(book.author).attr("id", "author"));
 				row.append($('<td nowrap>').append(
-						$('<button class="bookDetail">').text("詳細").attr("type", "button").attr("id", book.id).attr("class","grayButton bookDetail")));
+						$('<button>').text("詳細").attr("type", "button").attr("id", book.id).attr("class","grayButton bookDetail")));
 
 				if (book.status == "貸出中") {
 					row.append($('<td nowrap>').text(book.status).attr("id","status").attr("class","red"));

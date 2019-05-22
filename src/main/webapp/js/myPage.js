@@ -30,7 +30,7 @@ function checkLogin() {
 		}
 		else{	//ログインしてたら表示
 			alert('ログインしてください');
-			location.href='login.html'
+			location.href='./login.html'
 		}
 
 	}).fail(function(result) {
