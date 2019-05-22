@@ -456,7 +456,7 @@ public class BookDAO {
 			return false;
 		}
 
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_BOOK_QUERY)) {
+		try (PreparedStatement statement = connection.prepareStatement(INSERT_RENTAL_STATUS_QUERY)) {
 
 			statement.setString(1, mail);
 			statement.setInt(2, id);

@@ -94,23 +94,6 @@ public class Resources {
 		return dao.returnBook(mailAddress);
 	}
 
-	@POST
-	public boolean borrow(@FormParam("id") int id, @Context HttpServletRequest request) throws WebApplicationException {
-
-		System.out.println(id);
-
-		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String today = formatter.format(date);
-		HttpSession session = request.getSession();
-		User nowUser = (User) session.getAttribute("loginUser");
-		session.getAttribute("mail");
-
-		String mail = nowUser.getMailAddress();
-		return bookDAO.borrowById(id, today, mail);
-
-	}
-
 	@GET
 	@Path("returnBook/{id}")
 	public int returnBookById(@PathParam("id") int id) throws WebApplicationException {
@@ -219,6 +202,23 @@ public class Resources {
 	public String getMatrixParam(@MatrixParam("name") final String name, @MatrixParam("year") final String year) {
 
 		return "[MatrixParam] Name : " + name + " Year : " + year;
+	}
+
+	@POST
+	public boolean borrow(@FormParam("id") int id, @Context HttpServletRequest request) throws WebApplicationException {
+
+		System.out.println(id);
+
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(date);
+		HttpSession session = request.getSession();
+		User nowUser = (User) session.getAttribute("loginUser");
+		session.getAttribute("mail");
+
+		String mail = nowUser.getMailAddress();
+		return bookDAO.borrowById(id, today, mail);
+
 	}
 
 	@POST

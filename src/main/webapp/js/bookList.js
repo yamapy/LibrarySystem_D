@@ -207,19 +207,19 @@ function borrowById(button) {
 	});
 }
 
-function findById(id) {
-	console.log('findByID start - id:' + id);
-	$.ajax({
-		type : "GET",
-		url : rootUrl + '/' + id,
-		dataType : "json",
-		success : function(data) {
-			alert('借りました');
-			console.log('findById success: ' + data.name);
-			renderDetails(data)
-		}
-	});
-}
+//function findById(id) {
+//	console.log('findByID start - id:' + id);
+//	$.ajax({
+//		type : "GET",
+//		url : rootUrl + '/' + id,
+//		dataType : "json",
+//		success : function(data) {
+//			alert('借りました');
+//			console.log('findById success: ' + data.name);
+//			renderDetails(data)
+//		}
+//	});
+//}
 
 function renderDetails(book) {
 	$('.error').text('');
