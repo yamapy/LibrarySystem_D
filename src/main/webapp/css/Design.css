@@ -109,7 +109,7 @@ td {
 	display: inline-block;
  	text-align: right;
  	width: 100px;
- 	/*border-style : solid*/
+ 	border-style : solid
 }
 .rightForm {
 	display:inline;
