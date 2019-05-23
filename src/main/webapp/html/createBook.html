@@ -5,64 +5,81 @@
 <title>書籍追加登録</title>
 
 <!--<link rel="stylesheet" href="css/postStyle.css">-->
+<link rel="stylesheet" href="../css/Design.css">
 
 </head>
 <body>
 	<div class="main clearfix">
 		<div id="createBook">
 			<h1>書籍追加登録</h1>
-			<font color="red">IDを除く全ての項目を必ず入力してください。</font>
-			<form id="createBookForm" enctype="multipart/form-data">
-				<div class="error"></div>
+			<div  class="inner">
+				<font color="red" >IDを除く全ての項目を必ず入力してください。</font>
+				<form id="createBookForm" enctype="multipart/form-data">
+					<div class="error leftForm"></div>
 
-				<div>
-					<label for="id">ID：</label> <input type="text" name="id" id="id"
-						disabled>
-				</div>
+					<div>
+						<label for="id" class="leftForm">ID：</label> <input type="text" name="id" id="id"
+							disabled  class="rightForm">
+					</div>
 
-				<div>
-					<label for="bookTitle">タイトル：</label> <input type="text"
-						maxlength="85" id="bookTitle" name="title"
-						placeholder="例：Javaで学ぶシミュレーションの基礎" required>
-				</div>
+					<div>
+						<label for="bookTitle" class="leftForm">タイトル：</label> <input type="text"
+							maxlength="85" id="bookTitle" name="title"
+							placeholder="例：Javaで学ぶシミュレーションの基礎" required  class="rightForm">
+					</div>
 
-				<div>
-					<label for="author">作者：</label> <input type="text"
-						maxlength="85" id="author" name="author"
-						placeholder="例：峯村吉泰" required>
-				</div>
+					<div>
+						<label for="author" class="leftForm">作者：</label> <input type="text"
+							maxlength="85" id="author" name="author"
+							placeholder="例：峯村吉泰" required  class="rightForm">
 
-				<div>
-					<label for="publisher">出版社：</label> <input type="text"
-						maxlength="85" id="publisher" name="publisher"
-						placeholder="例：森北出版" required>
-				</div>
+					</div>
 
-				<div>
-					<label for="genreParam">ジャンル：</label> <select id="genreParam" name="genreParam"></select>
-				</div>
+					<div>
+						<label for="publisher" class="leftForm">出版社：</label> <input type="text"
+							maxlength="85" id="publisher" name="publisher"
+							placeholder="例：森北出版" required  class="rightForm">
+					</div>
 
-				<div>
-					<label for="genre"></label> <input type="text"
-						id="genre" name="genre" required>
-				</div>
+					<div>
+						<table>
+							<tr>
+								<td rowspan="2">ジャンル：</td>
+								<td class="rightForm">bb</td>
+							</tr><tr>
+								<td class="rightForm">bb</td>
+							</tr>
+						</table>
+								<label class="leftForm">ジャンル：</label>
 
-				<div>
-					<label for="puchaseDate">購入日：</label> <input type="text"
-						maxlength="85" id="puchaseDate"
-						name="purchaseDate" placeholder="例：20180523（数字8桁で入力）" required>
-				</div>
+							<select id="genreParam" name="genreParam"  class="rightForm"></select>
 
-				<div>
-					<label for="buyer">購入者：</label> <input type="text"
-						maxlength="85" id="buyer" name="buyer"
-						placeholder="例：未来太郎" required>
-				</div>
-				<div>
-					<button id="saveBook" class="blueButton">登録</button>
-				</div>
-			</form>
-			<button id="returnManageTopPage" class="orangeButton">戻る</button>
+							<label for="genre"  class="leftForm"></label> <input type="text"
+								id="genre" name="genre" required  class="rightForm">
+
+
+					</div>
+
+
+
+					<div>
+						<label for="puchaseDate" class="leftForm">購入日：</label> <input type="text"
+							maxlength="85" id="puchaseDate"
+							name="purchaseDate" placeholder="例：20180523（数字8桁で入力）" required  class="rightForm">
+					</div>
+
+					<div>
+						<label for="buyer" class="leftForm">購入者：</label> <input type="text"
+							maxlength="85" id="buyer" name="buyer"
+							placeholder="例：未来太郎" required  class="rightForm">
+					</div>
+					<div>
+						<button id="saveBook" class="blueButton">登録</button>
+						<button id="returnManageTopPage" class="orangeButton">戻る</button>
+					</div>
+				</form>
+			</div>
+
 		</div>
 	</div>
 

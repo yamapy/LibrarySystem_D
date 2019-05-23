@@ -18,7 +18,6 @@ function initPage() {
 			renderBookDetails(data)
 		}
 	});
-
 }
 
 /* 詳細表示 */
@@ -29,12 +28,13 @@ function renderBookDetails(book) {
 	$('#author').append( addEmp(book.author) );
 	$('#publisher').append( addEmp(book.publisher) );
 	$('#genre').append( addEmp(book.genre) );
-	$('#puchaseDate').append(book.purchaseDate);
+
+	$('#puchaseDate').append(  dateFormat(new Date(book.purchaseDate))  );
 	$('#buyer').append( addEmp(book.buyer) );
 	if( book.borrower != undefined ){
-		$('#borrower').append(book.borrower);
+		$('#borrower').append( addEmp(book.borrower) );
 		$('#borrowerMailaddress').append( addEmp(book.borrowerMailaddress) );
-		$('#returnDate').append( addEmp(book.returnDate) );
+		$('#returnDate').append( addEmp(dateFormat(new Date(book.returnDate))) );
 	}else{
 		$('#borrowerArea').remove();
 	}
@@ -42,7 +42,14 @@ function renderBookDetails(book) {
 	function addEmp(data){
 		return ( data == undefined  ? '(なし)' : data );
 	}
+	function dateFormat(date) {
+		var format = 'YYYY年MM月DD日';
+	    format = format.replace(/YYYY/, date.getFullYear());
+	    format = format.replace(/MM/, date.getMonth() + 1);
+	    format = format.replace(/DD/, date.getDate());
 
+	    return format;
+	}
 }
 
 /* 書籍一覧へ戻る */
@@ -52,7 +59,8 @@ $(function() {
 	$('#return')
 			.click(
 					function() {
-						window.location.href = './bookList.html';
+//						window.location.href = './bookList.html';
+						window.close();
 					});
 
 })
