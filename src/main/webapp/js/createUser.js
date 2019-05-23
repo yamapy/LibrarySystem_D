@@ -14,7 +14,7 @@ $('#createUser-login-button')
 						$('.error').append('<div>メールアドレスを入力てください。</div>');
 					}
 					if ($('#mailAddress').val() != ''
-							&& $('#employeeName').val() === '') {
+							&& $('#employeeName').text() === '') {
 						$('.error').append('<div>メールアドレスが正しくありません。</div>');
 					}
 					if (($('#password').val() === '')
@@ -205,5 +205,5 @@ function logout() {
 	$('#returnButton')
 			.click(
 					function() {
-						window.location.href = './login.html';
+						location.href = './login.html';
 					});
