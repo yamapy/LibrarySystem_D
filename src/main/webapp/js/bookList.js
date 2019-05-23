@@ -21,7 +21,8 @@ $(function(){
 		sessionStorage.setItem('id', bookId);
 		var id = sessionStorage.getItem('id');
 //		console.log('id');
-		location.href = './bookDetail.html?bookId='+bookId;
+//		location.href = './bookDetail.html?bookId='+bookId;
+		window.open('./bookDetail.html?bookId='+bookId);
 
 	})
 
@@ -65,9 +66,12 @@ function renderTable(data) {
 		}
 	});
 	console.log(data)
+
+	$('th').attr('nowrap');
+
 	if (isLogin == "true") {
 
-		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>貸出</th>';
+		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th nowrap>作者</th><th>詳細</th><th>貸出</th>';
 
 		$('#book').children().remove();
 
@@ -104,7 +108,7 @@ function renderTable(data) {
 	}
 
 	else{
-		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th>作者</th><th>詳細</th><th>ステータス</th>';
+		var headerRow = '<tr><th>タイトル</th><th>ジャンル</th><th norap>作者</th><th>詳細</th><th nowrap>ステータス</th>';
 
 		$('#book').children().remove();
 

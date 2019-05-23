@@ -144,6 +144,8 @@ function setButton(loginStatus,management){
 	    		alert(fileName+'.htmlに対応するボタンリストが"buttonList.js"で宣言されていません')
 	}
 
+	$("body").prepend( $('<p class="blackLine">') );
 	$("body").prepend(buttons);
+
 
 }

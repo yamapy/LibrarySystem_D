@@ -6,43 +6,47 @@
 <link rel="stylesheet" href="../css/Design.css">
 </head>
 <body>
-<body>
 	<div id="buttonList"></div>
 	<div class="table">
 		<div id = "search">
 		<h1 id = "bookSearch">書籍検索</h1>
 		<form id="bookSelector">
 			<div>
-				<label for="titleParam">タイトル：</label> <input type="text"
-					maxlength="85" name="titleParam" id="titleParam">
+				<label for="titleParam" class="leftForm">タイトル：</label> <input type="text"
+					maxlength="85" name="titleParam" id="titleParam" class="rightForm">
 			</div>
 			<div>
-				<label for="authorParam">作者：</label> <input type="text"
-					maxlength="85" name="authorParam" id="authorParam">
+				<label for="authorParam" class="leftForm">作者：</label> <input type="text"
+					maxlength="85" name="authorParam"  class="rightForm" id="authorParam" >
 			</div>
 			<div>
-				<label for="genreParam">ジャンル：</label> <select name="genreParam"
-					id="genreParam">
+				<label for="genreParam" class="leftForm">ジャンル：</label> <select name="genreParam"
+					id="genreParam"  class="rightForm">
 				</select>
 			</div>
 			<div>
-				<label for="statusParam">ステータス：</label> <select name="statusParam"
-					id="statusParam">
+				<label for="statusParam" class="leftForm">ステータス：</label> <select name="statusParam"
+					id="statusParam" class="rightForm">
 					<option value="" selected>指定しない</option>
 					<option value="貸出可能">貸出可能</option>
 					<option value="貸出中">貸出中</option>
 				</select>
 			</div>
-			<button class = "grayButton" id="findBook">検索</button>
+			<div>
+				<label class="leftForm"></label>
+				<button class = "grayButton" id="findBook"class="rightForm">検索</button>
+			</div>
+
 		</form>
 		</div>
-		<table>
-			<div id="bookList">
-				<h2>書籍一覧</h2>
-				<div id="book"></div>
-				<div id="insertBlock"></div>
-			</div>
-		</table>
+
+
+
+		<div id="bookList">
+			<h1>書籍一覧</h1>
+			<div id="book"></div>
+			<div id="insertBlock"></div>
+		</div>
 		<span id="prev">前へ</span> <span id="page"></span> <span id="next">次へ</span>
 	</div>
 	<script src="../js/jquery-3.3.1.min.js"></script>

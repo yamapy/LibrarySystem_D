@@ -68,7 +68,7 @@ function findAllUserMailAddresses() {
 function renderEmpInfo(data) {
 	employeeInfo = [];
 	for (var i = 0; i < Object.keys(data).length; i++) {
-		employeeInfo.push(data[i])
+		employeeInfo.push(data[i]);
 	}
 	console.log(employeeInfo.length + " Employees");
 }
@@ -76,33 +76,40 @@ function renderEmpInfo(data) {
 function renderUserInfo(data) {
 	userMailAddresses = [];
 	for (var i = 0; i < Object.keys(data).length; i++) {
-		userMailAddresses.push(data[i])
+		userMailAddresses.push(data[i]);
 	}
 	console.log(userMailAddresses.length + " Users");
 }
 
-// // searchWordの実行
-// $('#mailAddress').on('change', searchWord);
+
 function searchWord() {
 	var searchText = $('#mailAddress').val(); // 検索ボックスに入力された値
+	/*
+	console.log('append');
+	var empName = 'バカ';
+	$("#employeeName").append(empName);
 
+	*/
 	// 検索結果エリアの表示を空にする
-	$('#employeeName').val('');
+	$('#employeeName').text('');
 	// 検索ボックスに値が入ってる場合
 	if (searchText != '') {
 		// employeeInfo.each(function() {
 		for (var i = 0; i < employeeInfo.length; i++) {
 			if (employeeInfo[i].mailAddress === searchText) {
 				empName = employeeInfo[i].name;
-				$("#employeeName").val(empName);
+				$("#employeeName").append(empName);
+				return;
 			}
 		}
-		// });
-
+		$("#employeeName").append('(該当社員なし)');
+		return;
 	}
+	$("#employeeName").text('(該当する社員名を表示)');
 };
 
-$("#mailAddress").focusout(function() {
+$("#mailAddress").keyup(function() {
+	console.log('focus');
 	searchWord();
 	// $("#employeeName").val(empName);
 	console.log(empName);
@@ -197,7 +204,7 @@ function logout() {
 $(function() {
 
 	/* 以下カッコ内は戻るボタンのID名称 */
-	$('#back-to-login-button')
+	$('#returnButton')
 			.click(
 					function() {
 						window.location.href = './login.html';

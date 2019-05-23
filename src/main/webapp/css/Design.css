@@ -2,7 +2,16 @@
 
 #search {
 	position: relative;
-	left: 150px
+	left: 10%
+}
+
+.sub {
+	position: relative;
+	left: 10%
+}
+.manageButtonSize {
+	position: relative;
+	width:50;
 }
 
 #bookSearch {
@@ -36,6 +45,12 @@ td {
 	padding: 5px;
 }
 
+.inner{
+  text-align: center;
+}
+.right{
+  text-align: right;
+}
 
 
 .grayButton {
@@ -105,15 +120,48 @@ td {
   border-radius: 3px;
   font-weight: bold;
 }
+
+.line{
+	 border-bottom: 5px solid #dcdcdc;
+	 text-align:center;
+}
+.blackLine{
+	 border-bottom: 5px solid #000000;
+	 text-align:center;
+}
+.lightBlueButton {
+  color: #ffffff;
+  text-shadow: black 1px 1px 0px;
+  display: inline-block;
+  padding: 0.5em 1em;
+
+
+  text-decoration: none;
+  background:#2F5496;/*ボタン色*/
+  border-bottom: solid 3px #1B3056;
+  border-right: solid 3px #1B3056;
+  border-top: solid 3px #4E78C7;
+  border-left: solid 3px #4E78C7;
+  border-radius: 3px;
+  font-weight: bold
+}
+.lightBlueButton:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+
 .leftForm {
 	display: inline-block;
-	height: 10px;
-	width: 30%;
  	text-align: right;
+ 	width: 150px;
+ 	/*border-style : solid*/
 }
 .rightForm {
-	display:inline;
- 	width: 500px;
+	display:inline-block;
+ 	width: 200px;
+ 	/*border-style : solid*/
 }
 
 .blankForm {
@@ -122,3 +170,4 @@ td {
 .red{
 	color:red;
 }
+
