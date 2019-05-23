@@ -200,3 +200,10 @@ function logout() {
 		}
 	})
 }
+
+	/* 戻るボタン!!!!!!!! */
+	$('#returnButton')
+			.click(
+					function() {
+						window.location.href = './login.html';
+					});
