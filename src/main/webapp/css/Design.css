@@ -24,6 +24,15 @@ h2 {
 	left: 150px
 }
 
+
+
+
+.inner{
+  text-align: center;
+}
+.right{
+  text-align: right;
+}
 table {
 	width: 80%;
 	border-collapse: separate;
@@ -44,14 +53,6 @@ td {
 	text-align: center;
 	padding: 5px;
 }
-
-.inner{
-  text-align: center;
-}
-.right{
-  text-align: right;
-}
-
 
 .grayButton {
   display: inline-block;
@@ -160,7 +161,7 @@ td {
 }
 .rightForm {
 	display:inline-block;
- 	width: 200px;
+ 	width: 400px;
  	/*border-style : solid*/
 }
 

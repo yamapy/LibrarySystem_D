@@ -29,16 +29,28 @@ function findLendingBook() {
 }
 
 function dt(data) {
-	var headerRow = '<tr><th>現在貸出中の書籍件数</th><tr>';
+	var headerRow = '<tr><th>現在貸出中の書籍';
 
 	if (data.length === 0) {
+		headerRow += '(0件)';
+		/*
 		$('#lendingBookNumber').append('<p>0件</p>')
+		*/
 	} else {
 		var table = $('<table>').attr('border', 1);
-		table.append(headerRow);
+
+
+		headerRow += '(全' + data + '件)';
+
+
 		$('#lendingBookNumber').append(table);
-		$('#lendingBookNumber').append('全' + data + '件');
+		//$('#lendingBookNumber').append('全' + data + '件');
+
+		table.append(headerRow);
+
 	}
+	headerRow += '</th><tr>';
+	//$('#lendingBookNumber').append('全' + data + '件');
 }
 
 function renderTable(data) {
@@ -52,8 +64,8 @@ function renderTable(data) {
 		$.each(data, function(index, lendingBook) {
 			var row = $('<tr>');
 			row.append($('<td>').text(lendingBook.title));
-			row.append($('<td>').text(lendingBook.borrower));
-			row.append($('<td>').text(lendingBook.returnDate).attr("id", lendingBook.id));
+			row.append($('<td nowrap>').text(lendingBook.borrower));
+			row.append($('<td nowrap>').text(lendingBook.returnDate).attr("id", lendingBook.id));
 			table.append(row);
 		});
 
