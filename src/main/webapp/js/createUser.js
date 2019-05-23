@@ -201,13 +201,9 @@ function logout() {
 	})
 }
 
-$(function() {
-
-	/* 以下カッコ内は戻るボタンのID名称 */
+	/* 戻るボタン!!!!!!!! */
 	$('#returnButton')
 			.click(
 					function() {
 						window.location.href = './login.html';
 					});
-
-})
